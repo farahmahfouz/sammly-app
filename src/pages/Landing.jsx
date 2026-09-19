@@ -1,7 +1,6 @@
 import Hero from "../components/Landing/Hero";
 import CategorySection from "./../components/Landing/CategorySection";
 import LandingProductItem from "./../layouts/LandingProductItem";
-import Heroo from "../components/Landing/Heroo";
 import "../styles/Landing.css"; // Import the CSS file
 
 function Landing() {
@@ -29,7 +28,7 @@ function Landing() {
       </div>
 
       {/* slider section5 */}
-      <Heroo />
+      {/* <Heroo /> */}
     </>
   );
 }

@@ -4,6 +4,7 @@ import Fizz from "../../icons/Fizz";
 import CarIcon from "../../icons/CarIcon";
 import Checked from "../../icons/Checked";
 import Cloud from "../../icons/cloud";
+import ArrowRight from "../../icons/ArrowRight";
 
 function Hero() {
   return (
@@ -30,9 +31,9 @@ function Hero() {
         <div className="flex gap-6">
           <Link
             to="/customize"
-            className="self-start rounded-full bg-primary text-white px-4 py-2 md:px-6 md:py-3 hover:bg-primaryDark transition mt-6"
+            className="rounded-full flex gap-1 items-center bg-primary text-white px-4 py-2 md:px-6 md:py-3 hover:bg-primaryDark transition mt-6"
           >
-            Create Your Own →
+            Create Your Own <ArrowRight/>
           </Link>
           <div
             className="flex gap-1 rounded-full border border-primary bg-transparent text-primary px-4 py-2 md:px-6 md:py-3  transition mt-6"
