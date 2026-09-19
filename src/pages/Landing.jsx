@@ -2,6 +2,8 @@ import Hero from "../components/Landing/Hero";
 import CategorySection from "./../components/Landing/CategorySection";
 import "../styles/Landing.css"; // Import the CSS file
 import Sticker from "../components/Landing/Sticker";
+import Discount from "../components/Landing/Discount";
+import Review from "../components/Landing/Review";
 
 function Landing() {
   return (
@@ -26,8 +28,10 @@ function Landing() {
       <div className="h-96 landing-product-item">
         {/* <LandingProductItem className="" /> */}
       </div>
+      <Discount/>
 
-      {/* slider section5 */}
+      <Review/>
+
       <Sticker />
     </>
   );

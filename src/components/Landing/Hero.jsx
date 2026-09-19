@@ -10,10 +10,9 @@ function Hero() {
   return (
     <div
       className="w-full h-auto flex flex-col md:flex-row justify-between items-center container mx-auto"
-
     >
       <div className="my-auto flex flex-col gap-2 relative">
-        <div className="bg-primaryLight text-primaryDark hover:text-primary rounded-full w-fit px-4 flex gap-1 text-sm font-medium tracking-tight py-2">
+        <div className="bg-surfacePurple/95  text-primaryDark hover:text-primary rounded-full w-fit px-4 flex gap-1 text-sm font-medium tracking-tight py-2">
           <Fizz />
           Custome T-Shirts
         </div>
@@ -34,7 +33,7 @@ function Hero() {
             style={{
               background: "linear-gradient(to right, #81B3DC, #CE6ADA)",
             }}
-            className="rounded-full flex gap-1 items-center text-white px-4 py-2 md:px-6 md:py-3 hover:opacity-90 transition mt-6"
+            className="rounded-full shadow-primary flex gap-1 items-center text-white px-4 py-2 md:px-6 md:py-3 hover:opacity-90 transition mt-6"
           >
             Create Your Own <ArrowRight/>
           </Link>
