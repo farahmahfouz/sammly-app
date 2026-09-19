@@ -27,7 +27,7 @@
 
 * {
   body {
-    font-family: "Roboto", sans-serif;
+    font-family: "Poppins", sans-serif;
   }
 }
 
@@ -42,5 +42,5 @@
 
 
 .container {
-  max-width: 1220px;
+  max-width: clamp(320px, 90vw, 1220px);
 }
