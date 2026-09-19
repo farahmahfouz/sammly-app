@@ -6,7 +6,7 @@ function CarIcon() {
       viewBox="0 0 24 24"
       strokeWidth={1.25}
       stroke="currentColor"
-      className="absolute text-white size-11 top-2 right-0.5 -left-.5 transition-transform transform hover:translate-x-52 hover:text-black duration-700 ease-in-out"
+      className=" size-10"
     >
       <path
         strokeLinecap="round"

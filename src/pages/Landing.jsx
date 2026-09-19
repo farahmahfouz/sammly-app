@@ -1,6 +1,5 @@
 import Hero from "../components/Landing/Hero";
 import CategorySection from "./../components/Landing/CategorySection";
-import MiniSection from "../components/Landing/MiniSection";
 import LandingProductItem from "./../layouts/LandingProductItem";
 import Heroo from "../components/Landing/Heroo";
 import "../styles/Landing.css"; // Import the CSS file
@@ -10,9 +9,6 @@ function Landing() {
     <>
       {/* Hero Section */}
       <Hero />
-
-      {/* Mini section2 */}
-      <MiniSection />
 
       {/* CategorySection- section3 */}
       <CategorySection />

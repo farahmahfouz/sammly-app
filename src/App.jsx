@@ -38,7 +38,7 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <div className="relative">
+    <div className="relative ">
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
         <AuthProvider>

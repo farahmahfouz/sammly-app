@@ -92,7 +92,7 @@ export default function ProductDetails() {
 
   return (
     <div className="w-full py-10 flex justify-center">
-      <div className="w-4/5 card bg-base-100 shadow-xl lg:flex md:gap-11 md:flex lg:flex-row flex flex-col">
+      <div className="md:w-4/5 card bg-base-100 shadow-none md:shadow-xl lg:flex md:gap-11 md:flex lg:flex-row flex flex-col">
         <div className=" md:w-11/12 h-full lg:w-2/3 relative">
           <button
             onClick={() => window.history.back()}

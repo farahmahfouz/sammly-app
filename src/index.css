@@ -47,3 +47,8 @@
   transform: scaleX(0);
   transition: transform 0.5s;
 }
+
+
+.container {
+  max-width: 1220px;
+}

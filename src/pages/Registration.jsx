@@ -31,7 +31,7 @@ export default function App() {
     setIsLoading(true); // Set isLoading to true before making the request
     try {
       await axios.post(
-        "https://react-node-designer.glitch.me/api/v1/users/signup",
+        "http://localhost:4001/api/v1/users/signup",
         data
       );
       toast.success("Registration successful! Please Log In", {
