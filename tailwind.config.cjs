@@ -1,8 +1,6 @@
-/* eslint-disable no-undef */
-
 /** @type {import('tailwindcss').Config} */
 
-export default {
+module.exports ={
   content: ["./index.html", "./src/**/*.{js,jsx}"],
 
   theme: {
@@ -22,6 +20,8 @@ export default {
         surface: "#FFFFFF",
         surfaceLavender: "#F5F2FF",
         surfacePink: "#FCEBFA",
+        surfaceGray: "#f7fbfe",
+        surfacePurple: '#e6e3eef2',
 
         textPrimary: "#10213F",
         textSecondary: "#667085",

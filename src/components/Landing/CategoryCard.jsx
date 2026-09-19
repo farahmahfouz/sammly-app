@@ -14,10 +14,9 @@ function CategoryCard({ cat }) {
                 alt={cat.name}
                 className="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-300"
             />
-            <div className="bg-surface border border-borderLight p-4">
+            <div className="bg-surfaceGray/80 border border-borderLight p-4">
                 <div>
                     <div className='flex items-center justify-between text-primary hover:text-primaryDark'>
-
                         <h3 className="text-base font-semibold capitalize text-textPrimary">{cat.name}</h3>
                         <span className='border border-borderLight p-1 rounded-full'>
                             <ArrowRight />
