@@ -1,9 +1,10 @@
+import "../styles/Landing.css"; // Import the CSS file
 import Hero from "../components/Landing/Hero";
 import CategorySection from "./../components/Landing/CategorySection";
-import "../styles/Landing.css"; // Import the CSS file
 import Sticker from "../components/Landing/Sticker";
 import Discount from "../components/Landing/Discount";
 import Review from "../components/Landing/Review";
+import Tutorial from "../components/Landing/Tutorial";
 
 function Landing() {
   return (
@@ -13,6 +14,8 @@ function Landing() {
 
       {/* CategorySection- section3 */}
       <CategorySection />
+
+      <Tutorial/>
 
       {/* ProductItem- section4 */}
       <section className="mt-5 featured-products-section landing-product-item">
@@ -25,9 +28,7 @@ function Landing() {
         </div>
       </section>
 
-      <div className="h-96 landing-product-item">
-        {/* <LandingProductItem className="" /> */}
-      </div>
+
       <Discount/>
 
       <Review/>

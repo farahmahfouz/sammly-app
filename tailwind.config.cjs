@@ -92,12 +92,11 @@ module.exports = {
          Box Shadows
       ========================= */
       boxShadow: {
-        sm: "0 1px 3px rgba(16, 33, 63, 0.06)",
-        md: "0 4px 12px rgba(16, 33, 63, 0.08)",
-        lg: "0 10px 30px rgba(16, 33, 63, 0.10)",
+        // sm: "0 1px 3px rgba(16, 33, 63, 0.06)",
+        // md: "0 4px 12px rgba(16, 33, 63, 0.08)",
+        // lg: "0 10px 30px rgba(16, 33, 63, 0.10)",
 
-        primary: "0 2px 6px rgba(104, 71, 232, 0.025)",
-        primaryHover: "0 6px 16px rgba(81, 51, 201, 0.24)",
+        cardShadow: "0 2px 6px #6847e81c",
       },
 
       /* =========================

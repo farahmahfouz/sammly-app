@@ -7,7 +7,7 @@ function CategoryCard({ cat }) {
         <Link
             to="/products"
             key={cat.id}
-            className=" rounded-lg overflow-hidden group cursor-pointer block"
+            className=" rounded-lg overflow-hidden group cursor-pointer shadow-cardShadow block"
         >
             <img
                 src={cat.image}

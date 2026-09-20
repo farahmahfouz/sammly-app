@@ -33,7 +33,7 @@ function Hero() {
             style={{
               background: "linear-gradient(to right, #81B3DC, #CE6ADA)",
             }}
-            className="rounded-full shadow-primary flex gap-1 items-center text-white px-4 py-2 md:px-6 md:py-3 hover:opacity-90 transition mt-6"
+            className="rounded-full shadow-cardShadow flex gap-1 items-center text-white px-4 py-2 md:px-6 md:py-3 hover:opacity-90 transition mt-6"
           >
             Create Your Own <ArrowRight/>
           </Link>
