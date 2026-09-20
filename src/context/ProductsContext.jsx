@@ -31,6 +31,7 @@ export const ProductsProvider = ({ children }) => {
 
     try {
       const response = await getProductsByPage(page, search, category);
+      console.log(response)
       setProducts(response.products);
       setTotalPages(response.pagination.totalPages); // Use the totalPages from the response
     } catch (err) {

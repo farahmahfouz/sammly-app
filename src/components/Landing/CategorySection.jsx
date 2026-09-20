@@ -47,7 +47,7 @@ const categories = [
 function CategorySection() {
 
   return (
-    <section className="py-28 container mx-auto">
+    <section className="py-16 container mx-auto">
       <div className="text-start mb-6">
         <span className="flex gap-1 text-primary items-center">
           <Explore />

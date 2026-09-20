@@ -5,6 +5,7 @@ import Sticker from "../components/Landing/Sticker";
 import Discount from "../components/Landing/Discount";
 import Review from "../components/Landing/Review";
 import Tutorial from "../components/Landing/Tutorial";
+import Carrousel from "../components/Landing/Carrousel";
 
 function Landing() {
   return (
@@ -18,15 +19,7 @@ function Landing() {
       <Tutorial/>
 
       {/* ProductItem- section4 */}
-      <section className="mt-5 featured-products-section landing-product-item">
-        <div className="text-center mb-6 featured-products-content">
-          <p className="text-gray-500">FEATURED PRODUCTS</p>
-          <h2 className="text-2xl font-bold text-textColor">BEST SELLER</h2>
-          <p className="text-gray-500 text-l">
-            Discover our best-selling clothing pieces <br /> that combine style and quality to complete your perfect look
-          </p>
-        </div>
-      </section>
+      <Carrousel/>
 
 
       <Discount/>

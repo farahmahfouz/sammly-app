@@ -27,7 +27,7 @@ const testimonials = [
 
 function Review() {
     return (
-        <div className="container mx-auto py-12">
+        <div className="container mx-auto py-16">
             <span className="flex gap-1 text-primary items-center">
                 <h2 className="text-xs font-semibold uppercase tracking-tighter">what our customer say</h2>
             </span>
