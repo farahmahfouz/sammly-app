@@ -37,11 +37,19 @@ function Tutorial() {
           watch full tutorial
         </button>
       </div>
-      <video className="w-full h-full object-fill rounded-xl"
-        controls
-        poster="/tutorial-cover.png">
-        <source src='tutorial.mp4' type="video/mp4" ></source>
-      </video>
+      <div className="flex items-center gap-2 relative">
+        <img src="lines.png" alt="" className="w-6 md:w-44 shrink-0 absolute -top-9 -left-36" />
+
+        <video
+          className="w-full h-full object-fill rounded-xl"
+          controls
+          poster="/tutorial-cover.png"
+        >
+          <source src="tutorial.mp4" type="video/mp4" />
+        </video>
+
+        <img src="lines.png" alt="" className="w-6 md:w-24 shrink-0 absolute -bottom-8 -right-20 rotate-[190deg]" />
+      </div>
     </div>
   )
 }
