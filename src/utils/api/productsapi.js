@@ -1,8 +1,19 @@
 import axiosInstance from "./axiosInstance";
 
-export const getAllProducts = async () => {
-  const response = await axiosInstance.get(`/products`);
-  return response.data.data.products;
+export const getAllProducts = async (params) => {
+  const response = await axiosInstance.get(`/products`, {
+    params: {
+      page: params?.page,
+      limit: params?.limit,
+      sort: params?.sort,
+      search: params?.search,
+      ...(params?.filter && {
+        category: params.filter.value,
+      }),
+    },
+  });
+  console.log(response);
+  return response.data.data;
 };
 
 export const getProductsByPage = async (page, search = "", category = "") => {

@@ -75,7 +75,7 @@ function Hero() {
       <img
         src="hero-home.png"
         alt="New Collection"
-        className="w-full h-auto max-w-md md:max-w-xl object-cover mt-6 md:mt-0"
+        className="w-full h-auto max-w-md md:max-w-2xl object-cover mt-6 md:mt-0"
       />
     </div>
   );

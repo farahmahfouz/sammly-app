@@ -20,7 +20,6 @@ import CartPage from "./pages/CartPage";
 import ForgetPassword from "./pages/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword";
 import { CartProvider } from "./context/CartContext";
-import { ProductsProvider } from "./context/ProductsContext";
 import { FavoriteProductsProvider } from "./context/FavoriteProductsContext";
 import SuccessPayment from "./pages/SuccessPayment";
 import UserProfile from "./pages/UserProfile";
@@ -31,7 +30,7 @@ import DesignerDetails from "./pages/DesignerDetails";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 60 * 100,
+      // staleTime: 60 * 100,
     },
   },
 });
@@ -45,7 +44,6 @@ function App() {
           <UserProvider>
             <CartProvider>
               <BrowserRouter>
-                <ProductsProvider>
                   <FavoriteProductsProvider>
                     {/* Conditionally render Navbar and Footer */}
                     <Routes>
@@ -156,7 +154,6 @@ function App() {
                       />
                     </Routes>
                   </FavoriteProductsProvider>
-                </ProductsProvider>
               </BrowserRouter>
             </CartProvider>
           </UserProvider>
