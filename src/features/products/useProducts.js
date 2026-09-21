@@ -9,16 +9,31 @@ function useProducts() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
-  const limit = !searchParams.get("limit") ? 10 : Number(searchParams.get("limit"));
+  const limit = !searchParams.get("limit")
+    ? 10
+    : Number(searchParams.get("limit"));
   const sort = searchParams.get("sort") || "-createdAt";
   const search = searchParams.get("search") || "";
 
   const filterValue = searchParams.get("category");
+  const sizeValue = searchParams.get("size");
+
+  const minPrice = searchParams.get("price[gte]");
+  const maxPrice = searchParams.get("price[lte]");
+
   const filter = useMemo(() => {
-    return !filterValue || filterValue === "all"
-      ? null
-      : { field: "category", value: filterValue };
-  }, [filterValue]);
+    const filters = {};
+    if (filterValue && filterValue !== "all") filters.category = filterValue;
+    if (sizeValue) filters["stock.size"] = sizeValue;
+    if (minPrice) {
+      filters["price[gte]"] = minPrice;
+    }
+
+    if (maxPrice) {
+      filters["price[lte]"] = maxPrice;
+    }
+    return Object.keys(filters).length ? filters : null;
+  }, [filterValue, sizeValue, minPrice, maxPrice]);
 
   const {
     isPending: isLoading,
@@ -40,18 +55,19 @@ function useProducts() {
   const totalPages = Math.ceil(count / limit);
   const categories = categoriesData || [];
 
-
   useEffect(() => {
     if (page < totalPages) {
       queryClient.prefetchQuery({
         queryKey: ["products", page + 1, limit, filter, sort, search],
-        queryFn: () => getProducts({ page: page + 1, limit, filter, sort, search }),
+        queryFn: () =>
+          getProducts({ page: page + 1, limit, filter, sort, search }),
       });
     }
     if (page > 1) {
       queryClient.prefetchQuery({
         queryKey: ["products", page - 1, limit, filter, sort, search],
-        queryFn: () => getProducts({ page: page - 1, limit, filter, sort, search }),
+        queryFn: () =>
+          getProducts({ page: page - 1, limit, filter, sort, search }),
       });
     }
   }, [page, totalPages, limit, filter, sort, search, queryClient]);
@@ -67,15 +83,25 @@ function useProducts() {
   };
 
   const handleSortChange = (value) => {
-  setSearchParams((prev) => {
-    const next = new URLSearchParams(prev);
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
 
-    next.set("sort", value);
-    next.set("page", "1");
+      next.set("sort", value);
+      next.set("page", "1");
 
-    return next;
-  });
-}; 
+      return next;
+    });
+  };
+
+  const handleSizeChange = (size) => {
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+      if (sizeValue === size) next.delete("size");
+      else next.set("size", size);
+      next.set("page", "1");
+      return next;
+    });
+  };
   const handlePageChange = (newPage) => {
     setSearchParams((prev) => {
       const next = new URLSearchParams(prev);
@@ -94,6 +120,48 @@ function useProducts() {
     });
   };
 
+  const handlePriceChange = (min, max, isChecked) => {
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+
+      if (isChecked) {
+        next.delete("price[gte]");
+        next.delete("price[lte]");
+      } else {
+        if (min !== null) {
+          next.set("price[gte]", String(min));
+        } else {
+          next.delete("price[gte]");
+        }
+
+        if (max !== null) {
+          next.set("price[lte]", String(max));
+        } else {
+          next.delete("price[lte]");
+        }
+      }
+
+      next.set("page", "1");
+
+      return next;
+    });
+  };
+
+  const handleClearFilters = () => {
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+
+      next.delete("category");
+      next.delete("size");
+      next.delete("price[gte]");
+      next.delete("price[lte]");
+
+      next.set("page", "1");
+
+      return next;
+    });
+  };
+
   return {
     products,
     currentPage: page,
@@ -106,8 +174,14 @@ function useProducts() {
     handlePageChange,
     handleSortChange,
     handleCategoryChange,
+    handleSizeChange,
+    handlePriceChange,
+    handleClearFilters,
     categories,
     selectedCategory: filterValue,
+    selectedSize: sizeValue,
+    minPrice,
+    maxPrice,
   };
 }
 

@@ -1,32 +1,27 @@
 import Search from "../../components/Search";
 import FilterIcon from "./../../icons/FilterIcon";
 import useProducts from "./useProducts";
+import CategoryFilter from "../categories/CategoryFilter";
+import SizeFilter from "./SizeFilter";
+import PriceFilter from "./PriceFilter";
 
-// eslint-disable-next-line react/prop-types
 function Filter({ isOpen }) {
   const {
     categories,
     handleCategoryChange,
     selectedCategory,
+    handleSizeChange,
+    selectedSize,
+    handlePriceChange,
+    minPrice,
+    maxPrice,
+    handleClearFilters
   } = useProducts();
-
-  const allCategories = [
-    {
-      _id: "all",
-      name: "all",
-      productsCount: categories.reduce(
-        (total, category) => total + category.productsCount,
-        0
-      ),
-    },
-    ...categories,
-  ];
 
   return (
     <aside
-      className={`h-full overflow-hidden transition-all duration-300 ${
-        isOpen ? "w-80" : "w-0 border-0"
-      }`}
+      className={`h-full overflow-hidden transition-all duration-300 ${isOpen ? "w-80" : "w-0 border-0"
+        }`}
     >
       <div className="w-72 border mx-auto border-borderLight h-full rounded-md shadow-cardShadow p-4">
         <Search />
@@ -37,64 +32,35 @@ function Filter({ isOpen }) {
             filter
           </span>
 
-          <p className="text-primary hover:text-primaryDark transition-all capitalize cursor-pointer">
+          <p onClick={handleClearFilters} className="text-primary hover:text-primaryDark transition-all capitalize cursor-pointer">
             clear all
           </p>
         </div>
 
-        <span className="block w-full border-t border-borderLight"></span>
+        <span className="block w-full border-t border-borderLight" />
 
-        <div>
-          <p className="text-textPrimary font-semibold capitalize text-sm pt-4">
-            categories
-          </p>
+        <CategoryFilter
+          categories={categories}
+          selectedCategory={selectedCategory}
+          onCategoryChange={handleCategoryChange}
+        />
 
-          <ul className="mt-2 space-y-2">
-            {allCategories.map((cat) => {
-              const isChecked = cat._id === "all" ? !selectedCategory : selectedCategory === cat._id;;
+        <span className="block w-full border-t border-borderLight" />
 
-              return (
-                <li
-                  key={cat._id}
-                  className="flex justify-between"
-                >
-                  <label className="flex items-center gap-2 cursor-pointer text-sm text-textPrimary capitalize">
-                    <input
-                      type="checkbox"
-                      checked={isChecked}
-                      onChange={() =>
-                        handleCategoryChange(
-                          cat._id === "all" ? null : cat._id
-                        )
-                      }
-                      className="sr-only"
-                    />
 
-                    <span
-                      className={`w-4 h-4 flex items-center justify-center rounded border transition-all ${
-                        isChecked
-                          ? "bg-surfaceLavender border-border"
-                          : "bg-surfaceLavender border-border"
-                      }`}
-                    >
-                      {isChecked && (
-                        <span className="text-primaryDark text-xs leading-none">
-                          ✓
-                        </span>
-                      )}
-                    </span>
+        <SizeFilter
+          selectedSize={selectedSize}
+          onSizeChange={handleSizeChange} />
 
-                    {cat.name}
-                  </label>
+        <span className="block w-full border-t border-borderLight" />
 
-                  <p className="bg-surfaceLavender rounded-xs text-primaryDark text-xs py-1 px-2">
-                    {cat.productsCount}
-                  </p>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+
+        <PriceFilter
+          minPrice={minPrice}
+          maxPrice={maxPrice}
+          onPriceChange={handlePriceChange}
+        />
+
       </div>
     </aside>
   );

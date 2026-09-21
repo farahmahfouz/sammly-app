@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-const LIVE = "https://react-node-designer.glitch.me/api/v1";
+// const LIVE = "https://react-node-designer.glitch.me/api/v1";
 const LOCAL = "http://localhost:4001/api/v1/";
 
 const axiosInstance = axios.create({
@@ -11,8 +11,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     let token = Cookies.get("token");
-        console.log("TOKEN:", token);
-    console.log("URL:", config.url);
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

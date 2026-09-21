@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import useProducts from "./useProducts";
 
 import NoData from "../../components/NoData";

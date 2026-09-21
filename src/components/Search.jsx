@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import SearchIcon from "../icons/SearchIcon";
 
 function Search({ value = "", onChange, placeholder = "Search...", }) {

@@ -1,17 +1,25 @@
 import axiosInstance from "./axiosInstance";
 
-export const getAllProducts = async (params) => {
-  const response = await axiosInstance.get(`/products`, {
-    params: {
-      page: params?.page,
-      limit: params?.limit,
-      sort: params?.sort,
-      search: params?.search,
-      ...(params?.filter && {
-        category: params.filter.value,
-      }),
-    },
-  });
+export const getAllProducts = async ({ page, limit, filter, sort, search }) => {
+  const params = {
+    page,
+    limit,
+  };
+
+  if (search) {
+    params.search = search;
+  }
+
+  if (filter) {
+    Object.assign(params, filter);
+  }
+
+  if (sort) {
+    params.sort = sort;
+  }
+
+  const response = await axiosInstance.get("/products", { params });
+
   return response.data.data;
 };
 
