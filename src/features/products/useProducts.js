@@ -38,7 +38,8 @@ function useProducts() {
   const products = data.products;
   const count = data.allCounts;
   const totalPages = Math.ceil(count / limit);
-  const categories = categoriesData?.data?.categories || [];
+  const categories = categoriesData || [];
+
 
   useEffect(() => {
     if (page < totalPages) {
@@ -106,6 +107,7 @@ function useProducts() {
     handleSortChange,
     handleCategoryChange,
     categories,
+    selectedCategory: filterValue,
   };
 }
 

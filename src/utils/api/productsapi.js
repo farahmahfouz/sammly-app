@@ -12,7 +12,6 @@ export const getAllProducts = async (params) => {
       }),
     },
   });
-  console.log(response);
   return response.data.data;
 };
 
