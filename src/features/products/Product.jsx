@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 
-import { useToggleFavorite } from "../../hooks/useToggleFavorite";
+import useFavoriteProducts from '../products/useFavoriteProducts';;
 
 import HeardFilledIcon from "../../icons/HeardFilledIcon";
 import HeartIcon from "../../icons/HeartIcon";
@@ -16,14 +16,13 @@ function Product({ product }) {
     const {
         favoriteProducts,
         toggleFavorite,
-    } = useToggleFavorite();
+    } = useFavoriteProducts();
 
     return (
         <Link to={`/product-details/${product._id}`} className="rounded-xl w-full max-w-[351px] min-w-56 border border-borderLight shadow-cardShadow">
 
             {/* Product Image */}
             <figure className="relative">
-
                 {isLoggedIn && (
                     <button
                         type="button"
