@@ -62,10 +62,10 @@ function Products({ isFilterOpen, onToggleFilter, ...restProps }) {
             <div className="w-full relative">
                 <div className="w-full md:py-10 pt-2">
                     {/* Products Grid */}
-                    <div className={`grid gap-6 justify-items-center ${isFilterOpen
-                        ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
-                        : "grid-cols-1 md:grid-cols-2 lg:grid-cols-5"
-                        }`}>
+                    <div className="grid gap-6 justify-items-center"
+                        style={{
+                            gridTemplateColumns: `repeat(auto-fit, minmax(${isFilterOpen ? '230px' : '210px'}, 1fr))`,
+                        }}>
 
                         {/* No Data */}
                         {products?.length === 0 ? (

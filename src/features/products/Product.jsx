@@ -19,7 +19,7 @@ function Product({ product }) {
     } = useToggleFavorite();
 
     return (
-        <Link to={`/product-details/${product._id}`} className="rounded-xl w-full max-w-64 border border-borderLight shadow-cardShadow">
+        <Link to={`/product-details/${product._id}`} className="rounded-xl w-full min-w-56 border border-borderLight shadow-cardShadow">
 
             {/* Product Image */}
             <figure className="relative">
