@@ -1,6 +1,6 @@
-import HeroSection from '../components/CustomizePage/HeroSection';
-import HowItWorks from '../components/CustomizePage/HowItWorks';
-import CardOfDesigner from './../components/CustomizePage/CardOfDesigner';
+import HeroSection from '../features/designs/HeroSection';
+import HowItWorks from '../features/designs/HowItWorks';
+import CardOfDesigner from '../features/designs/CardOfDesigner';
 
 export default function CustomizePage() {
   return (

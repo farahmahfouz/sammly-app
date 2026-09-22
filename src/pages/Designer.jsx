@@ -4,7 +4,7 @@ import { useRef, useEffect, useState, useContext } from "react";
 import { fabric } from "fabric";
 import { useNavigate, useParams } from "react-router";
 import RadioComponent from "../components/RadioComponent";
-import SizeCharts from "../components/Charts/SizeCharts";
+import SizeCharts from "../features/productDetails/SizeCharts.jsx";
 import XIcon from "../icons/XIcon";
 import Downloads from "../icons/Downloads";
 import ShowMore from "../icons/ShowMore.jsx";

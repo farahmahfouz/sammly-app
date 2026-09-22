@@ -6,7 +6,7 @@ export default function SizeCharts() {
       <div className="">
         <div className="flex gap-1 items-center text-primary text-sm font-semibold capitalize tracking-tighter">
           <PiResizeBold />
-          <p>size chart</p>
+          <p className="text-textPrimary">size chart</p>
         </div>
         <p className="text-sm text-textMuted first-letter:uppercase tracking-tighter">choose your size carefully to get the perfict fit</p>
       </div>

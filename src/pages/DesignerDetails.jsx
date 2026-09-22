@@ -4,7 +4,7 @@ import axiosInstance from "../utils/api/axiosInstance";
 import { fabric } from "fabric";
 import { loadFromJSON } from "../utils/helpers/canvasTools";
 import RadioComponent from "../components/RadioComponent";
-import SizeCharts from "../components/Charts/SizeCharts";
+import SizeCharts from "../features/productDetails/SizeCharts.jsx";
 import XIcon from "../icons/XIcon";
 
 import {

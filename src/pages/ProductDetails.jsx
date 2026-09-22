@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import SizeCharts from "../components/Charts/SizeCharts";
+import SizeCharts from "../features/productDetails/SizeCharts";
 import ProductDetailsCard from "../features/productDetails/ProductDetailsCard";
 import Review from "../components/Landing/Review";
 import Carrousel from './../components/Landing/Carrousel';
