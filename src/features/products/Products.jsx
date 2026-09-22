@@ -5,7 +5,6 @@ import NoData from "../../components/NoData";
 import Product from "./Product";
 import Dropdown from "../../components/DropDown";
 import FilterIcon from "../../icons/FilterIcon";
-import Paginationn from "../../components/Pagination";
 import Pagination from "../../components/Pagination";
 
 function Products({ isFilterOpen, onToggleFilter, ...restProps }) {

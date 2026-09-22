@@ -1,29 +1,9 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import ArrowRight from "../../icons/ArrowRight";
-import { getAllProducts } from "../../utils/api/productsapi";
+import useProducts from '../../features/products/useProducts';
 
 function Carrousel() {
-  const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchFeaturedProducts = async () => {
-      setIsLoading(true);
-
-      try {
-        const response = await getAllProducts();
-
-        setProducts(response.products || response);
-      } catch (error) {
-        console.error("Failed to fetch featured products:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchFeaturedProducts();
-  }, []);
+  const { products } = useProducts();
 
   return (
     <section className="container mx-auto py-16">
@@ -57,9 +37,7 @@ function Carrousel() {
 
       {/* Products */}
       <div className="mt-8 flex gap-4">
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : (
+        {
           products.map((product) => (
             <div key={product._id} className="w-48 overflow-hidden">
               <img
@@ -77,7 +55,7 @@ function Carrousel() {
               </p>
             </div>
           ))
-        )}
+        }
       </div>
     </section>
   );
