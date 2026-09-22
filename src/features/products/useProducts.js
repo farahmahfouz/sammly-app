@@ -10,7 +10,7 @@ function useProducts() {
 
   const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
   const limit = !searchParams.get("limit")
-    ? 10
+    ? 8
     : Number(searchParams.get("limit"));
   const sort = searchParams.get("sort") || "-createdAt";
   const search = searchParams.get("search") || "";
@@ -50,10 +50,13 @@ function useProducts() {
     queryFn: getCategories,
   });
 
-  const products = data.products;
-  const count = data.allCounts;
-  const totalPages = Math.ceil(count / limit);
   const categories = categoriesData || [];
+  const products = data.products || [];
+  const totalPages = data.pagination?.totalPages || 0;
+  const totalCount = data.pagination?.totalProducts ?? 0;
+
+  const startItem = totalCount === 0 ? 0 : (page - 1) * limit + 1;
+  const endItem = Math.min(page * limit, totalCount);
 
   useEffect(() => {
     if (page < totalPages) {
@@ -166,6 +169,10 @@ function useProducts() {
     products,
     currentPage: page,
     totalPages,
+    totalCount,
+    startItem,
+    endItem,
+    limit,
     search,
     isLoading,
     isError,

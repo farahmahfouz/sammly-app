@@ -26,7 +26,7 @@ function CategoryItem({ category, isChecked, onChange }) {
         {category.name}
       </label>
 
-      <p className="bg-surfaceLavender rounded-xs text-primaryDark text-xs py-1 px-2">
+      <p className="bg-surfaceLavender rounded-xs font-semibold text-primaryDark text-xs py-1 px-2">
         {category.productsCount}
       </p>
     </li>

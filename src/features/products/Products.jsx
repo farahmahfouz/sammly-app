@@ -5,6 +5,8 @@ import NoData from "../../components/NoData";
 import Product from "./Product";
 import Dropdown from "../../components/DropDown";
 import FilterIcon from "../../icons/FilterIcon";
+import Paginationn from "../../components/Pagination";
+import Pagination from "../../components/Pagination";
 
 function Products({ isFilterOpen, onToggleFilter, ...restProps }) {
     const {
@@ -12,6 +14,12 @@ function Products({ isFilterOpen, onToggleFilter, ...restProps }) {
         isError,
         error,
         handleSortChange,
+        currentPage,
+        totalPages,
+        handlePageChange,
+        startItem,
+        endItem,
+        totalCount,
     } = useProducts();
 
     if (isError) {
@@ -29,7 +37,9 @@ function Products({ isFilterOpen, onToggleFilter, ...restProps }) {
     return (
         <div className="md:py-6 px-12">
             <div className="flex justify-between items-center">
-                <p className="text-textMuted tracking-tighter text-sm first-letter:capitalize">showing 1 - 4 of {products?.length} products</p>
+                <p className="text-textMuted tracking-tighter text-sm first-letter:capitalize">
+                    showing {startItem} - {endItem} of {totalCount} products
+                </p>
                 <div className="flex gap-1 capitalize text-textMuted items-center  text-sm">
                     sort by
                     <Dropdown
@@ -51,7 +61,6 @@ function Products({ isFilterOpen, onToggleFilter, ...restProps }) {
             </div>
             <div className="w-full relative">
                 <div className="w-full md:py-10 pt-2">
-
                     {/* Products Grid */}
                     <div className={`grid gap-6 justify-items-center ${isFilterOpen
                         ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
@@ -75,6 +84,13 @@ function Products({ isFilterOpen, onToggleFilter, ...restProps }) {
 
                     </div>
                 </div>
+                {totalPages > 1 && (
+                    <Pagination
+                        onPageChange={handlePageChange}
+                        totalPages={totalPages}
+                        currentPage={currentPage}
+                    />
+                )}
             </div>
         </div>
     );
