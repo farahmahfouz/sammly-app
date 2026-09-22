@@ -59,6 +59,18 @@ function useProducts() {
   const endItem = Math.min(page * limit, totalCount);
 
   useEffect(() => {
+    if (totalPages > 0 && page > totalPages) {
+      setSearchParams((prev) => {
+        const next = new URLSearchParams(prev);
+        next.set("page", String(totalPages));
+        return next;
+      });
+    }
+  }, [page, totalPages, setSearchParams]);
+
+  useEffect(() => {
+    if (totalPages === 0) return;
+
     if (page < totalPages) {
       queryClient.prefetchQuery({
         queryKey: ["products", page + 1, limit, filter, sort, search],

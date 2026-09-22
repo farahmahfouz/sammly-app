@@ -19,7 +19,7 @@ function Product({ product }) {
     } = useToggleFavorite();
 
     return (
-        <Link to={`/product-details/${product._id}`} className="rounded-xl w-full min-w-56 border border-borderLight shadow-cardShadow">
+        <Link to={`/product-details/${product._id}`} className="rounded-xl w-full max-w-[351px] min-w-56 border border-borderLight shadow-cardShadow">
 
             {/* Product Image */}
             <figure className="relative">
@@ -27,8 +27,12 @@ function Product({ product }) {
                 {isLoggedIn && (
                     <button
                         type="button"
-                        className="bg-white rounded-3xl w-11 h-11 absolute top-9 start-4 flex justify-center items-center cursor-pointer z-10"
-                        onClick={() => toggleFavorite(product._id)}
+                        className="bg-white rounded-3xl w-7 h-7 absolute top-4 right-4  flex justify-center items-center cursor-pointer z-10"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            toggleFavorite(product._id);
+                        }}
                     >
                         {favoriteProducts?.[product._id] ? (
                             <HeardFilledIcon />

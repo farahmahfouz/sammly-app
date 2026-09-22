@@ -34,6 +34,8 @@ function Products({ isFilterOpen, onToggleFilter, ...restProps }) {
         );
     }
 
+    if (products?.length === 0) { return (<div className="w-full min-h-[60vh] flex items-center justify-center"> <NoData /> </div>); }
+
     return (
         <div className="md:py-6 px-12">
             <div className="flex justify-between items-center">
@@ -61,27 +63,18 @@ function Products({ isFilterOpen, onToggleFilter, ...restProps }) {
             </div>
             <div className="w-full relative">
                 <div className="w-full md:py-10 pt-2">
-                    {/* Products Grid */}
                     <div className="grid gap-6 justify-items-center"
                         style={{
                             gridTemplateColumns: `repeat(auto-fit, minmax(${isFilterOpen ? '230px' : '210px'}, 1fr))`,
                         }}>
-
-                        {/* No Data */}
-                        {products?.length === 0 ? (
-                            <div className="w-full flex justify-center items-center col-span-full">
-                                <NoData />
-                            </div>
-                        ) : (
-                            products?.map((product) => (
-                                <Product
-                                    isFilterOpen={isFilterOpen}
-                                    product={product}
-                                    key={product._id}
-                                />
-                            ))
-                        )}
-
+                        {products?.map((product) => (
+                            <Product
+                                isFilterOpen={isFilterOpen}
+                                product={product}
+                                key={product._id}
+                            />
+                        ))
+                        }
                     </div>
                 </div>
                 {totalPages > 1 && (
