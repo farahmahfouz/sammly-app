@@ -17,7 +17,7 @@ import ProductSize from "./ProductSize";
 import { TbShoppingBagExclamation } from "react-icons/tb";
 
 
-function ProductDetailsCard() {
+function ProductDetailsCard({ onSizeChartClick }) {
     const { product, isLoading, isError } = useProduct();
 
     const { isLoggedIn } = useContext(AuthContext);
@@ -86,9 +86,7 @@ function ProductDetailsCard() {
 
     return (
         <div className=" flex flex-col lg:flex-row md:gap-11">
-            {/* عمود الجاليري (thumbnails + الصورة الكبيرة) */}
             <div className="flex gap-4 w-full lg:w-1/2">
-                {/* عمود الصور المصغرة */}
                 <div className="hidden md:flex flex-col gap-3 w-20 ">
                     {allImages.map((img, index) => (
                         <button
@@ -153,10 +151,10 @@ function ProductDetailsCard() {
                 <p className="text-primaryDark text-2xl font-bold pt-4 ">
                     EG {product.price}
                 </p>
-                <p className="py-4 text-textMuted text-sm lowercase  first-letter:uppercase">{product.description}</p>
+                <p className="py-4 pb-10 text-textMuted text-sm lowercase  first-letter:uppercase">{product.description}</p>
                 <ProductFeatures />
                 <div className="md:pt-5">
-                    <ProductSize setSelectedSize={setSelectedSize} stockAvailable={stockAvailable} />
+                    <ProductSize onSizeChartClick={onSizeChartClick} setSelectedSize={setSelectedSize} stockAvailable={stockAvailable} />
 
                     <div className="flex justify-center lg:flex lg:justify-end md:pt-10">
                         {isLoggedIn ? (

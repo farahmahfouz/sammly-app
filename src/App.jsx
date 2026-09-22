@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 // import Components
 import Navbar from "./layouts/Navbar";
 import Footer from "./layouts/Footer";
@@ -38,7 +37,6 @@ function App() {
   return (
     <div className="relative ">
       <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
         <AuthProvider>
           <UserProvider>
             <CartProvider>

@@ -3,21 +3,21 @@ import ArrowRight from "../../icons/ArrowRight"
 import Rating from "../Rating";
 const testimonials = [
     {
-        image: "usernotfound.jpg",
+        image: "/usernotfound.jpg",
         name: "Sarah M.",
         review: "The quality is amazing and the print looks exactly like my design, I'm so happy with my order!",
         location: "Cairo, Egypt",
         rating: 2
     },
     {
-        image: "usernotfound.jpg",
+        image: "/usernotfound.jpg",
         name: "Ahmed K.",
         review: "Super easy to use and the delivery was faster than I expected. Will definitely order again!",
         location: "Alexandria, Egypt",
         rating: 5
     },
     {
-        image: "usernotfound.jpg",
+        image: "/usernotfound.jpg",
         name: "Nour A.",
         review: "I created a group shirt for my friends and it turned out perfect. Great quality and service!",
         location: "Giza, Egypt",
