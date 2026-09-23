@@ -4,6 +4,8 @@ import useProducts from "./useProducts";
 import CategoryFilter from "../categories/CategoryFilter";
 import SizeFilter from "./SizeFilter";
 import PriceFilter from "./PriceFilter";
+import { useEffect, useState } from "react";
+import useDebounce from "../../hooks/useDebounce";
 
 function Filter({ isOpen }) {
   const {
@@ -15,8 +17,26 @@ function Filter({ isOpen }) {
     handlePriceChange,
     minPrice,
     maxPrice,
-    handleClearFilters
+    handleClearFilters,
+    search,
+    handleSearch
   } = useProducts();
+
+  const [searchInput, setSearchInput] = useState(search);
+
+  const debouncedSearch = useDebounce(searchInput, 400);
+
+  useEffect(() => {
+    if (debouncedSearch !== search) {
+      handleSearch(debouncedSearch);
+    }
+  }, [debouncedSearch]);
+
+
+  useEffect(() => {
+    setSearchInput(search);
+  }, [search]);
+
 
   return (
     <aside
@@ -24,7 +44,7 @@ function Filter({ isOpen }) {
         }`}
     >
       <div className="w-72 border mx-auto border-borderLight h-full rounded-md shadow-cardShadow p-4">
-        <Search />
+        <Search value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
 
         <div className="flex justify-between text-sm tracking-tight py-4">
           <span className="flex items-center text-textPrimary gap-2 capitalize font-semibold tracking-wide">

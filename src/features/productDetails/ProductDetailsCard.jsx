@@ -1,6 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { useCart } from "../../context/CartContext";
+import useCart from "../cart/useCart";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -18,16 +18,28 @@ import { TbShoppingBagExclamation } from "react-icons/tb";
 
 
 function ProductDetailsCard({ onSizeChartClick }) {
+    const navigate = useNavigate();
     const { product, isLoading, isError } = useProduct();
 
     const { isLoggedIn } = useContext(AuthContext);
-    const navigate = useNavigate();
     const { addToCart } = useCart();
     const { favoriteProducts, toggleFavorite } = useFavoriteProducts();
 
     const [activeIndex, setActiveIndex] = useState(0);
     const [selectedSize, setSelectedSize] = useState("");
     const [isAdding, setIsAdding] = useState(false);
+    const [quantity, setQuantity] = useState(1);
+
+    const selectedSizeStock = product?.stock?.find(
+        (el) => el.size === selectedSize
+    )?.quantity || 0;
+
+    const isMinQuantity = quantity <= 1;
+    const isMaxQuantity = quantity >= selectedSizeStock;
+
+    useEffect(() => {
+        setQuantity(1);
+    }, [selectedSize]);
 
     if (isLoading) {
         return (
@@ -65,7 +77,7 @@ function ProductDetailsCard({ onSizeChartClick }) {
         }
         const cartItem = {
             productId,
-            quantity: 1,
+            quantity: quantity,
             size: selectedSize,
             type: "Product",
         };
@@ -161,15 +173,19 @@ function ProductDetailsCard({ onSizeChartClick }) {
                             <div className="grid grid-cols-[1.5fr_4fr] gap-10 w-full">
                                 <div className="flex items-center justify-between gap-4 border border-surfaceLavender shadow-cardShadow rounded-full px-5 py-2 ">
                                     <button
-                                        // onClick={decreaseQty}
-                                        className="text-primary text-lg font-medium hover:opacity-70 transition"
+                                        onClick={() => setQuantity((prev) => prev - 1)}
+                                        className={`text-primary text-lg font-medium transition ${isMinQuantity ? "opacity-50 cursor-not-allowed" : "hover:opacity-70"
+                                            }`}
+                                        disabled={isMinQuantity}
                                     >
                                         −
                                     </button>
-                                    <span className="text-sm font-medium text-textPrimary">1</span>
+                                    <span className="text-sm font-medium text-textPrimary">{quantity}</span>
                                     <button
-                                        // onClick={increaseQty}
-                                        className="text-primary text-lg font-medium hover:opacity-70 transition"
+                                        onClick={() => setQuantity((prev) => prev + 1)}
+                                        className={`text-primary text-lg font-medium transition ${isMaxQuantity ? "opacity-50 cursor-not-allowed" : "hover:opacity-70"
+                                            }`}
+                                        disabled={isMaxQuantity}
                                     >
                                         +
                                     </button>

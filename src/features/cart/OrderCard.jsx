@@ -1,4 +1,4 @@
-import { useCart } from "../../context/CartContext";
+import useCart from "./useCart";
 import { LiaFileSignatureSolid } from "react-icons/lia";
 
 

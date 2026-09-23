@@ -30,7 +30,7 @@ import {
 import AuthContext from "../context/AuthContext.jsx";
 import { toast } from "react-toastify";
 
-import { useCart } from "../context/CartContext.jsx";
+import useCart from "../features/cart/useCart.js";
 
 export default function Designer() {
   const { addToCart } = useCart();

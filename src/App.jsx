@@ -18,7 +18,6 @@ import CartPage from "./pages/CartPage";
 import ForgetPassword from "./pages/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword";
 import { AuthProvider } from "./context/AuthContext";
-import { CartProvider } from "./context/CartContext";
 import { UserProvider } from "./context/UserContext";
 import SuccessPayment from "./pages/SuccessPayment";
 import UserProfile from "./pages/UserProfile";
@@ -39,7 +38,6 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <UserProvider>
-            <CartProvider>
               <BrowserRouter>
                 {/* Conditionally render Navbar and Footer */}
                 <Routes>
@@ -150,7 +148,6 @@ function App() {
                   />
                 </Routes>
               </BrowserRouter>
-            </CartProvider>
           </UserProvider>
         </AuthProvider>
       </QueryClientProvider>

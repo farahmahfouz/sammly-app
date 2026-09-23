@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import ArrowRight from "../../icons/ArrowRight"
 
 function Sticker() {
@@ -24,10 +25,10 @@ function Sticker() {
             <div className="flex items-center gap-2 shrink-0">
                 <img src="sticker2.png" alt="t-shirt sticker2" />
 
-                <button className="flex items-center gap-1 px-6 py-2 shadow-cardShadow bg-primaryDark text-white hover:bg-primary transition-all capitalize text-sm tracking-tight rounded-full">
+                <Link to="/customize" className="flex items-center gap-1 px-6 py-2 shadow-cardShadow bg-primaryDark text-white hover:bg-primary transition-all capitalize text-sm tracking-tight rounded-full">
                     start customizing
                     <ArrowRight />
-                </button>
+                </Link>
             </div>
 
         </div>

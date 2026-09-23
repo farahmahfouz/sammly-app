@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useCart } from "../../context/CartContext";
+import  useCart from "./useCart";
 import { GiChewedHeart } from "react-icons/gi";
 import { MdLockReset } from "react-icons/md";
 import CartCard from "./CartCard";

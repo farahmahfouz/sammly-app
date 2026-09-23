@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 
 //contexts
 import AuthContext from "../context/AuthContext";
-import { useCart } from "../context/CartContext";
+import  useCart  from "../features/cart/useCart";
 import UserContext from "../context/UserContext";
 
 // Import the custom link component

@@ -1,4 +1,4 @@
-import { useCart } from "../../context/CartContext";
+import useCart from "./useCart";
 import XIcon from "../../icons/XIcon";
 
 function CartCard({ product, handleDeleteConfirm }) {
