@@ -1,5 +1,5 @@
 import { createOrder } from "../../utils/api/orderApi";
-import EmptyCart from "../../components/EmptyCart";
+import EmptyCart from "./EmptyCart";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
