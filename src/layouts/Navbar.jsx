@@ -10,7 +10,6 @@ import UserContext from "../context/UserContext";
 import CustomLink from "./CustomLink";
 
 //icons
-import ExitIcon from "../icons/ExitIcon";
 import CartIcon from "../icons/CartIcon";
 
 export default function Navbar() {
@@ -43,7 +42,7 @@ export default function Navbar() {
         </div>
 
         {/* Burger Icon for Small Screens */}
-        <div className="md:hidden text-textColor absolute left-24">
+        <div className="md:hidden text-primary hover:text-primaryDark absolute left-24">
           <button onClick={toggleMenu} className="btn btn-ghost btn-circle">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -63,10 +62,10 @@ export default function Navbar() {
         </div>
 
         {/* Navigation Links */}
-        <div className="hidden md:flex gap-10">
+        <div className="hidden md:flex gap-6 text-base">
           <CustomLink to="/">Home</CustomLink>
           <CustomLink to="/products">Products</CustomLink>
-          <CustomLink to="/customize">Customize</CustomLink>
+          <CustomLink to="/customize">Make your own</CustomLink>
           <CustomLink to="/aboutus" className>
             About Us
           </CustomLink>
@@ -75,15 +74,15 @@ export default function Navbar() {
         {/* Mobile Navigation Links */}
         <div className={`${isMenuOpen ? "block" : "hidden"} md:hidden`}>
           <div className="absolute top-16 left-0 bg-white w-full shadow-lg p-3">
-            <CustomLink to="/" className="block px-4 py-2 text-textColor">
+            <CustomLink to="/" className="block px-4 py-2 text-primary hover:text-primaryDark">
               Home
             </CustomLink>
-            <CustomLink to="/products" className="block px-4 py-2 text-textColor">
+            <CustomLink to="/products" className="block px-4 py-2 text-primary hover:text-primaryDark">
               Products
             </CustomLink>
             <CustomLink
               to="/customize"
-              className="block px-4 py-2 text-textColor"
+              className="block px-4 py-2 text-primary hover:text-primaryDark"
             >
               Customize
             </CustomLink>
@@ -91,20 +90,22 @@ export default function Navbar() {
           </div>
         </div>
 
-        <div className="">
+        <div className=" flex gap-2 items-center">
           {isLoggedIn && (
             <div className="dropdown dropdown-end">
               <Link
                 to="/cart"
                 tabIndex={0}
                 role="button"
-                className="btn btn-ghost btn-circle"
+                className="px-3"
               >
                 <div className="indicator">
                   <CartIcon />
-                  <span className="badge badge-sm indicator-item">
-                    {totalQuantity}
-                  </span>
+                  {totalQuantity > 0 && (
+                      <span className="badge badge-sm indicator-item ">
+                        {totalQuantity}
+                      </span>
+                  )}
                 </div>
               </Link>
             </div>
@@ -113,17 +114,16 @@ export default function Navbar() {
             <div
               tabIndex={0}
               role="button"
-              className="btn btn-ghost btn-circle avatar"
+              className=" avatar"
             >
               <div className="rounded-2xl">
                 <div
-                  className={`avatar ${userProfile ? "online" : ""
-                    } placeholder w-10`}
+                  className={`avatar placeholder z-10 w-10`}
                 >
-                  <div className="bg-white text-textColor border border-textColor w-16 rounded-full">
+                  <div className="bg-white text-primary border border-primary hover:text-primaryDark w-16 rounded-full">
                     <span className="text-xl">
                       {isLoading && isLoggedIn ? (
-                        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-textColor"></div>
+                        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary hover:text-primaryDark"></div>
                       ) : userProfile ? (
                         userProfile.name.charAt(0).toUpperCase()
                       ) : (
@@ -136,7 +136,7 @@ export default function Navbar() {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-slate-50 rounded-box z-[1] mt-3 w-52 p-2 shadow-sm"
+              className="menu menu-sm dropdown-content bg-slate-50 rounded-box z-10 mt-3 w-52 p-2 shadow-sm"
             >
               {isLoggedIn && (
                 <li className="">
@@ -175,9 +175,7 @@ export default function Navbar() {
                     className="px-5 py-3 text-xl  text-red-600 rounded-lg hover:transition-all"
                   >
                     Logout{" "}
-                    <span className="pl-12">
-                      <ExitIcon />{" "}
-                    </span>
+
                   </button>
                 </li>
               )}
