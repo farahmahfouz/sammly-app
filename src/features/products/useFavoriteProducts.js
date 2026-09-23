@@ -7,44 +7,82 @@ import {
 
 function useFavoriteProducts() {
   const queryClient = useQueryClient();
-  const { data: favoriteProducts = {}, isLoading } = useQuery({
+
+  const {
+    data: favoriteProducts = [],
+    isLoading,
+  } = useQuery({
     queryKey: ["favoriteProducts"],
     queryFn: async () => {
       const response = await getFavoriteProducts();
-      const favorites = response.data.favProducts;
 
-      return favorites.reduce((acc, product) => {
-        acc[product._id] = true;
-        return acc;
-      }, {});
+      return response.data.favProducts;
     },
   });
 
   const { mutate: toggleFavorite, isPending } = useMutation({
-    mutationFn: async (productId) => {
-      if (favoriteProducts[productId]) {
+    mutationFn: async ({ productId, isFavorite }) => {
+      if (isFavorite) {
         await removeFromFavorites(productId);
       } else {
         await addToFavorites(productId);
       }
-
-      return productId;
     },
 
-    onSuccess: (productId) => {
+    onMutate: async ({ productId, isFavorite }) => {
+      await queryClient.cancelQueries({
+        queryKey: ["favoriteProducts"],
+      });
+
+      const previousFavorites =
+        queryClient.getQueryData(["favoriteProducts"]) || [];
+
       queryClient.setQueryData(
         ["favoriteProducts"],
-        (currentFavorites = {}) => ({
-          ...currentFavorites,
-          [productId]: !currentFavorites[productId],
-        }),
+        (currentFavorites = []) => {
+          if (isFavorite) {
+            // Remove
+            return currentFavorites.filter(
+              (product) => product._id !== productId
+            );
+          }
+          return currentFavorites;
+        }
       );
+
+      return { previousFavorites };
+    },
+
+    // 2. If request fails → rollback UI
+    onError: (_error, _variables, context) => {
+      queryClient.setQueryData(
+        ["favoriteProducts"],
+        context.previousFavorites
+      );
+    },
+
+    // 3. Sync with server after request finishes
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["favoriteProducts"],
+      });
     },
   });
 
+  const handleToggleFavorite = (productId) => {
+    const isFavorite = favoriteProducts.some(
+      (product) => product._id === productId
+    );
+
+    toggleFavorite({
+      productId,
+      isFavorite,
+    });
+  };
+
   return {
     favoriteProducts,
-    toggleFavorite,
+    toggleFavorite: handleToggleFavorite,
     isLoading: isLoading || isPending,
   };
 }

@@ -21,7 +21,6 @@ function Product({ product }) {
     return (
         <Link to={`/product-details/${product._id}`} className="rounded-xl w-full max-w-[351px] min-w-56 border border-borderLight shadow-cardShadow">
 
-            {/* Product Image */}
             <figure className="relative">
                 {isLoggedIn && (
                     <button
@@ -33,7 +32,9 @@ function Product({ product }) {
                             toggleFavorite(product._id);
                         }}
                     >
-                        {favoriteProducts?.[product._id] ? (
+                        {favoriteProducts?.some(
+                            (favProduct) => favProduct._id === product._id
+                        ) ? (
                             <HeardFilledIcon />
                         ) : (
                             <HeartIcon />
@@ -54,7 +55,7 @@ function Product({ product }) {
                 <h2 className="text-sm font-bold text-textPrimary  uppercase truncate">
                     {product.name}
                 </h2>
-                <p className="text-textMuted text-sm tracking-tighter py-2 text-start  text-nowrap truncate">
+                <p className="text-textMuted text-sm tracking-tighter py-2 text-start lowercase first-letter:uppercase text-nowrap truncate">
                     {product.description}
                 </p>
                 <div className="flex justify-between gap-3 pb-2">

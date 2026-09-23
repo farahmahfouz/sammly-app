@@ -47,13 +47,11 @@ function Filter({ isOpen }) {
 
         <span className="block w-full border-t border-borderLight" />
 
-
         <SizeFilter
           selectedSize={selectedSize}
           onSizeChange={handleSizeChange} />
 
         <span className="block w-full border-t border-borderLight" />
-
 
         <PriceFilter
           minPrice={minPrice}

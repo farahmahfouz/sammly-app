@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import UserContext from "../../context/UserContext";
 import Skelton from "../../layouts/Skelton";
+import Empty from "./Empty";
 
 export default function ProfileOrders() {
   const { userOrders } = useContext(UserContext);
@@ -11,11 +12,9 @@ export default function ProfileOrders() {
 
   return (
     <div className="col-span-3">
-      <div className="card h-full bg-white shadow-md rounded-lg p-4">
-        <div className="card-body">
-          <h6 className="flex items-center mb-3 text-xl font-bold">
-            My Orders
-          </h6>
+      <div className="card h-full bg-white p-4">
+        <div >
+
           {userOrders && userOrders.length > 0 ? (
             <div className="grid grid-cols-1 gap-4">
               {userOrders
@@ -87,8 +86,8 @@ export default function ProfileOrders() {
                 ))}
             </div>
           ) : (
-            <div className="flex justify-center">
-              <img src="/noorder3.png" className="w-1/4" alt="No Orders" />
+            <div className="w-full flex justify-center items-center py-10">
+              <Empty resourceName="Orders" />
             </div>
           )}
         </div>

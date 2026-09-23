@@ -60,6 +60,10 @@ export const UserProvider = ({ children }) => {
     setIsEditing(true);
   };
 
+  const handleCancelEdit = () => {
+    setIsEditing(false);
+  };
+
   const handleSaveProfile = async (updatedData) => {
     try {
       const updatedProfile = await updateUserProfile(
@@ -104,6 +108,7 @@ export const UserProvider = ({ children }) => {
         isEditing,
         error,
         handleEditProfile,
+        handleCancelEdit,
         handleSaveProfile,
         setUserProfile,
         fetchData,

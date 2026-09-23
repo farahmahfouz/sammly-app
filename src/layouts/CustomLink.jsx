@@ -9,7 +9,7 @@ function CustomLink({ to, children }) {
     <div className="relative group">
       <Link
         to={to}
-        className={`font-medium text-md hover:transition-all ${
+        className={`font-medium tracking-tight text-base hover:transition-all ${
            isActive ? "text-primaryDark" : "text-textPrimary"
         }`}
       >
