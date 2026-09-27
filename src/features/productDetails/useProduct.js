@@ -8,7 +8,6 @@ function useProduct() {
     queryKey: ["product", id],
     queryFn: () => getProductById(id),
   });
-  console.log(product)
   return { isPending, product };
 }
 

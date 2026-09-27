@@ -23,6 +23,7 @@ import SuccessPayment from "./pages/SuccessPayment";
 import UserProfile from "./pages/UserProfile";
 import AboutUs from "./pages/AboutUs";
 import DesignerDetails from "./pages/DesignerDetails";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -39,6 +40,7 @@ function App() {
         <AuthProvider>
           <UserProvider>
               <BrowserRouter>
+              <ScrollToTop />
                 {/* Conditionally render Navbar and Footer */}
                 <Routes>
                   <Route

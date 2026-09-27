@@ -13,8 +13,8 @@ import AuthContext from "../../context/AuthContext";
 import useFavoriteProducts from "../products/useFavoriteProducts";
 import useProduct from "./useProduct";
 import ProductFeatures from "./ProductFeatures";
-import ProductSize from "./ProductSize";
 import { TbShoppingBagExclamation } from "react-icons/tb";
+import RadioComponent from "../../components/RadioComponent";
 
 
 function ProductDetailsCard({ onSizeChartClick }) {
@@ -148,7 +148,9 @@ function ProductDetailsCard({ onSizeChartClick }) {
                             className="bg-borderLight/40 rounded-full w-12 h-12 flex justify-center items-center cursor-pointer"
                             onClick={() => toggleFavorite(product._id)}
                         >
-                            {favoriteProducts && favoriteProducts[product._id] ? (
+                            {favoriteProducts?.some(
+                                (favProduct) => favProduct._id === product._id
+                            ) ? (
                                 <HeardFilledIcon />
                             ) : (
                                 <HeartIcon />
@@ -166,8 +168,7 @@ function ProductDetailsCard({ onSizeChartClick }) {
                 <p className="py-4 pb-10 text-textMuted text-sm lowercase  first-letter:uppercase">{product.description}</p>
                 <ProductFeatures />
                 <div className="md:pt-5">
-                    <ProductSize onSizeChartClick={onSizeChartClick} setSelectedSize={setSelectedSize} stockAvailable={stockAvailable} />
-
+                    <RadioComponent setSize={setSelectedSize} stock={stockAvailable} onSizeChartClick={onSizeChartClick} />
                     <div className="flex justify-center lg:flex lg:justify-end md:pt-10">
                         {isLoggedIn ? (
                             <div className="grid grid-cols-[1.5fr_4fr] gap-10 w-full">

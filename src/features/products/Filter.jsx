@@ -30,7 +30,7 @@ function Filter({ isOpen }) {
     if (debouncedSearch !== search) {
       handleSearch(debouncedSearch);
     }
-  }, [debouncedSearch]);
+  }, [debouncedSearch, handleSearch, search]);
 
 
   useEffect(() => {

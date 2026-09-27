@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import "../styles/scroll.css";
 
 import { useRef, useEffect, useState, useContext } from "react";
@@ -5,7 +6,6 @@ import { fabric } from "fabric";
 import { useNavigate, useParams } from "react-router";
 import RadioComponent from "../components/RadioComponent";
 import SizeCharts from "../features/productDetails/SizeCharts.jsx";
-import XIcon from "../icons/XIcon";
 import Downloads from "../icons/Downloads";
 import ShowMore from "../icons/ShowMore.jsx";
 
@@ -31,6 +31,13 @@ import AuthContext from "../context/AuthContext.jsx";
 import { toast } from "react-toastify";
 
 import useCart from "../features/cart/useCart.js";
+import Steps from "../features/designs/Steps.jsx";
+import { MdFormatTextdirectionLToR } from "react-icons/md";
+import { LuImageUp } from "react-icons/lu";
+import { FiBookmark, FiShoppingCart } from "react-icons/fi";
+import DeleteIcon from './../icons/DeleteIcon';
+import NeedHelp from "../features/designs/NeedHelp.jsx";
+
 
 export default function Designer() {
   const { addToCart } = useCart();
@@ -72,6 +79,17 @@ export default function Designer() {
   const [isSaving, setIsSaving] = useState(false);
   const [canvasObjects, setCanvasObjects] = useState([]);
   const [displayedCanvas, setDisplayedCanvas] = useState(null);
+  const [activeView, setActiveView] = useState("front"); // "front" | "back"
+
+  const handleFront = () => {
+    setActiveView("front");
+    scrollToFront();
+  };
+
+  const handleBack = () => {
+    setActiveView("back");
+    scrollToBack();
+  };
 
   const fetchProductAndDesign = async () => {
     if (!id) return;
@@ -107,6 +125,15 @@ export default function Designer() {
     }
   };
 
+  const sizeChartRef = useRef(null);
+
+  const scrollToSizeChart = () => {
+    sizeChartRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   useEffect(() => {
     fetchProductAndDesign();
     if (savedCanvas.front) {
@@ -129,16 +156,6 @@ export default function Designer() {
     })
   );
 
-  const handleCaptureScreenShot = async (canvas) => {
-    try {
-      const imageOfDesign = await captureScreenShot(canvas);
-      return imageOfDesign;
-    } catch (error) {
-      console.log("screenshoterror", error);
-      return null;
-    }
-  };
-
   useEffect(() => {
     if (product && canvasRefFront.current && canvasRefBack.current) {
       setBackgroundImage(product.image);
@@ -151,16 +168,15 @@ export default function Designer() {
 
     fabricCanvasFront.current = new fabric.Canvas(canvasRefFront.current);
     fabricCanvasBack.current = new fabric.Canvas(canvasRefBack.current);
+
     setDisplayedCanvas(fabricCanvasFront);
     scrollToFront();
 
     const handleObjectAdded = (e) => {
-      console.log("Object added:", e.target.type);
       setCanvasObjects((prevObjects) => [...prevObjects, e.target]);
     };
 
     const handleObjectRemoved = (e) => {
-      console.log("Object removed:", e.target.type);
       setCanvasObjects((prevObjects) =>
         prevObjects.filter((obj) => obj !== e.target)
       );
@@ -183,7 +199,6 @@ export default function Designer() {
           fontWeight: e.selected[0].fontWeight,
           fontStyle: e.selected[0].fontStyle,
         });
-        console.log("Text selected:", e.selected[0]);
       }
     };
 
@@ -321,12 +336,7 @@ export default function Designer() {
         formData.append(`dragImages`, image);
       });
 
-      console.log("FormData contents:");
-      for (let [key, value] of formData.entries()) {
-        console.log(key, value);
-      }
       setTotalPrice(totalPrice);
-      console.log(totalPrice);
 
       let saveResponse;
       if (designId) {
@@ -444,24 +454,7 @@ export default function Designer() {
     fabricCanvasBack.current.discardActiveObject();
     fabricCanvasBack.current.renderAll();
   };
-  // const handleWheel = (event) => {
-  //   event.preventDefault();
-  //   // event.stopImmediatePropagation()
-  //   // event.stopPropagation();
-  // };
 
-  // solve error of handlewheel
-  // useEffect(() => {
-  //   const handleWheel = (event) => {
-  //     event.preventDefault();
-  //   };
-
-  //   window.addEventListener("wheel", handleWheel, { passive: false });
-
-  //   return () => {
-  //     window.removeEventListener("wheel", handleWheel);
-  //   };
-  // }, []);
   const handleDownloadScreenShot = async () => {
     const imageOfDesignFront = await captureScreenShot(
       fabricCanvasFront.current,
@@ -479,66 +472,61 @@ export default function Designer() {
   };
 
   return (
-    <div className="container mx-auto px-4 mb-20 ">
-      <div className="text-textColor text-3xl sm:text-4xl text-center my-5 sm:my-8 md:my-10 font-bold">
-        Customize your design
+    <div className="container mx-auto py-14">
+      <div className="flex justify-between pb-10">
+        <div className="max-w-[420px]">
+          <img src="/style.png" alt="object-contain" />
+          <p className="text-2xl sm:text-4xl tracking-wide font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-purple-600 to-purple-400">
+            Customize your design
+          </p>
+          <p className="text-textMuted tracking-tight">Create something unique. Add your text, image or both and
+            turn it into your perfect t-shirt.
+          </p>
+        </div>
+        <Steps />
       </div>
-      <div className="flex flex-col lg:flex-row gap-6  justify-between  custom:mx-24 custom:gap-4 ">
+      <div className="flex flex-col lg:flex-row gap-6  justify-between  custom:gap-4 ">
         <div className="w-full lg:w-3/5 flex flex-col justify-start items-center ">
           {/* designer images and buttons  */}
           <div className="flex flex-col w-full">
-            <div className="flex sm:justify-between justify-evenly w-full">
-              <button
-                className="border border-red-500 text-red-500 py-2 px-2 rounded w-32 sm:w-1/4 md:w-32 lg:w-32 cursor-pointer  transition duration-300 ease-in-out"
-                onClick={() => handleResetCanva(displayedCanvas?.current)}
-              >
-                Clear Design
-              </button>
-
-              <button
-                className={`bg-white text-buttonColor py-2 px-4 rounded w-44 sm:w-1/4 md:w-44 lg:w-44 transition duration-300 ease-in-out border border-buttonColor ${
-                  isRemoveButtonDisabled(displayedCanvas?.current)
-                    ? "bg-gray-200 border-none"
-                    : ""
-                }`}
-                onClick={() =>
-                  handleRemoveSelectedObj(displayedCanvas?.current)
-                }
-                disabled={isRemoveButtonDisabled(displayedCanvas?.current)}
-              >
-                Remove Selected
-              </button>
-            </div>
-
-            <div className="flex flex-col  sm:flex-row   sm:justify-center items-center sm:items-start ">
+            <div className="flex flex-col sm:flex-row sm:justify-center items-center sm:items-start ">
               {/* Buttons for Scrolling */}
-              <div className="flex flex-row sm:flex-col justify-center mt-5 gap-5 bg-lightBackGround w-2/4 sm:w-1/5">
+              <div className="flex flex-row sm:flex-col justify-start p-4 mr-4 gap-5 bg-surfaceLavender/40 shadow-cardShadow rounded-md h-full w-2/4 sm:w-1/5">
                 <button
-                  className=" text-white py-2 px-4 rounded "
-                  onClick={scrollToFront}
+                  className={`text-white py-2 rounded-sm border-2 transition-colors ${activeView === "front" ? "border-primary" : "border-transparent"
+                    }`}
+                  onClick={handleFront}
                 >
                   <img src={backgroundImage} alt="front model" />
                 </button>
+
                 <button
-                  className="  text-white py-2 px-4 rounded"
-                  onClick={scrollToBack}
+                  className={`text-white py-2 rounded-sm border-2 transition-colors ${activeView === "back" ? "border-primary" : "border-transparent"
+                    }`}
+                  onClick={handleBack}
                 >
                   <img src={backgroundBackImage} alt="back model" />
                 </button>
               </div>
 
               {/* Scroll images */}
-              <div className="flex overflow-hidden mt-5 w-full hide-scrollbar  ">
+              <div
+                className="flex overflow-hidden w-full hide-scrollbar rounded-lg shadow-cardShadow"
+                style={{
+                  backgroundImage: 'linear-gradient(135deg, #d9d4f768 0%, rgb(245 242 255 / 0.4) 50%, #d9d4f753 100%)'
+                }}
+              >              
+
                 <div
                   id="divToTakeScreenshotFront"
                   ref={frontImageRef}
                   style={{
                     backgroundImage: `url(${backgroundImage})`,
                     minWidth: "400px", // Ensure the div has a minimum width
-                    height: "500px", // Ensure the div has a fixed height
+                    height: "700px", // Ensure the div has a fixed height
                     flexShrink: 0, // Prevent the div from shrinking
                   }}
-                  className="w-full flex flex-col justify-center items-center bg-center bg-no-repeat bg-white relative rounded-lg bg-cover sm:bg-contain xs:bg-contain mdplus:bg-contain lgplus:bg-contain p-5 md:w-[600px] md:h-[600px]  "
+                  className="w-full flex flex-col justify-center items-center py-10 bg-center bg-no-repeat relative rounded-lg bg-cover sm:bg-contain xs:bg-contain mdplus:bg-contain lgplus:bg-contain p-5 md:w-[600px] md:h-[700px]  "
                 >
                   <canvas
                     id="canvasBorderFront"
@@ -557,7 +545,7 @@ export default function Designer() {
                     height: "500px", // Ensure the div has a fixed height
                     flexShrink: 0, // Prevent the div from shrinking
                   }}
-                  className="w-full flex flex-col justify-center items-center bg-center bg-no-repeat bg-white relative rounded-lg bg-cover sm:bg-contain xs:bg-contain mdplus:bg-cover lgplus:bg-contain smplus:bg-cover p-5 md:w-[600px] md:h-[600px]"
+                  className="w-full flex flex-col justify-center items-center bg-center bg-no-repeat relative rounded-lg bg-cover sm:bg-contain xs:bg-contain mdplus:bg-cover lgplus:bg-contain smplus:bg-cover p-5 md:w-[600px] md:h-[600px]"
                 >
                   <canvas
                     id="canvasBorderBack"
@@ -569,25 +557,49 @@ export default function Designer() {
                 </div>
               </div>
             </div>
+            
           </div>
+            <div className="flex gap-2 py-4">
+                  <button
+                    className="border border-primary/40 text-primary/40 bg-white/90 backdrop-blur-sm py-2 px-3 rounded-full text-sm cursor-pointer transition duration-300 ease-in-out"
+                    onClick={() => handleResetCanva(displayedCanvas?.current)}
+                  >
+                    Clear Design
+                  </button>
+
+                  <button
+                    className={`flex items-center gap-1 bg-white/90 backdrop-blur-sm text-primary tracking-tighter py-2 px-3 rounded-full text-sm transition duration-300 ease-in-out border border-primary ${isRemoveButtonDisabled(displayedCanvas?.current)
+                      ? "bg-gray-200 border-none text-gray-400"
+                      : ""
+                      }`}
+                    onClick={() =>
+                      handleRemoveSelectedObj(displayedCanvas?.current)
+                    }
+                    disabled={isRemoveButtonDisabled(displayedCanvas?.current)}
+                  >
+                    <DeleteIcon />
+
+                    Remove Selected
+                  </button>
+                </div>
         </div>
 
-        <div className="w-full lg:w-2/4 p-4 shadow-md rounded-lg border border-gray-300 text-base-content">
-          <div className="flex flex-col p-5">
+        <div className="w-full lg:w-2/4 p-6 shadow-cardShadow rounded-lg border text-textPrimary border-borderLight">
+          <div className="flex flex-col gap-6">
             <div className="flex justify-between">
-              <div className="mb-5 font-bold text-xl sm:text-2xl text-black">
+              <div className="font-bold text-xl sm:text-2xl tracking-tighter">
                 {name}
               </div>
-              <div className="mb-5 font-bold text-xl sm:text-2xl ">
+              <div className=" font-bold text-xl sm:text-2xl  tracking-tighter">
                 {totalPrice} EG
               </div>
             </div>
-            <div className="flex flex-col justify-center mb-5">
-              <div className="flex justify-between mt-5 mb-2">
-                <div className="text-lg sm:text-xl font-bold">
+            <div className="flex flex-col justify-center gap-2">
+              <div className="flex justify-between tracking-tighter">
+                <div className="text-lg sm:text-xl font-semibold">
                   Choose Image{" "}
                 </div>
-                <span>+ 100EG</span>
+                <span className="text-textSecondary">+ 100EG</span>
               </div>
 
               <div className="flex justify-between items-center">
@@ -602,121 +614,102 @@ export default function Designer() {
                 />
                 <label
                   htmlFor="chooseImgFront"
-                  className=" bg-white text-buttonColor py-4 px-4 rounded cursor-pointer hover:bg-gray-100 transition duration-300 ease-in-out  w-full border border-buttonColor text-center "
+                  className="text-primary flex items-center gap-2 justify-center py-4 px-4 rounded cursor-pointer hover:text-primaryDark transition duration-300 ease-in-out  w-full border border-dashed border-surfaceLavender text-center"
                 >
-                  Choose Image
+                  <div className="flex flex-col items-center">
+                  <LuImageUp className="size-8"/>
+                    <p className="flex gap-2">
+                      Choose Image
+                      <ShowMore />
+                    </p>
+                    <p className="text-xs text-textMuted">
+                      PNG. JPG (Max SMB)
+                    </p>
+                  </div>
                   <div className="relative group inline-block">
-                    <ShowMore />
-                    <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max px-2 py-1 mb-3 shadow-md rounded border border-gray-300 text-sm text-textColor bg-white border rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+
+                    <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-max px-2 py-1 mb-3 shadow-md border-gray-300 text-sm text-primary bg-white border rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       Drag 5 images only
                     </span>
                   </div>
                 </label>
-                {/* <inp-ut
-                  id="chooseImgBack"
-                  className="hidden"
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) =>
-                    handleAddImageOnCanva(e, fabricCanvasBack.current)
-                  }
-                />
-                <label
-                  htmlFor="chooseImgBack"
-                  className=" bg-white text-buttonColor py-4 px-4 rounded cursor-pointer hover:bg-gray-100 transition duration-300 ease-in-out  w-full border border-buttonColor text-center "
-                >
-                  Choose Image for Back
-                </label> */}
               </div>
 
-              <div className="mt-5">
-                <div className="flex justify-between mb-2">
-                  <div className="text-lg sm:text-xl font-bold">Add Text</div>
-                  <span>+ 50EG</span>
+              <div className="">
+                <div className="flex justify-between ">
+                  <div className="text-lg sm:text-xl font-semibold tracking-tighter">Add Text</div>
+                  <span className="text-textSecondary">+ 50EG</span>
                 </div>
                 <button
-                  className=" bg-white text-buttonColor py-4 px-4 rounded cursor-pointer hover:bg-gray-100 transition duration-300 ease-in-out  w-full border border-buttonColor "
+                  className="text-textMuted flex items-center gap-2 justify-start py-4 px-4 rounded cursor-pointer hover:text-textSecondary transition duration-300 ease-in-out  w-full border border-surfaceLavender tracking-tighter"
                   id="addTextBtnFront"
                   onClick={() => handleAddText(displayedCanvas.current)}
                 >
-                  Add Text
+                  <span className="text-xl bg-surfaceLavender text-primary rounded-full p-2">
+                    <MdFormatTextdirectionLToR />
+                  </span>
+                  Add your text here...
                 </button>
               </div>
             </div>
-            <div className="text-lg sm:text-xl font-bold">Text Control</div>
-            <div className="bg-lightBackGround p-3 mt-3 rounded ">
-              <div className="">
-                <div className="flex gap-8  items-center mt-3">
-                  <div className="">
-                    <label htmlFor="font-size">Font Size</label>
+            <div className="">
+              <p className="text-lg sm:text-xl font-semibold tracking-tighter">Text Control</p>
+              <div className="bg-surfacePurple/40 px-4 py-3 rounded-md border border-surfaceLavender">
+                <div className="">
+                  <div className="flex gap-8 items-center">
+                    <div className="font-medium tracking-tighter text-sm">
+                      <label htmlFor="font-size">Font Size</label>
+                    </div>
+                    <span className="ml-4 text-sm">{textProps.fontSize}</span>
+                    <div className="flex-1">
+                      <input
+                        id="font-size"
+                        type="range"
+                        min={1}
+                        max="50"
+                        value={textProps.fontSize}
+                        className="range range-xs w-full"
+                        onChange={(e) => {
+                          if (parseInt(e.target.value) <= 0 || e.target.value === "") {
+                            e.target.value = 1;
+                          }
+                          handleUpdateTextProps("fontSize", parseInt(e.target.value));
+                        }}
+                      />
+                    </div>
                   </div>
-                  <span className="ml-4 text-sm">{textProps.fontSize}</span>
-                  <div className="">
-                    <input
-                      id="font-size"
-                      type="range"
-                      min={1}
-                      max="50"
-                      value={textProps.fontSize}
-                      className="range range-xs"
-                      onChange={(e) => {
-                        if (
-                          parseInt(e.target.value) <= 0 ||
-                          e.target.value === ""
-                        ) {
-                          e.target.value = 1;
-                        }
-                        handleUpdateTextProps(
-                          "fontSize",
-                          parseInt(e.target.value)
-                        );
-                        console.log("Font size changed to:", e.target.value);
-                        console.log(textProps);
-                      }}
-                    />
+
+                  <div className="flex gap-12 items-center mt-3">
+                    <div className="font-medium tracking-tighter text-sm">
+                      <label htmlFor="font-style">Font Style</label>
+                    </div>
+                    <div className="">
+                      <select
+                        id="font-style"
+                        className="border border-primary py-2 px-4 rounded-full  outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+                        value={textProps.fontFamily}
+                        onChange={(e) => {
+                          handleUpdateTextProps("fontFamily", e.target.value);
+                        }}
+                      >
+                        <option defaultValue value="arial">Arial</option>
+                        <option value="helvetica">Helvetica</option>
+                        <option value="verdana">Verdana</option>
+                        <option value="georgia">Georgia</option>
+                        <option value="courier">Courier</option>
+                        <option value="comic sans ms">Comic Sans MS</option>
+                        <option value="impact">Impact</option>
+                        <option value="monaco">Monaco</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
 
-                <div className="flex gap-12 items-center mt-3 ">
-                  <div className="">
-                    <label htmlFor="font-style">Font Style</label>
-                  </div>
-                  <div className="">
-                    <select
-                      id="font-style"
-                      className="select select-sm border-buttonColor select-success w-full max-w-xs"
-                      value={textProps.fontFamily}
-                      onChange={(e) => {
-                        handleUpdateTextProps("fontFamily", e.target.value);
-                        console.log("Font family changed to:", e.target.value);
-                        console.log(textProps);
-                      }}
-                    >
-                      <option defaultValue value="arial">
-                        Arial
-                      </option>
-                      <option value="helvetica">Helvetica</option>
-                      <option value="verdana">Verdana</option>
-                      <option value="georgia">Georgia</option>
-                      <option value="courier">Courier</option>
-                      <option value="comic sans ms">Comic Sans MS</option>
-                      <option value="impact">Impact</option>
-                      <option value="monaco">Monaco</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div className="lg:flex justify-between">
-                <div className="flex gap-9 items-center mt-3">
-                  <div className="">
-                    <label
-                      htmlFor="color_picker"
-                      className="text-sm font-medium mb-2"
-                    >
+                <div className="flex items-center justify-between gap-9 mt-3">
+                  <div className="flex items-center gap-3">
+                    <label htmlFor="color_picker" className="font-medium tracking-tighter text-sm">
                       Color
                     </label>
-                  </div>
-                  <div className="">
                     <input
                       id="color_picker"
                       className="p-1 h-8 w-12 block bg-white border border-gray-200 cursor-pointer rounded-lg disabled:opacity-50 disabled:pointer-events-none"
@@ -724,153 +717,123 @@ export default function Designer() {
                       value={textProps.fill}
                       onChange={(e) => {
                         handleUpdateTextProps("fill", e.target.value);
-                        console.log("Color changed to:", e.target.value);
-                        console.log(textProps);
                       }}
                     />
                   </div>
-                </div>
 
-                <div className="flex gap-9 items-center mt-3">
-                  <div>
-                    <label htmlFor="bold-button">Bold</label>
-                  </div>
-                  <div>
+                  <div className="flex items-center gap-2">
+                    <label htmlFor="bold-button" className="font-medium tracking-tighter text-sm">
+                      Bold
+                    </label>
                     <input
                       id="bold-button"
                       type="checkbox"
+                      checked={textProps.fontWeight === "bold"}
                       onChange={() => {
                         handleUpdateTextProps(
                           "fontWeight",
-                          textProps.fontWeight === "" ? "bold" : ""
+                          textProps.fontWeight === "bold" ? "" : "bold"
                         );
-                        console.log("Bold changed to:", textProps.fontWeight);
                       }}
-                      className="checkbox"
+                      className="toggle toggle-sm toggle-primary"
                     />
                   </div>
-                </div>
 
-                <div className="flex gap-9 items-center mt-3">
-                  <div>
-                    <label htmlFor="italic-button">Italic</label>
-                  </div>
-                  <div>
+                  <div className="flex items-center gap-2">
+                    <label htmlFor="italic-button" className="font-medium tracking-tighter text-sm">
+                      Italic
+                    </label>
                     <input
                       id="italic-button"
                       type="checkbox"
-                      value={textProps.italic}
+                      checked={textProps.fontStyle === "italic"}
                       onChange={() => {
                         handleUpdateTextProps(
                           "fontStyle",
-                          textProps.fontStyle === "" ? "italic" : ""
+                          textProps.fontStyle === "italic" ? "" : "italic"
                         );
                       }}
-                      className="checkbox"
+                      className="toggle toggle-sm toggle-primary"
                     />
                   </div>
                 </div>
               </div>
             </div>
-
-            <div className="flex flex-col justify-between my-5">
-              <div className="flex gap-3">
-                <button
-                  className="font-bold underline"
-                  onClick={() =>
-                    document.getElementById("my_modal_5").showModal()
-                  }
-                >
-                  Sizes table
-                </button>
-              </div>
+            <div className="flex flex-col justify-between" onClick={scrollToSizeChart}>
               <RadioComponent
                 setSize={setSelectedSize}
                 stock={stockAvailable}
               />
             </div>
-            <dialog
-              id="my_modal_5"
-              className="modal modal-bottom sm:modal-middle"
-            >
-              <div className="modal-box">
-                <form method="dialog">
-                  <div className="p-3">
-                    <button className="float-right rounded-full">
-                      <XIcon />
-                    </button>
-                  </div>
-                </form>
-                <h3 className="font-bold text-2xl ">Size Charts</h3>
-                <p className="py-4">Choose your size carfully ..</p>
-                <div className="modal-action justify-center">
-                  <form method="dialog">
-                    <SizeCharts />
-                  </form>
-                </div>
+
+            <div className="w-full max-w-md mx-auto flex flex-col gap-3">
+              <div className="flex gap-3">
+                <button
+                  onClick={handleDownloadScreenShot}
+                  className="flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-full 
+                 border border-borderLight bg-white text-sm font-medium text-textSecondary
+                 hover:bg-gray-50 transition duration-300 ease-in-out"
+                >
+                  <Downloads className="size-3" />
+                  <span>Save Design to Device</span>
+                </button>
+
+                {isLoggedIn && (
+                  <button
+                    onClick={() => handleSaveDesign("save")}
+                    disabled={isSaving}
+                    className={`flex-1 flex items-center justify-center gap-2 rounded-full 
+                    border border-borderLight bg-white text-sm font-medium text-textSecondary
+                    hover:bg-gray-50 transition duration-300 ease-in-out
+                    ${isSaving ? "opacity-50 cursor-not-allowed" : ""}`}
+                  >
+                    {isSaving ? (
+                      <span className="loading loading-ring loading-sm"></span>
+                    ) : (
+                      <>
+                        <FiBookmark className="size-4" />
+                        <span>Save to Profile</span>
+                      </>
+                    )}
+                  </button>
+                )}
               </div>
-            </dialog>
-            <div className="flex justify-center gap-2 text-textColor">
-              <span
-                onClick={handleDownloadScreenShot}
-                className="text-sm cursor-pointer"
-              >
-                Download your design images
-              </span>
-              <button onClick={handleDownloadScreenShot}>
-                <Downloads />
-              </button>
+
+              {isLoggedIn ? (
+                <button
+                  onClick={handleAddToCart}
+                  disabled={isAdding}
+                  className="w-full text-sm shadow-cardShadow flex items-center justify-center gap-2 py-2 px-4 rounded-full 
+                 text-white bg-primaryGradient tracking-tight cursor-pointer
+                 hover:opacity-90 transition duration-300 ease-in-out"
+                >
+                  {isAdding ? (
+                    <span className="loading loading-ring loading-md"></span>
+                  ) : (
+                    <>
+                      <FiShoppingCart className="w-5 h-5" />
+                      <span>ADD TO CART</span>
+                    </>
+                  )}
+                </button>
+              ) : (
+                <button
+                  onClick={navigateToLogin}
+                  className="w-full bg-red-500 hover:bg-red-600 transition duration-700 ease-in-out 
+                 rounded-full text-white py-3 px-4 font-medium"
+                >
+                  Login to save and Add to Cart
+                </button>
+              )}
             </div>
           </div>
         </div>
       </div>
-      <div className="lg:flex justify-end sm:mx-40 mt-5">
-        {isLoggedIn && (
-          <button
-            className={`me-5 bg-white text-buttonColor py-2 px-4 rounded cursor-pointer 
-                  hover:bg-gray-100 transition duration-300 ease-in-out mt-5 w-full sm:w-44 
-                  border border-buttonColor ${
-                    isSaving ? "opacity-50 cursor-not-allowed" : ""
-                  }`}
-            onClick={() => handleSaveDesign("save")}
-            disabled={isSaving}
-          >
-            {isSaving ? (
-              <span className="loading loading-ring loading-md"></span>
-            ) : (
-              "Save Design"
-            )}
-            <div className="relative group inline-block">
-              <ShowMore />
-              <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max px-2 py-1 mb-3 shadow-md rounded border border-gray-300 text-sm text-textColor bg-white border rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                If you want to Edit your design later, save it.
-              </span>
-            </div>
-          </button>
-        )}
-        {isLoggedIn ? (
-          <button
-            onClick={handleAddToCart}
-            style={{
-              background: "linear-gradient(to right, #81B3DC, #CE6ADA)",
-            }}
-            className="py-2 px-4 rounded cursor-pointer transition duration-700 ease-in-out text-white btn mt-5 w-full sm:w-44 me-2"
-            disabled={isAdding}
-          >
-            {isAdding ? (
-              <span className="loading loading-ring loading-md"></span>
-            ) : (
-              "ADD TO CART"
-            )}
-          </button>
-        ) : (
-          <button
-            onClick={navigateToLogin}
-            className="bg-red-500 hover:bg-red-600 transition duration-700 ease-in-out rounded w-60 text-white py-2 px-10 me-16"
-          >
-            Login to save and Add to Cart
-          </button>
-        )}
+
+      <NeedHelp/>
+
+      <div ref={sizeChartRef} className="py-10">
+        <SizeCharts />
       </div>
     </div>
   );

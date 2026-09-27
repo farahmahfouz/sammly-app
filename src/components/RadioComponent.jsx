@@ -1,12 +1,24 @@
-export default function RadioComponent({ setSize, stock }) {
+import { PiResizeBold } from "react-icons/pi";
+
+export default function RadioComponent({ setSize, stock, onSizeChartClick }) {
   const handleSizeChange = (e) => {
     setSize(e.target.value); // Update the size in the parent component
   };
 
   return (
-    <div className="flex flex-col gap-2 items-start sm:items-center">
-      <div className="self-start">
+    <div className="flex flex-col gap-2">
+      <div className="flex justify-between">
         <label className="font-bold tracking-tighter">Size</label>
+        <button
+          onClick={onSizeChartClick}
+          className="font-bold capitalize tracking-tighter text-primary hover:text-primaryDark flex gap-1 items-center"
+        >
+          <PiResizeBold />
+
+          <span className="text-sm">
+            size chart
+          </span>
+        </button>
       </div>
       <div className="flex flex-wrap gap-2 text-[12px] font-medium">
         {["XS", "S", "M", "L", "XL", "XXL"].map((size) => (

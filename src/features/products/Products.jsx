@@ -62,7 +62,7 @@ function Products({ isFilterOpen, onToggleFilter, ...restProps }) {
             </div>
             <div className="w-full relative">
                 <div className="w-full md:py-10 pt-2">
-                    <div className="grid gap-6 justify-items-center"
+                    <div className="grid gap-6 justify-items-start"
                         style={{
                             gridTemplateColumns: `repeat(auto-fit, minmax(${isFilterOpen ? '230px' : '210px'}, 1fr))`,
                         }}>

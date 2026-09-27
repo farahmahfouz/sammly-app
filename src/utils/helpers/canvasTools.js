@@ -30,7 +30,7 @@ export const resizeCanvas = (fabricCanvas, canvasWidth, canvasHeight) => {
 export const captureScreenShot = async (
   fabricCanvas,
   elementId,
-  isDownload
+  isDownload,
 ) => {
   fabricCanvas.discardActiveObject();
   fabricCanvas.renderAll();
@@ -38,7 +38,7 @@ export const captureScreenShot = async (
     elementId,
     "MyImage",
     isDownload,
-    "image/jpeg"
+    "image/jpeg",
   );
   if (imageOfDesign) {
     return imageOfDesign;
@@ -50,20 +50,18 @@ export const captureScreenShot = async (
 
 // add text on canva
 export const addText = (fabricCanvas, textProps) => {
-  //const canvas = fabricCanvas.current;
   const textbox = new fabric.Textbox("Enter text here", {
-    left: 100,
-    top: 100,
-    fontSize: textProps.fontSize, // Use the current font size from the state
-    fill: textProps.fill, // Use the current text color from the state
-    fontFamily: textProps.fontFamily, // Use the current font family from the state
+    fontSize: textProps.fontSize,
+    fill: textProps.fill,
+    fontFamily: textProps.fontFamily,
     fontWeight: textProps.fontWeight,
     fontStyle: textProps.fontStyle,
-    editable: true, // Allow the user to edit the text
+    editable: true,
   });
-  fabricCanvas.add(textbox); // Add the textbox to the canvas
-  fabricCanvas.setActiveObject(textbox); // Make the new textbox the active object
-  fabricCanvas.renderAll(); // Re-render the canvas to display the changes
+  fabricCanvas.add(textbox);
+  fabricCanvas.centerObject(textbox);
+  fabricCanvas.setActiveObject(textbox);
+  fabricCanvas.renderAll();
 };
 
 //Function to update the properties of the selected text
@@ -115,20 +113,22 @@ export const resetCanvas = (fabricCanvas) => {
 //Function to handle adding an image to the canvas
 
 export const handleAddImage = (e, fabricCanvas, setDragImages) => {
-  let imgObj = e.target.files[0]; // Get the uploaded image file
+  let imgObj = e.target.files[0];
   let reader = new FileReader();
-  reader.readAsDataURL(imgObj); // Read the image file as a data URL
+  reader.readAsDataURL(imgObj);
   reader.onload = (e) => {
     let imgElement = document.createElement("img");
-    imgElement.src = e.target.result; // Set the image source to the data URL
+    imgElement.src = e.target.result;
     imgElement.onload = function () {
       const image = new fabric.Image(imgElement, {
-        scaleX: 0.1, // Scale down the image for the canvas
+        scaleX: 0.1,
         scaleY: 0.1,
       });
-      fabricCanvas.add(image); // Add the image to the canvas
-      fabricCanvas.centerObject(image); // Center the image on the canvas
-      fabricCanvas.setActiveObject(image); // Make the image the active object
+      console.log(image);
+      fabricCanvas.add(image);
+      fabricCanvas.centerObject(image);
+      fabricCanvas.setActiveObject(image);
+      fabricCanvas.renderAll(); // 👈 السطر المفقود
       setDragImages((prevImages) => [...prevImages, imgObj]);
     };
   };
