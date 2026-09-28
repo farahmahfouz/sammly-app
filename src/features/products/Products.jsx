@@ -6,12 +6,13 @@ import Product from "./Product";
 import Dropdown from "../../components/DropDown";
 import FilterIcon from "../../icons/FilterIcon";
 import Pagination from "../../components/Pagination";
+import Spinner from "../../components/Spinner";
 
 function Products({ isFilterOpen, onToggleFilter, ...restProps }) {
     const {
         products,
         isError,
-        error,
+        isLoading,
         handleSortChange,
         currentPage,
         totalPages,
@@ -25,13 +26,11 @@ function Products({ isFilterOpen, onToggleFilter, ...restProps }) {
         return (
             <div className="flex flex-col justify-center items-center p-10 overflow-y-scroll">
                 <NoData />
-
-                <h2 className="text-center text-red-600 mt-4">
-                    Error: {error?.message}
-                </h2>
             </div>
         );
     }
+
+    if (isLoading) return <Spinner />;
 
     if (products?.length === 0) { return (<div className="w-full min-h-[60vh] flex items-center justify-center"> <NoData /> </div>); }
 

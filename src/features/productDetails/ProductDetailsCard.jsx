@@ -15,6 +15,7 @@ import useProduct from "./useProduct";
 import ProductFeatures from "./ProductFeatures";
 import { TbShoppingBagExclamation } from "react-icons/tb";
 import RadioComponent from "../../components/RadioComponent";
+import Spinner from "../../components/Spinner";
 
 
 function ProductDetailsCard({ onSizeChartClick }) {
@@ -41,20 +42,9 @@ function ProductDetailsCard({ onSizeChartClick }) {
         setQuantity(1);
     }, [selectedSize]);
 
-    if (isLoading) {
-        return (
-            <div className="h-screen text-hoverButton flex justify-center align-middle">
-                <span className="loading loading-ball loading-xs"></span>
-                <span className="loading loading-ball loading-sm"></span>
-                <span className="loading loading-ball loading-md"></span>
-                <span className="loading loading-ball loading-lg"></span>
-            </div>
-        );
-    }
+    if (isLoading || (!product && !isError)) return <Spinner />;
 
-    if (isError || !product) {
-        return <NoData />;
-    }
+    if (isError || !product) return <NoData />;
 
     const allImages = [product.image, ...(product.extraImages || [])];
 

@@ -33,24 +33,24 @@ function Footer() {
           <h3 className="font-bold text-md">Quick Links</h3>
           <ul className="mt-4 space-y-2">
             <li>
-              <a href="#" className="hover:underline text-sm text-textMuted">
+              <Link to="/" className="hover:underline text-sm text-textMuted">
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:underline text-sm text-textMuted">
+              <Link to="products" className="hover:underline text-sm text-textMuted">
                 Products
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:underline text-sm text-textMuted">
+              <Link to="customize" className="hover:underline text-sm text-textMuted">
                 Create Your Own
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:underline text-sm text-textMuted">
+              <Link to="aboutus" className="hover:underline text-sm text-textMuted">
                 About Us
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -61,19 +61,19 @@ function Footer() {
           <h3 className="font-bold text-md">Customer Service</h3>
           <ul className="mt-4 space-y-2">
             <li>
-              <a href="#" className="hover:underline text-sm text-textMuted">
+              <Link to="/help" href="#" className="hover:underline text-sm text-textMuted">
                 Help & FAQs
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:underline text-sm text-textMuted">
+              <Link to="/help?category=shipping" href="#" className="hover:underline text-sm text-textMuted">
                 Shipping
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:underline text-sm text-textMuted">
+              <Link to="/help?category=returns" href="#" className="hover:underline text-sm text-textMuted">
                 Returns & Refunds
-              </a>
+              </Link>
             </li>
             <li>
               <a href="#" className="hover:underline text-sm text-textMuted">
