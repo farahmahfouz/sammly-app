@@ -56,7 +56,7 @@ function CartCard({ product, handleDeleteConfirm }) {
                                         product?.quantity - 1
                                     )
                                 }
-                                className={`w-8 h-8 flex items-center justify-center text-buttonColor text-lg transition duration-300 ease-in-out ${isMinQuantity || isUpdating
+                                className={`w-8 h-8 flex items-center justify-center text-primary text-lg transition duration-300 ease-in-out ${isMinQuantity || isUpdating
                                     ? "opacity-50 cursor-not-allowed"
                                     : "hover:bg-gray-100 cursor-pointer"
                                     }`}
@@ -78,7 +78,7 @@ function CartCard({ product, handleDeleteConfirm }) {
                                         product?.quantity + 1
                                     )
                                 }
-                                className={`w-8 h-8 flex items-center justify-center text-buttonColor text-lg transition duration-300 ease-in-out ${isMaxQuantity || isUpdating
+                                className={`w-8 h-8 flex items-center justify-center text-primary text-lg transition duration-300 ease-in-out ${isMaxQuantity || isUpdating
                                     ? "opacity-50 cursor-not-allowed"
                                     : "hover:bg-gray-100 cursor-pointer"
                                     }`}
@@ -93,7 +93,7 @@ function CartCard({ product, handleDeleteConfirm }) {
                 {/* Delete button */}
                 <button
                     onClick={() => handleDeleteConfirm(product?._id)}
-                    className="absolute top-2 right-2 text-black rounded-full w-9 h-9 flex justify-center items-center cursor-pointer"
+                    className="absolute top-2 right-2 text-textPrimary rounded-full w-9 h-9 flex justify-center cursor-pointer"
                     disabled={isRemoving === product?._id}
                 >
                     {isRemoving === product?._id ? (
