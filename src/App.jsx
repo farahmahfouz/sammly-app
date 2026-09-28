@@ -25,6 +25,7 @@ import AboutUs from "./pages/AboutUs";
 import DesignerDetails from "./pages/DesignerDetails";
 import ScrollToTop from "./components/ScrollToTop";
 import HelpFAQs from "./pages/HelpFaqs";
+import ContactUs from "./pages/ContactUs";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -126,6 +127,7 @@ function App() {
                         />
 
                         <Route path="/help" element={<HelpFAQs />} />
+                        <Route path="/contact" element={<ContactUs />} />
                         <Route
                           path="/forget-password"
                           element={

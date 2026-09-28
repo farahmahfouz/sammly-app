@@ -76,9 +76,9 @@ function Footer() {
               </Link>
             </li>
             <li>
-              <a href="#" className="hover:underline text-sm text-textMuted">
+              <Link to="/contact" className="hover:underline text-sm text-textMuted">
                 Contact Us
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
