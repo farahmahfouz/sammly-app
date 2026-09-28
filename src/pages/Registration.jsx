@@ -6,6 +6,7 @@ import axios from "axios";
 // Icons
 import Eye from "./../icons/Eye";
 import EyeSlash from "./../icons/EyeSlash";
+import { PiUserGearFill } from "react-icons/pi";
 
 //toast
 import "react-toastify/dist/ReactToastify.css";
@@ -56,32 +57,49 @@ export default function App() {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2  max-w-4xl mx-auto   m-9 rounded-xl p-5 shadow-[0px_0px_3px_3px_#fbfbfb]">
+    <div className="grid grid-cols-1 md:grid-cols-[1.6fr_1fr] container mx-auto py-6">
       {/* Image Section */}
-      <div className="md:order-1 flex justify-center items-center  rounded-xl">
+      <div className="md:order-1 flex flex-col">
+        <div className="flex flex-col gap-2 items-start">
+          <p className="text-4xl tracking-tighter font-extrabold leading-tight">
+            Create your
+            <p className="text-primaryDark">account</p>
+          </p>
+          <p className="max-w-96 text-textMuted tracking-tight">Join our community and start creating
+            custom T-shirts, expressing your style
+
+            Email address
+
+            and sharing your creativity!</p>
+        </div>
         <img
-          src="/brand1.jpg"
+          src="/signup.png"
           alt="Sign Up"
-          className="h-4/5 object-cover rounded-xl"
+          className="w-4/5 object-cover rounded-bl-badge rounded-br-[198px]"
         />
       </div>
 
       {/* Form Section */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="md:order-2 p-5 rounded-xl"
+        className="md:order-2 p-6 rounded-2xl shadow-cardShadow border border-borderLight flex flex-col gap-4"
       >
-        <div>
-          <h1 className="text-center text-3xl pb-6 text-textColor font-bold">
-            Create Account
-          </h1>
+        <div className="flex  items-center gap-2 justify-center text-center">
+
+          <PiUserGearFill className="text-primaryDark bg-surfaceLavender p-2 size-11 rounded-full" />
+          <div className="flex flex-col">
+            <p className="tracking-tight text-3xl  text-textPrimary font-bold">
+              Create Account
+            </p>
+            <p className="text-textMuted tracking-tighter text-sm">Fill in your details to get started</p>
+          </div>
         </div>
 
         {/* Name */}
-        <div className="mb-4">
+        <div className="">
           <label
             htmlFor="name"
-            className="block text-sm font-medium text-textColor"
+            className="block text-sm font-medium text-textPrimary"
           >
             Name
           </label>
@@ -94,9 +112,8 @@ export default function App() {
               })}
               type="text"
               id="name"
-              className={`mt-1 block w-full px-3 py-2 border-b ${
-                errors.name ? "border-b-red-500" : "border-b-gray-300"
-              } rounded-none shadow-sm focus:outline-none focus:ring-0 focus:border-b-indigo-500 sm:text-sm hover:border-b-textColor`}
+              className={`mt-1 block w-full px-3 py-2 border-b ${errors.name ? "border-b-red-500" : "border-b-gray-300"
+                } rounded-none shadow-sm focus:outline-none focus:ring-0 focus:border-b-indigo-500 sm:text-sm hover:border-b-primary`}
               placeholder="Enter name"
             />
           </div>
@@ -116,10 +133,10 @@ export default function App() {
         </div>
 
         {/* Email */}
-        <div className="mb-4">
+        <div className="">
           <label
             htmlFor="email"
-            className="block text-sm font-medium text-textColor"
+            className="block text-sm font-medium text-textPrimary"
           >
             Email address
           </label>
@@ -131,9 +148,8 @@ export default function App() {
               })}
               type="email"
               id="email"
-              className={`mt-1 block w-full px-3 py-2 border-b ${
-                errors.email ? "border-b-red-500" : "border-b-gray-300"
-              } rounded-none shadow-sm focus:outline-none focus:ring-0 focus:border-b-indigo-500 sm:text-sm hover:border-b-textColor`}
+              className={`mt-1 block w-full px-3 py-2 border-b ${errors.email ? "border-b-red-500" : "border-b-gray-300"
+                } rounded-none shadow-sm focus:outline-none focus:ring-0 focus:border-b-indigo-500 sm:text-sm hover:border-b-primary`}
               placeholder="Enter email"
             />
           </div>
@@ -149,10 +165,10 @@ export default function App() {
         </div>
 
         {/* Password */}
-        <div className="mb-4">
+        <div className="">
           <label
             htmlFor="password"
-            className="block text-sm font-medium text-textColor"
+            className="block text-sm font-medium text-textPrimary"
           >
             Password
           </label>
@@ -166,9 +182,8 @@ export default function App() {
               })}
               type={showPassword ? "text" : "password"}
               id="password"
-              className={`mt-1 block w-full px-3 py-2 border-b ${
-                errors.password ? "border-b-red-500" : "border-b-gray-300"
-              } rounded-none shadow-sm focus:outline-none focus:ring-0 focus:border-b-indigo-500 sm:text-sm hover:border-b-textColor`}
+              className={`mt-1 block w-full px-3 py-2 border-b ${errors.password ? "border-b-red-500" : "border-b-gray-300"
+                } rounded-none shadow-sm focus:outline-none focus:ring-0 focus:border-b-indigo-500 sm:text-sm hover:border-b-primary`}
               placeholder="Password"
             />
             {showPassword ? (
@@ -199,10 +214,10 @@ export default function App() {
         </div>
 
         {/* Confirm Password */}
-        <div className="mb-4">
+        <div className="">
           <label
             htmlFor="passwordConfirm"
-            className="block text-sm font-medium text-textColor"
+            className="block text-sm font-medium text-textPrimary"
           >
             Confirm Password
           </label>
@@ -214,11 +229,10 @@ export default function App() {
               })}
               type={showConfirmPassword ? "text" : "password"}
               id="passwordConfirm"
-              className={`mt-1 block w-full px-3 py-2 border-b ${
-                errors.passwordConfirm
-                  ? "border-b-red-500"
-                  : "border-b-gray-300"
-              } rounded-none shadow-sm focus:outline-none focus:ring-0 focus:border-b-indigo-500 sm:text-sm hover:border-b-textColor`}
+              className={`mt-1 block w-full px-3 py-2 border-b ${errors.passwordConfirm
+                ? "border-b-red-500"
+                : "border-b-gray-300"
+                } rounded-none shadow-sm focus:outline-none focus:ring-0 focus:border-b-indigo-500 sm:text-sm hover:border-b-primary`}
               placeholder="Confirm Password"
             />
             {showConfirmPassword ? (
@@ -238,10 +252,10 @@ export default function App() {
         </div>
 
         {/* Address */}
-        <div className="mb-4">
+        <div className="">
           <label
             htmlFor="address"
-            className="block text-sm font-medium text-textColor"
+            className="block text-sm font-medium text-textPrimary"
           >
             Address
           </label>
@@ -254,9 +268,8 @@ export default function App() {
               })}
               type="text"
               id="address"
-              className={`mt-1 block w-full px-3 py-2 border-b ${
-                errors.address ? "border-b-red-500" : "border-b-gray-300"
-              } rounded-none shadow-sm focus:outline-none focus:ring-0 focus:border-b-indigo-500 sm:text-sm hover:border-b-textColor`}
+              className={`mt-1 block w-full px-3 py-2 border-b ${errors.address ? "border-b-red-500" : "border-b-gray-300"
+                } rounded-none shadow-sm focus:outline-none focus:ring-0 focus:border-b-indigo-500 sm:text-sm hover:border-b-primary`}
               placeholder="Enter address"
             />
           </div>
@@ -276,10 +289,10 @@ export default function App() {
         </div>
 
         {/* Phone Number */}
-        <div className="mb-4">
+        <div className="">
           <label
             htmlFor="phone"
-            className="block text-sm font-medium text-textColor"
+            className="block text-sm font-medium text-textPrimary"
           >
             Phone Number
           </label>
@@ -291,9 +304,8 @@ export default function App() {
               })}
               type="text"
               id="phone"
-              className={`mt-1 block w-full px-3 py-2 border-b ${
-                errors.phone ? "border-b-red-500" : "border-b-gray-300"
-              } rounded-none shadow-sm focus:outline-none focus:ring-0 focus:border-b-indigo-500 sm:text-sm hover:border-b-textColor`}
+              className={`mt-1 block w-full px-3 py-2 border-b ${errors.phone ? "border-b-red-500" : "border-b-gray-300"
+                } rounded-none shadow-sm focus:outline-none focus:ring-0 focus:border-b-indigo-500 sm:text-sm hover:border-b-primary`}
               placeholder="Enter phone number"
             />
           </div>
@@ -311,7 +323,7 @@ export default function App() {
 
         <button
           type="submit"
-          className="w-full mt-3 flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-buttonColor hover:bg-hoverButton hover:transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-hoverButton"
+          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-full shadow-cardShadow text-sm font-bold text-white bg-primary hover:bg-primaryDark hover:transition-all focus:outline-none"
           disabled={isLoading}
         >
           {isLoading ? (
@@ -320,9 +332,9 @@ export default function App() {
             "Register"
           )}
         </button>
-        <p className="text-center mt-3">
+        <p className="text-center mt-auto tracking-tight text-sm">
           Already have account?{" "}
-          <Link to="/login" className="font-bold text-textColor">
+          <Link to="/login" className="font-semibold text-primary">
             Login Now
           </Link>
         </p>

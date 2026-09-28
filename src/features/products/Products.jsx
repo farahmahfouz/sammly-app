@@ -21,7 +21,6 @@ function Products({ isFilterOpen, onToggleFilter, ...restProps }) {
         endItem,
         totalCount,
     } = useProducts();
-    console.log(products)
 
     if (isError) {
         return (
