@@ -9,6 +9,7 @@ import HeartIcon from "../../icons/HeartIcon";
 
 import AuthContext from "../../context/AuthContext";
 import Cart from "../../icons/Cart";
+import RatingStars from "../reviews/RatingStarts";
 
 function Product({ product }) {
     const { isLoggedIn } = useContext(AuthContext);
@@ -19,7 +20,12 @@ function Product({ product }) {
     } = useFavoriteProducts();
 
     return (
-        <Link to={`/product-details/${product._id}`} className="rounded-xl w-full max-w-[351px] min-w-56 border border-borderLight shadow-cardShadow">
+        <Link to={`/product-details/${product._id}`} className="rounded-xl overflow-hidden relative w-full max-w-[351px] min-w-56 border border-borderLight shadow-cardShadow">
+            {product.isOnSale && (
+                <span className="absolute top-4 -left-10 w-32 -rotate-45 z-10 bg-surfaceLavender text-primaryDark text-xs font-bold text-center py-1">
+                    -{product.discount}%
+                </span>
+            )}
 
             <figure className="relative">
                 {isLoggedIn && (
@@ -42,6 +48,7 @@ function Product({ product }) {
                     </button>
                 )}
 
+
                 <img
                     src={product.image}
                     alt={product.name}
@@ -51,7 +58,6 @@ function Product({ product }) {
 
             {/* Product Info */}
             <div className="p-4 pt-0 items-center gap-1 text-start">
-
                 <h2 className="text-sm font-bold text-textPrimary  uppercase truncate">
                     {product.name}
                 </h2>
@@ -59,11 +65,29 @@ function Product({ product }) {
                     {product.description}
                 </p>
                 <div className="flex justify-between gap-3 pb-2">
+                    <div className="flex gap-1 items-center">
+                        {product.isOnSale ? (
+                            <>
+                                <p className="text-base font-bold text-primary line-through whitespace-nowrap">
+                                    EG {product.price}
+                                </p>
+                                <p className="text-sm text-textMuted whitespace-nowrap">
+                                    EG {product.finalPrice}
+                                </p>
+                            </>
+                        ) : (
+                            <p className="text-base font-bold text-primary whitespace-nowrap">
+                                EG {product.price}
+                            </p>
+                        )}
+                    </div>
 
-                    <p className="text-base font-bold text-primary whitespace-nowrap">
-                        EG {product.price}
-                    </p>
-                    <p className="text-textMuted text-sm tracking-tighter">(124)</p>
+                    <div className="text-textMuted/70 text-xs tracking-tighter flex items-center gap-2">
+                        <RatingStars size="h-2 w-2" value={product.ratingsAverage} />
+                        {product.ratingsQuantity > 0 && (
+                            <span>({product.ratingsQuantity})</span>
+                        )}
+                    </div>
                 </div>
 
 

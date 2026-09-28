@@ -62,3 +62,12 @@ export const getCategories = async () => {
   const response = await axiosInstance.get(`/categories`);
   return response.data.data.categories;
 };
+
+export const getRelatedProducts = async (id) => {
+  try {
+    const res = await axiosInstance.get(`/products/${id}/related`);
+    return res.data.data.products;
+  } catch (err) {
+    console.log(err);
+  }
+};

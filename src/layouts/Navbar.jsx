@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 
 //contexts
 import AuthContext from "../context/AuthContext";
-import  useCart  from "../features/cart/useCart";
+import useCart from "../features/cart/useCart";
 import UserContext from "../context/UserContext";
 
 // Import the custom link component
@@ -11,6 +11,8 @@ import CustomLink from "./CustomLink";
 
 //icons
 import CartIcon from "../icons/CartIcon";
+import { LuLogOut } from "react-icons/lu";
+import { CgProfile } from "react-icons/cg";
 
 export default function Navbar() {
   const { isLoggedIn, logout } = useContext(AuthContext);
@@ -23,6 +25,7 @@ export default function Navbar() {
   const handleLogout = () => {
     logout();
     navigate("/login");
+    setIsMenuOpen(!isMenuOpen);
   };
 
   const toggleMenu = () => {
@@ -102,9 +105,9 @@ export default function Navbar() {
                 <div className="indicator">
                   <CartIcon />
                   {totalQuantity > 0 && (
-                      <span className="badge badge-sm indicator-item ">
-                        {totalQuantity}
-                      </span>
+                    <span className="badge badge-sm indicator-item ">
+                      {totalQuantity}
+                    </span>
                   )}
                 </div>
               </Link>
@@ -136,46 +139,47 @@ export default function Navbar() {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-slate-50 rounded-box z-10 mt-3 w-52 p-2 shadow-sm"
+              className="menu menu-sm dropdown-content bg-white rounded-box z-10 mt-3 w-52 p-2 shadow-cardShadow"
             >
               {isLoggedIn && (
-                <li className="">
+                <li>
                   <Link
                     to="/user-profile"
-                    className="px-5 py-1 text-textPrimary text-md  hover:transition-all"
+                    className="px-5 py-1 text-textPrimary text-md rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 active:!bg-gray-100 active:!text-textPrimary transition-colors"
                   >
+                    <CgProfile />
                     Profile
                   </Link>
                 </li>
               )}
               {!isLoggedIn && (
-                <li className="">
+                <li>
                   <Link
                     to="/login"
-                    className="px-5 py-1 text-textPrimary text-md  hover:transition-all"
+                    className="px-5 py-1 text-textPrimary text-md rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 active:!bg-gray-100 active:!text-textPrimary transition-colors"
                   >
                     Login
                   </Link>
                 </li>
               )}
               {!isLoggedIn && (
-                <li className="">
+                <li>
                   <Link
                     to="/sign-up"
-                    className="px-5 py-1  text-textPrimary text-md  hover:transition-all"
+                    className="px-5 py-1 text-textPrimary text-md rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 active:!bg-gray-100 active:!text-textPrimary transition-colors"
                   >
                     Register
                   </Link>
                 </li>
               )}
               {isLoggedIn && (
-                <li className="">
+                <li>
                   <button
                     onClick={handleLogout}
-                    className="px-5 py-3 text-xl  text-red-600 rounded-lg hover:transition-all"
+                    className="px-5 py-1 text-red-600 text-left rounded-lg hover:bg-red-50 focus:outline-none focus:bg-red-50 active:!bg-red-50 transition-colors"
                   >
-                    Logout{" "}
-
+                    <LuLogOut />
+                    Logout
                   </button>
                 </li>
               )}

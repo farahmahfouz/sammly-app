@@ -8,7 +8,6 @@ import ArrowLeft from "../../icons/ArrowLeft";
 import HeartIcon from "../../icons/HeartIcon";
 import HeardFilledIcon from "../../icons/HeardFilledIcon";
 import NoData from "../../components/NoData";
-import Rating from "../../components/Rating";
 import AuthContext from "../../context/AuthContext";
 import useFavoriteProducts from "../products/useFavoriteProducts";
 import useProduct from "./useProduct";
@@ -16,11 +15,13 @@ import ProductFeatures from "./ProductFeatures";
 import { TbShoppingBagExclamation } from "react-icons/tb";
 import RadioComponent from "../../components/RadioComponent";
 import Spinner from "../../components/Spinner";
+import RatingStars from "../reviews/RatingStarts";
 
 
 function ProductDetailsCard({ onSizeChartClick }) {
     const navigate = useNavigate();
     const { product, isLoading, isError } = useProduct();
+    console.log(product)
 
     const { isLoggedIn } = useContext(AuthContext);
     const { addToCart } = useCart();
@@ -89,7 +90,7 @@ function ProductDetailsCard({ onSizeChartClick }) {
     return (
         <div className=" flex flex-col lg:flex-row md:gap-11">
             <div className="flex gap-4 w-full lg:w-1/2">
-                <div className="hidden md:flex flex-col gap-3 w-20 ">
+                <div className="hidden md:flex flex-col gap-3 w-20">
                     {allImages.map((img, index) => (
                         <button
                             key={index}
@@ -129,7 +130,12 @@ function ProductDetailsCard({ onSizeChartClick }) {
             </div>
 
             <div className="w-full lg:w-1/2 py-5">
-                <div className="flex justify-between">
+                {product.isOnSale && (
+                    <span className=" border border-primary shadow-cardShadow text-primaryDark text-xs font-bold text-center py-2 px-4 rounded-full">
+                       SALE
+                    </span>
+                )}
+                <div className="flex justify-between pt-4">
                     <h1 className="text-xl md:text-2xl font-bold uppercase">
                         {product.name}
                     </h1>
@@ -149,13 +155,29 @@ function ProductDetailsCard({ onSizeChartClick }) {
                     )}
                 </div>
                 <span className="text-textMuted flex gap-2 text-sm items-center">
-                    <Rating />
-                    4.8 (124 reviews)
+                    <RatingStars value={product.ratingsAverage} />
+                    {product.ratingsAverage}
+                    {product.ratingsQuantity > 0 && (
+                        <span>({product.ratingsQuantity} reviews)</span>
+                    )}
                 </span>
-                <p className="text-primaryDark text-2xl font-bold pt-4 ">
-                    EG {product.price}
-                </p>
-                <p className="py-4 pb-10 text-textMuted text-sm lowercase  first-letter:uppercase">{product.description}</p>
+                <div className="flex gap-4 items-center pt-4">
+                    {product.isOnSale ? (
+                        <>
+                            <p className="text-xl font-bold text-primary line-through whitespace-nowrap">
+                                EG {product.price}
+                            </p>
+                            <p className="text-sm text-textMuted whitespace-nowrap">
+                                EG {product.finalPrice}
+                            </p>
+                        </>
+                    ) : (
+                        <p className="text-xl font-bold text-primary whitespace-nowrap">
+                            EG {product.price}
+                        </p>
+                    )}
+                </div>
+                <p className="py-4 pb-8 text-textMuted text-sm lowercase first-letter:uppercase">{product.description}</p>
                 <ProductFeatures />
                 <div className="md:pt-5">
                     <RadioComponent setSize={setSelectedSize} stock={stockAvailable} onSizeChartClick={onSizeChartClick} />

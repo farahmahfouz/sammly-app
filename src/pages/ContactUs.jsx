@@ -127,7 +127,7 @@ function ContactUs() {
                     src="/sticker1.png"
                     alt=""
                     aria-hidden="true"
-                    className="hidden md:block w-28 lg:w-40 h-auto object-contain absolute end-28 top-1/2 rotate-12 -translate-y-1/2 pointer-events-none select-none"
+                    className="hidden md:block w-28 lg:w-40 h-auto object-contain absolute end-28 top-1/2 rotate-45 -translate-y-1/2 pointer-events-none select-none"
                 />
             </div>
 
