@@ -2,7 +2,7 @@ import { GiSeaStar } from "react-icons/gi";
 
 export default function HeroSection() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4  mb-20 container mx-auto">
+    <div className="grid grid-cols-1 md:grid-cols-4 mb-8 container mx-auto">
       <div className="md:col-span-2">
 
         <img

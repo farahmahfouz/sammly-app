@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import Skelton from "../../layouts/Skelton";
-import ArrowRight from "../../icons/ArrowRight";
 import Play from "../../icons/Play";
 import Order from "../../icons/Order";
 import CarIcon from "../../icons/CarIcon";
@@ -44,19 +43,22 @@ export default function CardOfDesigner() {
       <div className=" flex justify-center">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((product) => (
-            <div
+            <Link
+              to={`/designer/${product._id}`}
               key={product._id}
-              className="border border-borderLight w-full shadow-cardShadow rounded-lg flex flex-col h-full"
+              className="w-full rounded-lg flex flex-col h-full"
             >
-              <figure className="px-5 pt-10 h-64 flex items-center justify-center">
+              <figure className="pt-10 h-64 flex items-center justify-center overflow-hidden">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="rounded-xl max-h-full max-w-full object-contain"
+                  className="rounded-xl max-h-full max-w-full object-contain 
+               transition-transform duration-500 ease-out 
+               hover:scale-110 will-change-transform"
                 />
               </figure>
 
-              <div className="flex flex-col p-4 gap-2 flex-1">
+              <div className="flex flex-col p-4 gap-2 flex-1 items-center">
                 <h2 className="text-lg font-bold tracking-tighter uppercase">
                   {product.name}
                 </h2>
@@ -64,16 +66,8 @@ export default function CardOfDesigner() {
                 <p className="text-primary text-xl font-semibold">
                   EG {product.price}
                 </p>
-
-                <Link
-                  to={`/designer/${product._id}`}
-                  className="flex items-center justify-center gap-2 bg-primary text-white rounded-full cursor-pointer hover:bg-primaryDark transition duration-300 ease-in-out text-sm p-2 px-3 text-center mt-auto"
-                >
-                  Custome your design
-                  <ArrowRight />
-                </Link>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

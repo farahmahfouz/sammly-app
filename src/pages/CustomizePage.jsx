@@ -4,7 +4,7 @@ import CardOfDesigner from '../features/designs/CardOfDesigner';
 
 export default function CustomizePage() {
   return (
-    <div className="mb-44">
+    <div className="py-10">
 
       {/* Her Section  */}
       <HeroSection />
