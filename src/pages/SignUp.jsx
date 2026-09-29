@@ -1,9 +1,12 @@
 import "react-toastify/dist/ReactToastify.css";
 import SignUpForm from "../features/auth/signUpForm";
+import PageTitle from "../components/PageTitle";
 
 export default function Signup() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-[1.6fr_1fr] container mx-auto py-6">
+      <PageTitle title="Sign Up" />
+
       {/* Image Section */}
       <div className="md:order-1 flex flex-col">
         <div className="flex flex-col gap-2 items-start">
@@ -22,7 +25,7 @@ export default function Signup() {
           className="w-4/5 object-cover rounded-bl-badge rounded-br-[198px]"
         />
       </div>
-      <SignUpForm/>
+      <SignUpForm />
     </div>
   )
 }

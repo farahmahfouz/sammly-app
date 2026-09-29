@@ -38,6 +38,7 @@ import { FiBookmark, FiShoppingCart } from "react-icons/fi";
 import DeleteIcon from './../icons/DeleteIcon';
 import NeedHelp from "../features/designs/NeedHelp.jsx";
 import { LuLogIn } from "react-icons/lu";
+import PageTitle from "../components/PageTitle.jsx";
 
 export default function Designer() {
   const { addToCart } = useCart();
@@ -473,6 +474,8 @@ export default function Designer() {
 
   return (
     <div className="container mx-auto py-14">
+      <PageTitle title="Design" />
+
       <div className="flex justify-between pb-10">
         <div className="max-w-[420px]">
           <img src="/style.png" alt="object-contain" />

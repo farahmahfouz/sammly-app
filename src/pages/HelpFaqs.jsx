@@ -8,6 +8,7 @@ import {
 } from "react-icons/tb";
 import { Link, useSearchParams } from "react-router-dom";
 import FaqItem from "../features/Help/FaqItem";
+import PageTitle from "../components/PageTitle";
 
 /* ---------- Content (edit the answers to match your real policies) ---------- */
 const CATEGORIES = [
@@ -128,6 +129,8 @@ function HelpFAQs() {
 
     return (
         <section className="max-w-4xl mx-auto py-8 md:py-12">
+            <PageTitle title="Help" />
+
             {/* Header + search */}
             <div className="text-center mb-8">
                 <h1 className="text-2xl md:text-3xl font-bold text-textPrimary">

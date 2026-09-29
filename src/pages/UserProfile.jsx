@@ -1,3 +1,4 @@
+import PageTitle from "../components/PageTitle";
 import Spinner from "../components/Spinner";
 import ProfileCard from "../features/UserProfile/ProfileCard";
 import ProfileInformation from "../features/UserProfile/ProfileInformation";
@@ -8,30 +9,32 @@ const UserProfile = () => {
   const { user, isLoading } = useUser();
 
   if (isLoading) {
-    return <Spinner/>
+    return <Spinner />
   }
 
   const { userProfile, userOrders, favoriteProducts, designs } = user;
 
   return (
     <div className="container mx-auto py-14">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-surfacePurple/30 rounded-lg shadow-cardShadow p-6">
-          {/* Profile Card */}
-          <div className="col-span-1">
-            <ProfileCard />
-          </div>
+      <PageTitle title="Profile" />
 
-          {/* User Details Card */}
-          <div className="col-span-2">
-            <ProfileInformation />
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-surfacePurple/30 rounded-lg shadow-cardShadow p-6">
+        {/* Profile Card */}
+        <div className="col-span-1">
+          <ProfileCard />
         </div>
-        <UserTabs
-          userProfile={userProfile}
-          userOrders={userOrders}
-          favoriteProducts={favoriteProducts}
-          designs={designs}
-        />
+
+        {/* User Details Card */}
+        <div className="col-span-2">
+          <ProfileInformation />
+        </div>
+      </div>
+      <UserTabs
+        userProfile={userProfile}
+        userOrders={userOrders}
+        favoriteProducts={favoriteProducts}
+        designs={designs}
+      />
     </div>
   );
 };

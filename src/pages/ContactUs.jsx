@@ -10,6 +10,7 @@ import {
     TbHeartFilled,
 } from "react-icons/tb";
 import { FaInstagram, FaFacebookF, FaTiktok, FaXTwitter } from "react-icons/fa6";
+import PageTitle from "../components/PageTitle";
 
 /* ---------- Edit these with your real info ---------- */
 const WHATSAPP_NUMBER = "201000000000"; // international format, no + or leading zeros
@@ -108,6 +109,8 @@ function ContactUs() {
 
     return (
         <section className="max-w-5xl mx-auto py-8 md:py-12">
+            <PageTitle title="Contact Us" />
+
             <div className="text-center mb-10 relative">
                 <img
                     src="/lines.png"

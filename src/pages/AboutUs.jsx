@@ -4,6 +4,7 @@ import { LuTarget, LuArrowRight } from "react-icons/lu";
 import { FaGrinHearts } from "react-icons/fa";
 import { GiChestnutLeaf } from "react-icons/gi";
 import { LiaAwardSolid } from "react-icons/lia";
+import PageTitle from "../components/PageTitle";
 
 
 const IMAGES = {
@@ -45,6 +46,8 @@ const Badge = ({ children }) => (
 export default function AboutUs() {
   return (
     <div className="container mx-auto">
+      <PageTitle title="About Us" />
+
       {/* ================= HERO ================= */}
       <section className="px-6 py-14 grid md:grid-cols-2 gap-10 items-center">
         <div>
