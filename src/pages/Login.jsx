@@ -39,7 +39,6 @@ export default function Login() {
         "http://localhost:4001/api/v1/users/login",
         data
       );
-      toast.success("Logged In Successfully");
       login(res.data.data.token);
       if (redirect) {
         navigate(`/${redirect}`);
@@ -69,142 +68,146 @@ export default function Login() {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto  m-9 rounded-xl p-5 shadow-[0px_0px_3px_3px_#fbfbfb] h-4/5">
+    <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] container mx-auto py-12">
       {/* Image Section */}
-      <div className="md:order-1 flex justify-center items-center rounded-xl">
+      <div className="md:order-1 flex items-center">
         <img
-          src="/brand3.jpg"
+          src="/login.png"
           alt="Login"
-          className=" rounded-xl h-5/5"
+          className="object-cover"
         />
       </div>
 
       {/* Form Section */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="md:order-2 p-5 rounded-xl flex flex-col justify-evenly"
+        className="md:order-2 p-6 rounded-2xl shadow-cardShadow border border-borderLight flex flex-col gap-4"
       >
-        <div>
-          <h1 className="text-center  text-3xl pb-6 text-textColor font-bold">
-            Log In
+        <div className="flex flex-col gap-2 items-start">
+          <div className="text-xs font-semibold tracking-tight text-primary capitalize bg-surfaceLavender py-1 px-3 rounded-full">
+            login to your account
+          </div>
+          <h1 className="text-3xl tracking-wide font-bold leading-tight">
+            Welcome
+            <span className=" text-primaryDark">Back</span>
           </h1>
+          <p className="max-w-96 text-textMuted tracking-tight text-sm ">
+            Sign in to your account and continue creating amazing designs.
+          </p>
         </div>
 
         <div className="">
-          {/* Email */}
-          <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-textColor"
-            >
-              Email address
-            </label>
-            <div className="relative">
-              <input
-                {...register("email", {
-                  required: true,
-                  pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                })}
-                type="email"
-                id="email"
-                className={`mt-1 block w-full px-3 py-2 border-b ${errors.email ? "border-b-red-500" : "border-b-gray-300"
-                  } rounded-none shadow-sm focus:outline-none focus:ring-0 focus:border-b-indigo-500 sm:text-sm hover:border-b-textColor`}
-                placeholder="Enter email"
-              />
-            </div>
-            {errors.email?.type === "required" && (
-              <span className="text-red-500 text-sm">Email is required</span>
-            )}
-            {errors.email?.type === "pattern" && (
-              <span className="text-red-500 text-sm">Invalid email address</span>
-            )}
-            {errors.email?.type === "manual" && (
-              <span className="text-red-500 text-sm">{errors.email.message}</span>
-            )}
-          </div>
-
-          {/* Password */}
-          <div className="mb-4">
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-textColor"
-            >
-              Password
-            </label>
-            <div className="relative">
-              <input
-                {...register("password", {
-                  required: true,
-                  minLength: 8,
-                  maxLength: 30,
-                  pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/,
-                })}
-                type={showPassword ? "text" : "password"}
-                id="password"
-                className={`mt-1 block w-full px-3 py-2 border-b ${errors.password ? "border-b-red-500" : "border-b-gray-300"
-                  } rounded-none shadow-sm focus:outline-none focus:ring-0 focus:border-b-indigo-500 sm:text-sm hover:border-b-textColor`}
-                placeholder="Password"
-              />
-              {showPassword ? (
-                <EyeSlash onClick={() => setShowPassword(false)} />
-              ) : (
-                <Eye onClick={() => setShowPassword(true)} />
-              )}
-            </div>
-            {errors.password?.type === "required" && (
-              <span className="text-red-500 text-sm">Password is required</span>
-            )}
-            {errors.password?.type === "minLength" && (
-              <span className="text-red-500 text-sm">
-                Password must be at least 8 characters
-              </span>
-            )}
-            {errors.password?.type === "maxLength" && (
-              <span className="text-red-500 text-sm">
-                Password must be at most 30 characters
-              </span>
-            )}
-            {errors.password?.type === "pattern" && (
-              <span className="text-red-500 text-sm">
-                Password must contain at least one uppercase letter, one
-                lowercase letter, and one number
-              </span>
-            )}
-            {errors.password?.type === "manual" && (
-              <span className="text-red-500 text-sm">{errors.password.message}</span>
-            )}
-          </div>
-
-          <p className="text-end ">
-            <Link
-              to="/forget-password"
-              className="font-bold text-textColor"
-            >
-              Forget Password
-            </Link>
-          </p>
-
-          {/* is loading button */}
-          <button
-            type="submit"
-            className="w-full mt-3 flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-buttonColor hover:bg-hoverButton hover:transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-hoverButton"
-            disabled={isLoading}
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-textPrimary"
           >
-            {isLoading ? (
-              <span className="loading loading-ring loading-md"></span>
-            ) : (
-              "Login"
-            )}
-          </button>
-
-          <p className="text-center mt-5">
-            {`Don't have an account?`}{" "}
-            <Link to="/sign-up" className="font-bold text-textColor">
-              Signup
-            </Link>
-          </p>
-
+            Email address
+          </label>
+          <div className="relative">
+            <input
+              {...register("email", {
+                required: true,
+                pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              })}
+              type="email"
+              id="email"
+              className={`mt-1 block w-full px-3 py-2 border-b ${errors.email ? "border-b-red-500" : "border-b-gray-300"
+                } rounded-none shadow-sm focus:outline-none focus:ring-0 focus:border-b-indigo-500 sm:text-sm hover:border-b-primary`}
+              placeholder="Enter email"
+            />
+          </div>
+          {errors.email?.type === "required" && (
+            <span className="text-red-500 text-sm">Email is required</span>
+          )}
+          {errors.email?.type === "pattern" && (
+            <span className="text-red-500 text-sm">Invalid email address</span>
+          )}
+          {errors.email?.type === "manual" && (
+            <span className="text-red-500 text-sm">{errors.email.message}</span>
+          )}
         </div>
+
+        {/* Password */}
+        <div className="">
+          <label
+            htmlFor="password"
+            className="block text-sm font-medium text-textPrimary"
+          >
+            Password
+          </label>
+          <div className="relative">
+            <input
+              {...register("password", {
+                required: true,
+                minLength: 8,
+                maxLength: 30,
+                pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/,
+              })}
+              type={showPassword ? "text" : "password"}
+              id="password"
+              className={`mt-1 block w-full px-3 py-2 border-b ${errors.password ? "border-b-red-500" : "border-b-gray-300"
+                } rounded-none shadow-sm focus:outline-none focus:ring-0 focus:border-b-indigo-500 sm:text-sm hover:border-b-primary`}
+              placeholder="Password"
+            />
+            {showPassword ? (
+              <EyeSlash onClick={() => setShowPassword(false)} />
+            ) : (
+              <Eye onClick={() => setShowPassword(true)} />
+            )}
+          </div>
+          {errors.password?.type === "required" && (
+            <span className="text-red-500 text-sm">Password is required</span>
+          )}
+          {errors.password?.type === "minLength" && (
+            <span className="text-red-500 text-sm">
+              Password must be at least 8 characters
+            </span>
+          )}
+          {errors.password?.type === "maxLength" && (
+            <span className="text-red-500 text-sm">
+              Password must be at most 30 characters
+            </span>
+          )}
+          {errors.password?.type === "pattern" && (
+            <span className="text-red-500 text-sm">
+              Password must contain at least one uppercase letter, one
+              lowercase letter, and one number
+            </span>
+          )}
+          {errors.password?.type === "manual" && (
+            <span className="text-red-500 text-sm">{errors.password.message}</span>
+          )}
+        </div>
+
+        <p className="text-end ">
+          <Link
+            to="/forget-password"
+            className="text-sm tracking-tighter text-primary hover:text-primaryDark"
+          >
+            Forget Password?
+          </Link>
+        </p>
+
+        {/* is loading button */}
+        <button
+          type="submit"
+          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-full shadow-cardShadow text-sm font-bold text-white bg-primary hover:bg-primaryDark hover:transition-all focus:outline-none"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <span className="loading loading-ring loading-md"></span>
+          ) : (
+            "Login"
+          )}
+        </button>
+
+        <p className="text-center mt-auto tracking-tight text-sm">
+          {`Don't have an account?`}{" "}
+          <Link to="/sign-up" className="font-semibold text-primary">
+            Signup
+          </Link>
+        </p>
+
       </form>
     </div>
   );
