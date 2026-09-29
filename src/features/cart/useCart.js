@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import {
   getCart,
   removeFromCart,
@@ -65,6 +65,7 @@ function useCart() {
   const addToCartMutation = useMutation({
     mutationFn: (cartItem) => addToCartApi(cartItem),
     onSuccess: () => {
+      toast.success('Item added to cart')
       queryClient.invalidateQueries({ queryKey: CART_QUERY_KEY });
     },
   });

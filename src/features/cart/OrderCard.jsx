@@ -6,7 +6,6 @@ function OrderCard({ paymentMethod, changePaymentMethod, checkout }) {
     const {
         totalQuantity,
         totalPrice,
-
     } = useCart();
     return (
         <div className="col-span-1 border border-surfaceGray shadow-cardShadow p-5 rounded-lg h-fit">

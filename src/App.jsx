@@ -22,10 +22,10 @@ import { UserProvider } from "./context/UserContext";
 import SuccessPayment from "./pages/SuccessPayment";
 import UserProfile from "./pages/UserProfile";
 import AboutUs from "./pages/AboutUs";
-import DesignerDetails from "./pages/DesignerDetails";
 import ScrollToTop from "./components/ScrollToTop";
 import HelpFAQs from "./pages/HelpFaqs";
 import ContactUs from "./pages/ContactUs";
+import { Toaster } from "react-hot-toast";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -80,10 +80,6 @@ function App() {
                         <Route
                           path="/customize"
                           element={<CustomizePage />}
-                        />
-                        <Route
-                          path="/designer-details/:id"
-                          element={<DesignerDetails />}
                         />
                         <Route
                           path="/Designer/:id"
@@ -155,6 +151,25 @@ function App() {
                 />
               </Routes>
             </BrowserRouter>
+            <Toaster
+              position="top-right"
+              gutter={12}
+              containerStyle={{ margin: '8px' }}
+              toastOptions={{
+                success: {
+                  duration: 2000
+                },
+                error: {
+                  duration: 2000
+                },
+                style: {
+                  fontSize: '16px',
+                  maxWidth: '500px',
+                  padding: '16px 24px',
+                  backgroundColor: 'white',
+                  color: 'black'
+                }
+              }} />
           </UserProvider>
         </AuthProvider>
       </QueryClientProvider>

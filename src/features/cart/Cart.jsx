@@ -1,9 +1,8 @@
 import { createOrder } from "../../utils/api/orderApi";
 import EmptyCart from "./EmptyCart";
-import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import  useCart from "./useCart";
 import { GiChewedHeart } from "react-icons/gi";
 import { MdLockReset } from "react-icons/md";

@@ -1,25 +1,14 @@
+import Spinner from "../components/Spinner";
 import ProfileCard from "../features/UserProfile/ProfileCard";
 import ProfileInformation from "../features/UserProfile/ProfileInformation";
 import UserTabs from "../features/UserProfile/UserTabs";
 import useUser from "../features/UserProfile/useUser";
 
 const UserProfile = () => {
-  const { user, isLoading, error } = useUser();
+  const { user, isLoading } = useUser();
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <span className="loading loading-spinner loading-lg"></span>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <span>Error fetching user data: {error.message}</span>
-      </div>
-    );
+    return <Spinner/>
   }
 
   const { userProfile, userOrders, favoriteProducts, designs } = user;

@@ -6,10 +6,6 @@ import axios from "axios";
 
 import AuthContext from "../context/AuthContext";
 
-//toast
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
 //icons
 import Eye from "./../icons/Eye";
 import EyeSlash from "./../icons/EyeSlash";
@@ -56,7 +52,6 @@ export default function Login() {
           message: "Invalid email or password",
         });
       } else {
-        toast.error("Login failed");
         setError("password", {
           type: "manual",
           message: "Invalid email or password",
