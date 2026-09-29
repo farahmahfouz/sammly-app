@@ -37,7 +37,7 @@ import { LuImageUp } from "react-icons/lu";
 import { FiBookmark, FiShoppingCart } from "react-icons/fi";
 import DeleteIcon from './../icons/DeleteIcon';
 import NeedHelp from "../features/designs/NeedHelp.jsx";
-
+import { LuLogIn } from "react-icons/lu";
 
 export default function Designer() {
   const { addToCart } = useCart();
@@ -515,7 +515,7 @@ export default function Designer() {
                 style={{
                   backgroundImage: 'linear-gradient(135deg, #d9d4f768 0%, rgb(245 242 255 / 0.4) 50%, #d9d4f753 100%)'
                 }}
-              >              
+              >
 
                 <div
                   id="divToTakeScreenshotFront"
@@ -557,31 +557,31 @@ export default function Designer() {
                 </div>
               </div>
             </div>
-            
+
           </div>
-            <div className="flex gap-2 py-4">
-                  <button
-                    className="border border-primary/40 text-primary/40 bg-white/90 backdrop-blur-sm py-2 px-3 rounded-full text-sm cursor-pointer transition duration-300 ease-in-out"
-                    onClick={() => handleResetCanva(displayedCanvas?.current)}
-                  >
-                    Clear Design
-                  </button>
+          <div className="flex gap-2 py-4">
+            <button
+              className="border border-primary/40 text-primary/40 bg-white/90 backdrop-blur-sm py-2 px-3 rounded-full text-sm cursor-pointer transition duration-300 ease-in-out"
+              onClick={() => handleResetCanva(displayedCanvas?.current)}
+            >
+              Clear Design
+            </button>
 
-                  <button
-                    className={`flex items-center gap-1 bg-white/90 backdrop-blur-sm text-primary tracking-tighter py-2 px-3 rounded-full text-sm transition duration-300 ease-in-out border border-primary ${isRemoveButtonDisabled(displayedCanvas?.current)
-                      ? "bg-gray-200 border-none text-gray-400"
-                      : ""
-                      }`}
-                    onClick={() =>
-                      handleRemoveSelectedObj(displayedCanvas?.current)
-                    }
-                    disabled={isRemoveButtonDisabled(displayedCanvas?.current)}
-                  >
-                    <DeleteIcon />
+            <button
+              className={`flex items-center gap-1 bg-white/90 backdrop-blur-sm text-primary tracking-tighter py-2 px-3 rounded-full text-sm transition duration-300 ease-in-out border border-primary ${isRemoveButtonDisabled(displayedCanvas?.current)
+                ? "bg-gray-200 border-none text-gray-400"
+                : ""
+                }`}
+              onClick={() =>
+                handleRemoveSelectedObj(displayedCanvas?.current)
+              }
+              disabled={isRemoveButtonDisabled(displayedCanvas?.current)}
+            >
+              <DeleteIcon />
 
-                    Remove Selected
-                  </button>
-                </div>
+              Remove Selected
+            </button>
+          </div>
         </div>
 
         <div className="w-full lg:w-2/4 p-6 shadow-cardShadow rounded-lg border text-textPrimary border-borderLight">
@@ -617,7 +617,7 @@ export default function Designer() {
                   className="text-primary flex items-center gap-2 justify-center py-4 px-4 rounded cursor-pointer hover:text-primaryDark transition duration-300 ease-in-out  w-full border border-dashed border-surfaceLavender text-center"
                 >
                   <div className="flex flex-col items-center">
-                  <LuImageUp className="size-8"/>
+                    <LuImageUp className="size-8" />
                     <p className="flex gap-2">
                       Choose Image
                       <ShowMore />
@@ -819,9 +819,9 @@ export default function Designer() {
               ) : (
                 <button
                   onClick={navigateToLogin}
-                  className="w-full bg-red-500 hover:bg-red-600 transition duration-700 ease-in-out 
-                 rounded-full text-white py-3 px-4 font-medium"
+                  className="flex items-center gap-4 justify-center border border-primary shadow-cardShadow hover:text-primaryDark tracking-tighter transition duration-700 ease-in-out rounded-full text-primary w-full py-2 px-14"
                 >
+                  <LuLogIn />
                   Login to save and Add to Cart
                 </button>
               )}
@@ -830,7 +830,7 @@ export default function Designer() {
         </div>
       </div>
 
-      <NeedHelp/>
+      <NeedHelp />
 
       <div ref={sizeChartRef} className="py-10">
         <SizeCharts />

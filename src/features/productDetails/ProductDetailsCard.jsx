@@ -16,12 +16,11 @@ import { TbShoppingBagExclamation } from "react-icons/tb";
 import RadioComponent from "../../components/RadioComponent";
 import Spinner from "../../components/Spinner";
 import RatingStars from "../reviews/RatingStarts";
-
+import { LuLogIn } from "react-icons/lu";
 
 function ProductDetailsCard({ onSizeChartClick }) {
     const navigate = useNavigate();
     const { product, isLoading, isError } = useProduct();
-    console.log(product)
 
     const { isLoggedIn } = useContext(AuthContext);
     const { addToCart } = useCart();
@@ -221,8 +220,10 @@ function ProductDetailsCard({ onSizeChartClick }) {
                         ) : (
                             <button
                                 onClick={navigateToLogin}
-                                className="bg-red-500 hover:bg-red-600 transition duration-700 ease-in-out rounded w-full text-white py-2 px-14"
+                                className="flex items-center gap-4 justify-center border border-primary shadow-cardShadow hover:text-primaryDark tracking-tighter transition duration-700 ease-in-out rounded-full text-primary w-full py-2 px-14"
                             >
+                                <LuLogIn />
+
                                 Login to Add to Cart
                             </button>
                         )}
