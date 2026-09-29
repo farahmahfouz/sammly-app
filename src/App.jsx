@@ -5,7 +5,7 @@ import Navbar from "./layouts/Navbar";
 import Footer from "./layouts/Footer";
 
 //import pages
-import Registration from "./pages/Registration";
+import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import Landing from "./pages/Landing";
 import ProductsPage from "./pages/ProductsPage";
@@ -93,7 +93,7 @@ function App() {
                           path="/sign-up"
                           element={
                             <ProtectedRoute isAuth={false}>
-                              <Registration />
+                              <SignUp />
                             </ProtectedRoute>
                           }
                         />
