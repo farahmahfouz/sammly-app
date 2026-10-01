@@ -108,7 +108,7 @@ function ContactUs() {
     };
 
     return (
-        <section className="max-w-5xl mx-auto py-8 md:py-12">
+        <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-0 py-6 md:py-12">
             <PageTitle title="Contact Us" />
 
             <div className="text-center mb-10 relative">
@@ -134,9 +134,9 @@ function ContactUs() {
                 />
             </div>
 
-            <div className="grid lg:grid-cols-[1fr_1.4fr] gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-8">
                 {/* Contact methods */}
-                <div className="flex flex-col">
+                <div className="flex flex-col min-w-0 order-2 lg:order-1">
                     <p className="text-primary text-xs font-semibold tracking-wide uppercase">
                         Get in touch
                     </p>
@@ -192,10 +192,10 @@ function ContactUs() {
                     </div>
 
                     {/* Follow us */}
-                    <div className="border-t border-borderLight mt-8 pt-6 flex items-end justify-between gap-4">
-                        <div>
+                    <div className="hidden border-t border-borderLight mt-8 pt-6 md:flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+                        <div className="">
                             <p className="text-sm font-medium text-textPrimary mb-3">Follow us</p>
-                            <div className="flex gap-3">
+                            <div className="flex gap-3 justify-center">
                                 {SOCIAL_LINKS.map(({ icon: Icon, label, href }) => (
                                     <a
                                         key={label}
@@ -239,7 +239,7 @@ function ContactUs() {
                 </div>
 
                 {/* Form */}
-                <div className="bg-white rounded-2xl shadow-cardShadow border border-surfaceLavender p-5 md:p-8 flex flex-col gap-4">
+                <div className="order-1 lg:order-2 min-w-0 bg-white rounded-2xl shadow-cardShadow border border-surfaceLavender p-5 md:p-8 flex flex-col gap-4">
                     <div>
 
                         <p className="text-primary text-xs font-semibold tracking-wide uppercase">

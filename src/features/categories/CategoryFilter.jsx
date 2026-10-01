@@ -23,7 +23,7 @@ function CategoryFilter({
         categories
       </p>
 
-      <ul className="mt-2 space-y-2">
+      <ul className="grid grid-cols-4 gap-2 md:flex md:flex-col md:gap-3 mt-2">
         {allCategories.map((category) => (
           <CategoryItem
             key={category._id}

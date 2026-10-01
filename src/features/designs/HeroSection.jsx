@@ -18,7 +18,7 @@ export default function HeroSection() {
             <GiSeaStar />
             <p className="text-sm text-white">Your Style - Your T-Shirt</p>
           </div>
-          <div className="mb-5 font-bold text-6xl text-center tracking-tighter">
+          <div className="mb-5 font-bold text-5xl  md:text-6xl text-center tracking-tighter">
             Create Your
             <p className="text-primary">Perfect T-Shirt !
             </p>

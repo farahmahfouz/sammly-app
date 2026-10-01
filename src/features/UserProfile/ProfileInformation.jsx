@@ -43,7 +43,7 @@ function ProfileField({ field, value, isEditing, onChange }) {
                             name={field.name}
                             value={value}
                             onChange={onChange}
-                            className="border border-borderLight focus:border-primary focus:outline-none rounded-full px-4 py-2"
+                            className="border border-borderLight focus:border-primary focus:outline-none rounded-full px-2 md:px-4 py-2"
                         />
                     ) : (
                         value
@@ -133,14 +133,14 @@ export default function ProfileInformation() {
     };
 
     return (
-        <div className="bg-white shadow-cardShadow rounded-xl p-4 mb-4">
+        <div className="md:bg-white md:shadow-cardShadow rounded-xl md:p-4 mb-4">
             <div className="flex flex-col gap-2 ">
                 <div className='flex justify-between pb-4 items-center'>
                     <div className="flex items-center gap-1">
                         <div className="text-primary text-3xl rounded-full">
                             <MdOutlineEditLocation />
                         </div>
-                        <p className="capitalize font-bold ">my information</p>
+                        <p className="capitalize font-bold">my information</p>
                     </div>
                     <div className="flex justify-end gap-2">
                         {isEditing ? (
@@ -161,7 +161,7 @@ export default function ProfileInformation() {
                                     {isSaving ? (
                                         <span className="loading loading-ring loading-md"></span>
                                     ) : (
-                                        'Save Changes'
+                                        'Save'
                                     )}
                                 </button>
                             </>

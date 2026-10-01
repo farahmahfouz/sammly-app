@@ -27,8 +27,8 @@ const testimonials = [
 
 function Review() {
     return (
-        <div className="container mx-auto py-16">
-            <span className="flex gap-1 text-primary items-center">
+        <div className="container mx-auto py-6 md:py-16">
+            <span className="flex gap-1 text-primary items-center ">
                 <h2 className="text-xs font-semibold uppercase tracking-tighter">what our customer say</h2>
             </span>
             <div className="flex justify-between">
@@ -37,7 +37,7 @@ function Review() {
                     view all reviews <ArrowRight />
                 </Link>
             </div>
-            <div className="grid grid-cols-3 gap-4 pt-6">
+            <div className="grid  md:grid-cols-3 gap-4 pt-6">
 
                 {testimonials.map(test => (
                     <div key={test.name} className="border border-borderLight rounded-lg p-4 flex gap-4">

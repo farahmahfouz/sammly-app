@@ -21,7 +21,7 @@ const features = [
 
 function ProductFeatures() {
   return (
-    <section className="w-full rounded-md bg-surfaceLavender/60 px-4 py-2 ">
+    <section className="hidden md:block w-full rounded-md bg-surfaceLavender/60 px-4 py-2 ">
       <div className="grid grid-cols-2 gap-1 sm:grid-cols-4">
         {features.map(({ title, icon: Icon }) => (
           <div

@@ -22,10 +22,17 @@ export default function Navbar() {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const closeDropdown = () => {
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+  };
+
   const handleLogout = () => {
     logout();
     navigate("/login");
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen(false);
+    closeDropdown();
   };
 
   const toggleMenu = () => {
@@ -34,19 +41,16 @@ export default function Navbar() {
 
   return (
     <div className="sticky top-0 z-50 bg-base-100 w-full">
-
       <div className="navbar container mx-auto border-0 flex justify-between">
-
-
-        <div className="">
-          <Link to="/" >
+        <div >
+          <Link to="/" className="hidden md:block">
             <img src="/sammlyLogo.png" width={90} alt="logo" />
           </Link>
         </div>
 
         {/* Burger Icon for Small Screens */}
-        <div className="md:hidden text-primary hover:text-primaryDark absolute left-24">
-          <button onClick={toggleMenu} className="btn btn-ghost btn-circle">
+        <div className="md:hidden text-primary hover:text-primaryDark absolute">
+          <button onClick={toggleMenu} className="btn btn-ghost justify-start btn-circle">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -69,9 +73,8 @@ export default function Navbar() {
           <CustomLink to="/">Home</CustomLink>
           <CustomLink to="/products">Products</CustomLink>
           <CustomLink to="/customize">Make your own</CustomLink>
-          <CustomLink to="/aboutus" className>
-            About Us
-          </CustomLink>
+          {/* <CustomLink to="/aboutus">About Us</CustomLink> */}
+          <CustomLink to="/contact">Contact Us</CustomLink>
         </div>
 
         {/* Mobile Navigation Links */}
@@ -89,7 +92,8 @@ export default function Navbar() {
             >
               Customize
             </CustomLink>
-            <CustomLink to="/aboutus">About Us</CustomLink>
+            {/* <CustomLink to="/aboutus">About Us</CustomLink> */}
+            <CustomLink to="/contact">Contact Us</CustomLink>
           </div>
         </div>
 
@@ -144,6 +148,7 @@ export default function Navbar() {
               {isLoggedIn && (
                 <li>
                   <Link
+                    onClick={closeDropdown}
                     to="/user-profile"
                     className="px-5 py-1 text-textPrimary text-md rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 active:!bg-gray-100 active:!text-textPrimary transition-colors"
                   >
@@ -156,6 +161,7 @@ export default function Navbar() {
                 <li>
                   <Link
                     to="/login"
+                    onClick={closeDropdown}
                     className="px-5 py-1 text-textPrimary text-md rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 active:!bg-gray-100 active:!text-textPrimary transition-colors"
                   >
                     Login
@@ -166,6 +172,7 @@ export default function Navbar() {
                 <li>
                   <Link
                     to="/sign-up"
+                    onClick={closeDropdown}
                     className="px-5 py-1 text-textPrimary text-md rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 active:!bg-gray-100 active:!text-textPrimary transition-colors"
                   >
                     Register

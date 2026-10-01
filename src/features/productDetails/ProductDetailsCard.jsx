@@ -180,9 +180,9 @@ function ProductDetailsCard({ onSizeChartClick }) {
                 <ProductFeatures />
                 <div className="md:pt-5">
                     <RadioComponent setSize={setSelectedSize} stock={stockAvailable} onSizeChartClick={onSizeChartClick} />
-                    <div className="flex justify-center lg:flex lg:justify-end md:pt-10">
+                    <div className="flex justify-center lg:justify-end md:pt-10">
                         {isLoggedIn ? (
-                            <div className="grid grid-cols-[1.5fr_4fr] gap-10 w-full">
+                            <div className="grid grid-cols-[1.5fr_4fr] gap-10 w-full pt-4">
                                 <div className="flex items-center justify-between gap-4 border border-surfaceLavender shadow-cardShadow rounded-full px-5 py-2 ">
                                     <button
                                         onClick={() => setQuantity((prev) => prev - 1)}

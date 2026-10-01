@@ -6,7 +6,7 @@ function Carrousel() {
   const { products } = useProducts();
 
   return (
-    <section className="container mx-auto py-16">
+    <section className="container mx-auto py-6 md:py-16">
 
       {/* Section Header */}
       <span className="flex items-center gap-1 text-primary">

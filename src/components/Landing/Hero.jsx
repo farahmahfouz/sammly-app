@@ -11,7 +11,7 @@ function Hero() {
     <div
       className="w-full h-auto flex flex-col md:flex-row justify-between items-center container mx-auto"
     >
-      <div className="my-auto flex flex-col gap-2 relative">
+      <div className="my-auto flex flex-col items-center md:items-start gap-2 relative">
         <div className="bg-surfacePurple/95  text-primaryDark hover:text-primary rounded-full w-fit px-4 flex gap-1 text-sm font-medium tracking-tight py-2">
           <Fizz />
           Custome T-Shirts
@@ -20,32 +20,31 @@ function Hero() {
           Your imagination <br />
           on a{" "}
         </h1>
-        <img src="t-shirt-word.png" alt="" className="h-40 w-44 absolute top-10 left-28 rotate-6" />
+        <img src="t-shirt-word.png" alt="" className="h-20 w-28 md:h-40 md:w-44 absolute top-10 left-36 md:left-28 rotate-6" />
 
-        <p className="max-w-80 text-textPrimary tracking-wide leading-5 mt-4">
+        <p className="max-w-80 text-textPrimary tracking-wide leading-5 mt-4 text-center md:text-start">
           Turn your photos, designs, or ideas into
           high-quality custom t-shirts. Easy to create,
           fun to wear!
         </p>
-        <div className="flex gap-6">
+
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 w-full sm:w-auto mt-4 md:mt-6">
           <Link
             to="/customize"
             style={{
               background: "linear-gradient(to right, #81B3DC, #CE6ADA)",
             }}
-            className="rounded-full shadow-cardShadow flex gap-1 items-center text-white px-4 py-2 md:px-6 md:py-3 hover:opacity-90 transition mt-6"
+            className="rounded-full shadow-cardShadow flex gap-1 items-center justify-center text-white px-6 py-3 hover:opacity-90 transition"
           >
-            Create Your Own <ArrowRight/>
+            Create Your Own <ArrowRight />
           </Link>
-          <div
-            className="flex gap-1 rounded-full border border-primary bg-transparent text-primary px-4 py-2 md:px-6 md:py-3  transition mt-6"
-          >
+          <div className="flex gap-1 items-center justify-center rounded-full border border-primary bg-transparent text-primary px-6 py-3 transition">
             <PlayVideo />
             Watch How it works
           </div>
         </div>
 
-        <div className="pt-6 flex gap-12">
+        <div className="pt-6 flex gap-6 md:gap-12 flex-wrap justify-center">
           <div className="text-primaryDark flex gap-2 items-center">
             <CarIcon />
             <p className="text-textPrimary text-xs font-semibold tracking-wide leading-5">

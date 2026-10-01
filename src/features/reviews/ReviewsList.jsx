@@ -17,7 +17,7 @@ function ReviewsList() {
         <h2 className="text-xs font-semibold uppercase tracking-tighter">
           what our customer say
         </h2>
-        <p className="text-3xl font-extrabold capitalize text-textPrimary">
+        <p className="text-lg md:text-3xl font-extrabold capitalize text-textPrimary">
           real people. real stories.
         </p>
       </span>

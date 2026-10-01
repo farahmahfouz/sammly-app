@@ -2,20 +2,20 @@ import { PiResizeBold } from "react-icons/pi";
 
 export default function SizeCharts() {
   return (
-    <div className="py-4 px-12 bg-surfacePurple/20 border text-textPrimary border-surfacePurple shadow-cardShadow rounded-md">
-      <div className="">
+    <div className="py-4 md:px-12 bg-surfacePurple/20 border text-textPrimary border-surfacePurple shadow-cardShadow rounded-md">
+      <div className="px-4 pb-2 md:px-0 md:pb-2">
         <div className="flex gap-1 items-center text-primary text-sm font-semibold capitalize tracking-tighter">
           <PiResizeBold />
           <p className="text-textPrimary">size chart</p>
         </div>
         <p className="text-sm text-textMuted first-letter:uppercase tracking-tighter">choose your size carefully to get the perfict fit</p>
       </div>
-      <div className="grid grid-cols-[2fr_4fr]">
-        <img src="/size-chart.png" alt="" className="w-full object-cover" />
-        <div className="rounded-xl border border-borderLight overflow-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-[2fr_4fr]">
+        <img src="/size-chart.png" alt="" className="w-full object-cover hidden md:block" />
+        <div className="md:rounded-xl md:border border-borderLight overflow-hidden">
           <table className="border-collapse w-full">
             <thead>
-              <tr className="bg-gray-100 ">
+              <tr className="md:bg-gray-100 ">
                 <th className="px-4 py-2 border text-textPrimary border-borderLight">Size</th>
                 <th className="px-4 py-2 border text-textPrimary border-borderLight">Chest-cms</th>
                 <th className="px-4 py-2 border text-textPrimary border-borderLight">Waist-cms</th>

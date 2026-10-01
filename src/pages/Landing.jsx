@@ -7,8 +7,11 @@ import Review from "../components/Landing/Review";
 import Tutorial from "../components/Landing/Tutorial";
 import Carrousel from "../components/Landing/Carrousel";
 import PageTitle from "../components/PageTitle";
+import useMediaQuery from "../hooks/useMediaQuery";
 
 function Landing() {
+  const isDesktop = useMediaQuery("(min-width: 768px)");
+
   return (
     <>
       <PageTitle title="Home" />
@@ -18,17 +21,21 @@ function Landing() {
       {/* CategorySection- section3 */}
       <CategorySection />
 
-      <Tutorial />
+      {isDesktop && (
+        <Tutorial />
+      )}
 
       {/* ProductItem- section4 */}
       <Carrousel />
 
-
-      <Discount />
+      {isDesktop && (
+        <Discount />
+      )}
 
       <Review />
-
-      <Sticker />
+      {isDesktop && (
+        <Sticker />
+      )}
     </>
   );
 }

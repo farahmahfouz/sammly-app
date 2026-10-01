@@ -20,10 +20,7 @@ export default function ProfileFav() {
                     <Empty resourceName="Favorite Products" />
                 </div>
             ) : (
-
-
-
-                <div className="relative grid grid-cols-4 gap-5">
+                <div className="relative grid md:grid-cols-4 gap-5">
                     {favoriteProducts.map((product) => (
                         <div
                             key={product._id}

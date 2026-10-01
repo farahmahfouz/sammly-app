@@ -5,9 +5,9 @@ function Footer() {
   return (
     <footer className="bg-background text-center sm:text-start  text-textSecondary py-10 container mx-auto">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[1.2fr_1fr_1fr_1.5fr] gap-4">
-        <div>
+        <div className="flex flex-col items-center md:items-start">
           <div className="flex justify-center sm:justify-start flex-col gap-4">
-            <Link to="/" className="">
+            <Link to="/" className="mx-auto md:mx-0">
               <img src="/sammlyLogo.png" width={90} alt="logo" />
             </Link>
             <p className="text-textMuted text-sm max-w-[200px] first-letter:capitalize tracking-tighter">custom T-shirts for every story, every style, every occasion.</p>

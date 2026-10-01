@@ -15,10 +15,10 @@ const UserProfile = () => {
   const { userProfile, userOrders, favoriteProducts, designs } = user;
 
   return (
-    <div className="container mx-auto py-14">
+    <div className="container mx-auto py-6 md:py-14">
       <PageTitle title="Profile" />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-surfacePurple/30 rounded-lg shadow-cardShadow p-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 md:gap-4 bg-surfacePurple/30 rounded-lg shadow-cardShadow p-2 md:p-6">
         {/* Profile Card */}
         <div className="col-span-1">
           <ProfileCard />

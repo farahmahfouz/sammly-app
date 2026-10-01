@@ -473,10 +473,10 @@ export default function Designer() {
   };
 
   return (
-    <div className="container mx-auto py-14">
+    <div className="container mx-auto py-6 md:py-14">
       <PageTitle title="Design" />
 
-      <div className="flex justify-between pb-10">
+      <div className="hidden md:flex justify-between pb-10">
         <div className="max-w-[420px]">
           <img src="/style.png" alt="object-contain" />
           <p className="text-2xl sm:text-4xl tracking-wide font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-purple-600 to-purple-400">
@@ -492,23 +492,23 @@ export default function Designer() {
         <div className="w-full lg:w-3/5 flex flex-col justify-start items-center ">
           {/* designer images and buttons  */}
           <div className="flex flex-col w-full">
-            <div className="flex flex-col sm:flex-row sm:justify-center items-center sm:items-start ">
-              {/* Buttons for Scrolling */}
-              <div className="flex flex-row sm:flex-col justify-start p-4 mr-4 gap-5 bg-surfaceLavender/40 shadow-cardShadow rounded-md h-full w-2/4 sm:w-1/5">
+            <div className="flex flex-col sm:flex-row sm:justify-center items-center sm:items-start gap-2 w-full">
+              {/* Thumbnails */}
+              <div className="flex flex-row sm:flex-col justify-center sm:justify-start p-2 sm:p-4 sm:mr-4 gap-3 sm:gap-5 bg-surfaceLavender/40 shadow-cardShadow rounded-md w-full sm:w-1/5 sm:h-full">
                 <button
-                  className={`text-white py-2 rounded-sm border-2 transition-colors ${activeView === "front" ? "border-primary" : "border-transparent"
+                  className={`w-20 sm:w-full py-2 rounded-sm border-2 transition-colors ${activeView === "front" ? "border-primary" : "border-transparent"
                     }`}
                   onClick={handleFront}
                 >
-                  <img src={backgroundImage} alt="front model" />
+                  <img className="w-full h-auto object-contain" src={backgroundImage} alt="front model" />
                 </button>
 
                 <button
-                  className={`text-white py-2 rounded-sm border-2 transition-colors ${activeView === "back" ? "border-primary" : "border-transparent"
+                  className={`w-20 sm:w-full py-2 rounded-sm border-2 transition-colors ${activeView === "back" ? "border-primary" : "border-transparent"
                     }`}
                   onClick={handleBack}
                 >
-                  <img src={backgroundBackImage} alt="back model" />
+                  <img className="w-full h-auto object-contain" src={backgroundBackImage} alt="back model" />
                 </button>
               </div>
 
@@ -516,46 +516,41 @@ export default function Designer() {
               <div
                 className="flex overflow-hidden w-full hide-scrollbar rounded-lg shadow-cardShadow"
                 style={{
-                  backgroundImage: 'linear-gradient(135deg, #d9d4f768 0%, rgb(245 242 255 / 0.4) 50%, #d9d4f753 100%)'
+                  backgroundImage:
+                    "linear-gradient(135deg, #d9d4f768 0%, rgb(245 242 255 / 0.4) 50%, #d9d4f753 100%)",
                 }}
               >
-
+                {/* FRONT */}
                 <div
                   id="divToTakeScreenshotFront"
                   ref={frontImageRef}
-                  style={{
-                    backgroundImage: `url(${backgroundImage})`,
-                    minWidth: "400px", // Ensure the div has a minimum width
-                    height: "700px", // Ensure the div has a fixed height
-                    flexShrink: 0, // Prevent the div from shrinking
-                  }}
-                  className="w-full flex flex-col justify-center items-center py-10 bg-center bg-no-repeat relative rounded-lg bg-cover sm:bg-contain xs:bg-contain mdplus:bg-contain lgplus:bg-contain p-5 md:w-[600px] md:h-[700px]  "
+                  style={{ backgroundImage: `url(${backgroundImage})` }}
+                  className="min-w-full shrink-0 h-[420px] sm:h-[500px] md:h-[700px]
+                 flex justify-center items-center p-2 sm:p-5
+                 bg-center bg-no-repeat bg-contain relative rounded-lg"
                 >
                   <canvas
                     id="canvasBorderFront"
                     ref={canvasRefFront}
-                    style={{
-                      border: "1px dashed gray",
-                    }}
+                    className="max-w-full"
+                    style={{ border: "1px dashed gray" }}
                   />
                 </div>
+
+                {/* BACK */}
                 <div
                   id="divToTakeScreenshotBack"
                   ref={backImageRef}
-                  style={{
-                    backgroundImage: `url(${backgroundBackImage})`,
-                    minWidth: "400px", // Ensure the div has a minimum width
-                    height: "500px", // Ensure the div has a fixed height
-                    flexShrink: 0, // Prevent the div from shrinking
-                  }}
-                  className="w-full flex flex-col justify-center items-center bg-center bg-no-repeat relative rounded-lg bg-cover sm:bg-contain xs:bg-contain mdplus:bg-cover lgplus:bg-contain smplus:bg-cover p-5 md:w-[600px] md:h-[600px]"
+                  style={{ backgroundImage: `url(${backgroundBackImage})` }}
+                  className="min-w-full shrink-0 h-[420px] sm:h-[500px] md:h-[700px]
+                 flex justify-center items-center p-2 sm:p-5
+                 bg-center bg-no-repeat bg-contain relative rounded-lg"
                 >
                   <canvas
                     id="canvasBorderBack"
                     ref={canvasRefBack}
-                    style={{
-                      border: "1px dashed gray",
-                    }}
+                    className="max-w-full"
+                    style={{ border: "1px dashed gray" }}
                   />
                 </div>
               </div>
@@ -587,7 +582,7 @@ export default function Designer() {
           </div>
         </div>
 
-        <div className="w-full lg:w-2/4 p-6 shadow-cardShadow rounded-lg border text-textPrimary border-borderLight">
+        <div className="w-full lg:w-2/4 md:p-6 md:shadow-cardShadow rounded-lg md:border text-textPrimary border-borderLight">
           <div className="flex flex-col gap-6">
             <div className="flex justify-between">
               <div className="font-bold text-xl sm:text-2xl tracking-tighter">
@@ -778,7 +773,7 @@ export default function Designer() {
                  hover:bg-gray-50 transition duration-300 ease-in-out"
                 >
                   <Downloads className="size-3" />
-                  <span>Save Design to Device</span>
+                  <span>Save to Device</span>
                 </button>
 
                 {isLoggedIn && (

@@ -8,7 +8,7 @@ export default function Signup() {
       <PageTitle title="Sign Up" />
 
       {/* Image Section */}
-      <div className="md:order-1 flex flex-col">
+      <div className="hidden md:flex flex-col">
         <div className="flex flex-col gap-2 items-start">
           <h1 className="text-4xl tracking-tighter font-extrabold leading-tight">
             Create your

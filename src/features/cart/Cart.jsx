@@ -141,7 +141,7 @@ function Cart() {
                 <EmptyCart></EmptyCart>
             ) : (
                 <div className="my-5">
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-5">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 md:gap-5 mt-5">
                         <div className="col-span-2">
                             <div className="flex justify-between">
                                 <div className="tracking-tight">

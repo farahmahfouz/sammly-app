@@ -73,7 +73,7 @@ export default function Login() {
       <PageTitle title="Login" />
       <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] container mx-auto py-12">
         {/* Image Section */}
-        <div className="md:order-1 flex items-center">
+        <div className="hidden md:flex items-center">
           <img
             src="/login.png"
             alt="Login"
@@ -84,7 +84,7 @@ export default function Login() {
         {/* Form Section */}
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="md:order-2 p-6 rounded-2xl shadow-cardShadow border border-borderLight flex flex-col gap-4"
+          className="md:p-6 rounded-2xl md:shadow-cardShadow md:border border-borderLight flex flex-col gap-4"
         >
           <div className="flex flex-col gap-2 items-start">
             <div className="text-xs font-semibold tracking-tight text-primary capitalize bg-surfaceLavender py-1 px-3 rounded-full">

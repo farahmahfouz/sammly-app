@@ -72,7 +72,6 @@ export default function AboutUs() {
         </div>
 
         <div className=" flex justify-center">
-          <div className=" w-72 h-72 " />
           <img
             src={IMAGES.hero}
             alt="Custom T-shirt"

@@ -7,6 +7,10 @@ import Dropdown from "../../components/DropDown";
 import FilterIcon from "../../icons/FilterIcon";
 import Pagination from "../../components/Pagination";
 import Spinner from "../../components/Spinner";
+import useMediaQuery from "../../hooks/useMediaQuery";
+import Search from "../../components/Search";
+import { useEffect, useState } from "react";
+import useDebounce from "../../hooks/useDebounce";
 
 function Products({ isFilterOpen, onToggleFilter, ...restProps }) {
     const {
@@ -20,7 +24,26 @@ function Products({ isFilterOpen, onToggleFilter, ...restProps }) {
         startItem,
         endItem,
         totalCount,
+        search,
+        handleSearch
     } = useProducts();
+
+    const [searchInput, setSearchInput] = useState(search);
+
+    const debouncedSearch = useDebounce(searchInput, 400);
+
+    useEffect(() => {
+        if (debouncedSearch !== search) {
+            handleSearch(debouncedSearch);
+        }
+    }, [debouncedSearch, handleSearch, search]);
+
+
+    useEffect(() => {
+        setSearchInput(search);
+    }, [search]);
+
+
 
     if (isError) {
         return (
@@ -35,7 +58,13 @@ function Products({ isFilterOpen, onToggleFilter, ...restProps }) {
     if (products?.length === 0) { return (<div className="w-full min-h-[60vh] flex items-center justify-center"> <NoData /> </div>); }
 
     return (
-        <div className="md:py-6 px-12">
+        <div className="md:py-6 px-2 md:px-12">
+            <div className="md:hidden py-2">
+                <Search
+                    value={searchInput}
+                    onChange={(e) => setSearchInput(e.target.value)}
+                />
+            </div>
             <div className="flex justify-between items-center">
                 <p className="text-textMuted tracking-tighter text-sm first-letter:capitalize">
                     showing {startItem} - {endItem} of {totalCount} products
@@ -61,18 +90,17 @@ function Products({ isFilterOpen, onToggleFilter, ...restProps }) {
             </div>
             <div className="w-full relative">
                 <div className="w-full md:py-10 pt-2">
-                    <div className="grid gap-6 justify-items-start"
-                        style={{
-                            gridTemplateColumns: `repeat(auto-fit, minmax(${isFilterOpen ? '230px' : '210px'}, 1fr))`,
-                        }}>
+                    <div
+                        className={`grid gap-3 md:gap-6 justify-items-start grid-cols-2 md:[grid-template-columns:repeat(auto-fit,minmax(var(--card-min),1fr))]`}
+                        style={{ '--card-min': isFilterOpen ? '230px' : '210px' }}
+                    >
                         {products?.map((product) => (
                             <Product
                                 isFilterOpen={isFilterOpen}
                                 product={product}
                                 key={product._id}
                             />
-                        ))
-                        }
+                        ))}
                     </div>
                 </div>
                 {totalPages > 1 && (

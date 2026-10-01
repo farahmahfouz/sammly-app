@@ -31,7 +31,7 @@ export default function SignUpForm() {
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="md:order-2 p-6 rounded-2xl shadow-cardShadow border border-borderLight flex flex-col gap-4"
+        className="md:p-6 rounded-2xl md:shadow-cardShadow md:border border-borderLight flex flex-col gap-4"
       >
         <div className="flex items-center gap-2 justify-center text-center">
           <PiUserGearFill className="text-primaryDark bg-surfaceLavender p-2 size-11 rounded-full" />
