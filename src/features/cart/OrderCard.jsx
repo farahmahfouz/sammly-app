@@ -48,7 +48,6 @@ function OrderCard({ paymentMethod, changePaymentMethod, checkout }) {
                             </label>
                         ))}
                     </div>
-                    {/* </div> */}
                 </div>
                 <button
                     className="transition duration-300 ease-in-out rounded-full text-white px-14 py-2 mt-4 w-full"

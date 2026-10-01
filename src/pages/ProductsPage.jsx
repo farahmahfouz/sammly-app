@@ -15,9 +15,10 @@ export default function ProductsPage() {
 
   return (
     <div
-      className={`grid transition-all duration-300 grid-cols-1 ${
-        isFilterOpen ? "md:grid-cols-[20rem_1fr]" : "md:grid-cols-[0rem_1fr]"
-      }`}
+      className={`w-full min-w-0 grid transition-all duration-300 grid-cols-1 ${isFilterOpen
+          ? "md:grid-cols-[20rem_minmax(0,1fr)]"
+          : "md:grid-cols-[0_minmax(0,1fr)]"
+        }`}
     >
       <PageTitle title="Products" />
 

@@ -1,3 +1,4 @@
+import Card from "../../components/Card";
 import { Link } from "react-router-dom";
 import Skelton from "../../layouts/Skelton";
 import useFavoriteProducts from "../products/useFavoriteProducts";
@@ -20,48 +21,29 @@ export default function ProfileFav() {
                     <Empty resourceName="Favorite Products" />
                 </div>
             ) : (
+
                 <div className="relative grid md:grid-cols-4 gap-5">
                     {favoriteProducts.map((product) => (
-                        <div
+                        <Card
                             key={product._id}
-                            className="rounded-lg shadow-cardShadow w-full bg-white overflow-hidden"
-                        >
-                            <figure className="relative">
-                                <div
-                                    className="bg-white/30 text-primary hover:text-primaryDark transition-all rounded-3xl p-2 absolute top-2 end-4 flex justify-center items-center cursor-pointer "
-                                    onClick={() => toggleFavorite(product._id)}
+                            image={product.image}
+                            title={product.name}
+                            price={`EG${product.price}`}
+                            cornerAction={{
+                                icon: <GiShatteredHeart />,
+                                onClick: () => toggleFavorite(product._id),
+                            }}
+                            footer={
+                                <Link
+                                    to={`/product-details/${product._id}`}
+                                    className="py-1.5 px-3 w-full rounded-full text-primary border border-primary tracking-tighter flex justify-center items-center gap-1.5"
                                 >
-                                    <GiShatteredHeart />
-                                </div>
-
-                                <img
-                                    src={product.image}
-                                    alt={product.name}
-                                    className=" h-[220px] w-full object-cover"
-                                />
-                            </figure>
-
-                            <div className="p-3 flex flex-col gap-2">
-                                <h2 className="text-sm font-bold tracking-tighter uppercase line-clamp-1">
-                                    {product.name}
-                                </h2>
-
-                                <p className="text-sm font-semibold text-textMuted">
-                                    EG{product.price}
-                                </p>
-
-                                <div className="flex justify-center pt-1 w-full">
-                                    <Link
-                                        to={`/product-details/${product._id}`}
-                                        className="py-1.5 px-3 w-full rounded-full text-primary border border-primary tracking-tighter flex justify-center items-center gap-1.5"
-                                    >
-                                        <FaEye size={12} />
-                                        See Details
-                                        <ArrowRight size={12} />
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
+                                    <FaEye size={12} />
+                                    See Details
+                                    <ArrowRight size={12} />
+                                </Link>
+                            }
+                        />
                     ))}
                 </div>
             )}

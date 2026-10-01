@@ -6,6 +6,7 @@ import { AiOutlineUserSwitch } from 'react-icons/ai';
 import { MdOutlineEditLocation } from 'react-icons/md';
 import { MdOutlinePhoneBluetoothSpeaker } from 'react-icons/md';
 import { MdOutlineAttachEmail } from 'react-icons/md';
+import ConfirmModal from '../../components/ConfirmModal';
 
 const PROFILE_FIELDS = [
     { name: 'name', label: 'Name', icon: AiOutlineUserSwitch, capitalize: false, editable: true },
@@ -52,33 +53,6 @@ function ProfileField({ field, value, isEditing, onChange }) {
             </div>
             <span className="block w-8/12 border-t border-borderLight mx-auto" />
         </>
-    );
-}
-
-function ConfirmSaveModal({ isSaving, onConfirm, onCancel }) {
-    return (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-                <h3 className="text-lg font-semibold mb-4">Confirm Changes</h3>
-                <p>Are you sure you want to save these changes?</p>
-                <div className="flex justify-end gap-2 mt-4">
-                    <button
-                        className="btn bg-buttonColor hover:bg-hoverButton text-white"
-                        onClick={onConfirm}
-                        disabled={isSaving}
-                    >
-                        {isSaving ? <span className="loading loading-ring loading-md"></span> : 'Confirm'}
-                    </button>
-                    <button
-                        className="btn btn-outline text-gray-500 hover:bg-gray-700 mr-2"
-                        onClick={onCancel}
-                        disabled={isSaving}
-                    >
-                        Cancel
-                    </button>
-                </div>
-            </div>
-        </div>
     );
 }
 
@@ -191,14 +165,14 @@ export default function ProfileInformation() {
 
             </div>
 
-
-            {showModal && (
-                <ConfirmSaveModal
-                    isSaving={isSaving}
-                    onConfirm={handleEditConfirm}
-                    onCancel={handleEditCancel}
-                />
-            )}
+            <ConfirmModal
+                isOpen={showModal}
+                title="Confirm Changes"
+                message="Are you sure you want to save these changes?"
+                isLoading={isSaving}
+                onConfirm={handleEditConfirm}
+                onCancel={handleEditCancel}
+            />
         </div>
     );
 }

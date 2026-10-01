@@ -1,14 +1,16 @@
-import { createOrder } from "../../utils/api/orderApi";
-import EmptyCart from "./EmptyCart";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { createOrder } from "../../utils/api/orderApi";
+import useCart from "./useCart";
 import { toast } from "react-hot-toast";
-import  useCart from "./useCart";
+
 import { GiChewedHeart } from "react-icons/gi";
 import { MdLockReset } from "react-icons/md";
+
 import CartCard from "./CartCard";
 import OrderCard from "./OrderCard";
-
+import EmptyCart from "./EmptyCart";
+import ConfirmModal from "../../components/ConfirmModal";
 
 function Cart() {
     const {
@@ -184,45 +186,27 @@ function Cart() {
                     </div>
                 </div>
             )}
-            {showModal && (
-                <div className="modal modal-open">
-                    <div className="modal-box">
-                        <h3 className="font-bold text-lg">Confirm Delete</h3>
-                        <p className="py-4">Are you sure you want to delete this design?</p>
-                        <div className="modal-action">
-                            <button
-                                onClick={handleDeleteConfirmed}
-                                className="btn border border-red-500 bg-white hover:bg-red-500 hover:text-white duration-300"
-                            >
-                                Delete
-                            </button>
-                            <button onClick={handleDeleteCancel} className="btn">
-                                Cancel
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
-            {/* Modal for clearing the cart */}
-            {showClearCartModal && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                    <div className="bg-white p-6 rounded-lg">
-                        <h2 className="text-lg font-bold mb-4">Clear Cart</h2>
-                        <p>Are you sure you want to clear the entire cart?</p>
-                        <div className="flex justify-end space-x-4 mt-4">
-                            <button
-                                onClick={handleClearCartConfirmed}
-                                className="btn border border-red-500 bg-white hover:bg-red-500 hover:text-white duration-300"
-                            >
-                                Clear Cart
-                            </button>
-                            <button onClick={handleClearCartCancel} className="btn">
-                                Cancel
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
+            {/* Delete design */}
+            <ConfirmModal
+                isOpen={showModal}
+                title="Confirm Delete"
+                message="Are you sure you want to delete this design?"
+                confirmText="Delete"
+                variant="danger"
+                onConfirm={handleDeleteConfirmed}
+                onCancel={handleDeleteCancel}
+            />
+
+            {/* Clear cart */}
+            <ConfirmModal
+                isOpen={showClearCartModal}
+                title="Clear Cart"
+                message="Are you sure you want to clear the entire cart?"
+                confirmText="Clear Cart"
+                variant="danger"
+                onConfirm={handleClearCartConfirmed}
+                onCancel={handleClearCartCancel}
+            />
         </div>
     );
 }
