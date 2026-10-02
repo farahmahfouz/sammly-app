@@ -97,101 +97,84 @@ export default function Navbar() {
           </div>
         </div>
 
-        <div className=" flex gap-2 items-center">
-          {isLoggedIn && (
-            <div className="dropdown dropdown-end">
-              <Link
-                to="/cart"
-                tabIndex={0}
-                role="button"
-                className="px-3"
-              >
+        <div className="flex gap-2 items-center">
+          {isLoggedIn ? (
+            <>
+              {/* Cart */}
+              <Link to="/cart" className="px-3">
                 <div className="indicator">
                   <CartIcon />
                   {totalQuantity > 0 && (
-                    <span className="badge badge-sm indicator-item ">
+                    <span className="badge badge-sm indicator-item">
                       {totalQuantity}
                     </span>
                   )}
                 </div>
               </Link>
-            </div>
-          )}
-          <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className=" avatar"
-            >
-              <div className="rounded-2xl">
-                <div
-                  className={`avatar placeholder z-10 w-10`}
-                >
-                  <div className="bg-white text-primary border border-primary hover:text-primaryDark w-16 rounded-full">
-                    <span className="text-xl">
-                      {isLoading && isLoggedIn ? (
-                        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary hover:text-primaryDark"></div>
-                      ) : userProfile ? (
-                        userProfile.name.charAt(0).toUpperCase()
-                      ) : (
-                        <img src="/usernotfound.jpg" alt="User Not Found" />
-                      )}
-                    </span>
+
+              {/* Avatar dropdown (only when logged in) */}
+              <div className="dropdown dropdown-end">
+                <div tabIndex={0} role="button" className="avatar">
+                  <div className="rounded-2xl">
+                    <div className="avatar placeholder z-10 w-10">
+                      <div className="bg-white text-primary border border-primary hover:text-primaryDark w-16 rounded-full">
+                        <span className="text-xl">
+                          {isLoading ? (
+                            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary"></div>
+                          ) : userProfile ? (
+                            userProfile.name.charAt(0).toUpperCase()
+                          ) : (
+                            <img src="/usernotfound.jpg" alt="User Not Found" />
+                          )}
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
+
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content bg-white rounded-box z-10 mt-3 w-52 p-2 shadow-cardShadow"
+                >
+                  <li>
+                    <Link
+                      onClick={closeDropdown}
+                      to="/user-profile"
+                      className="px-5 py-2.5 text-textPrimary text-md rounded-md hover:bg-gray-100 focus:outline-none focus:bg-gray-100 active:!bg-gray-100 active:!text-textPrimary transition-colors"
+                    >
+                      <CgProfile />
+                      Profile
+                    </Link>
+                  </li>
+                  <li>
+                    <button
+                      onClick={handleLogout}
+                      className="px-5 py-2.5 text-red-600 text-left rounded-md hover:bg-gray-50 focus:outline-none focus:bg-red-50 active:!bg-red-50 transition-colors"
+                    >
+                      <LuLogOut />
+                      Logout
+                    </button>
+                  </li>
+                </ul>
               </div>
-            </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-white rounded-box z-10 mt-3 w-52 p-2 shadow-cardShadow"
-            >
-              {isLoggedIn && (
-                <li>
-                  <Link
-                    onClick={closeDropdown}
-                    to="/user-profile"
-                    className="px-5 py-1 text-textPrimary text-md rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 active:!bg-gray-100 active:!text-textPrimary transition-colors"
-                  >
-                    <CgProfile />
-                    Profile
-                  </Link>
-                </li>
-              )}
-              {!isLoggedIn && (
-                <li>
-                  <Link
-                    to="/login"
-                    onClick={closeDropdown}
-                    className="px-5 py-1 text-textPrimary text-md rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 active:!bg-gray-100 active:!text-textPrimary transition-colors"
-                  >
-                    Login
-                  </Link>
-                </li>
-              )}
-              {!isLoggedIn && (
-                <li>
-                  <Link
-                    to="/sign-up"
-                    onClick={closeDropdown}
-                    className="px-5 py-1 text-textPrimary text-md rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 active:!bg-gray-100 active:!text-textPrimary transition-colors"
-                  >
-                    Register
-                  </Link>
-                </li>
-              )}
-              {isLoggedIn && (
-                <li>
-                  <button
-                    onClick={handleLogout}
-                    className="px-5 py-1 text-red-600 text-left rounded-lg hover:bg-red-50 focus:outline-none focus:bg-red-50 active:!bg-red-50 transition-colors"
-                  >
-                    <LuLogOut />
-                    Logout
-                  </button>
-                </li>
-              )}
-            </ul>
-          </div>
+            </>
+          ) : (
+            <>
+              {/* Login / Register buttons (only when logged out) */}
+              <Link
+                to="/login"
+                className="btn btn-sm border bg-transparent border-primary text-primary hover:text-primaryDark rounded-full px-5"
+              >
+                Login
+              </Link>
+              <Link
+                to="/sign-up"
+                className="btn btn-sm bg-primary hover:bg-primaryDark text-white rounded-full px-5"
+              >
+                Register
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>

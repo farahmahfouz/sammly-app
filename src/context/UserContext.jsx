@@ -15,7 +15,7 @@ import AuthContext from "./AuthContext";
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const { isLoggedIn, userProfile: authUserProfile } = useContext(AuthContext);
+  const { isLoggedIn } = useContext(AuthContext);
   const [userProfile, setUserProfile] = useState(null);
   const [userOrders, setUserOrders] = useState(null);
   const [favoriteProducts, setFavoriteProducts] = useState(null);

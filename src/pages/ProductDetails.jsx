@@ -5,6 +5,7 @@ import RelatedProducts from './../features/productDetails/RelatedProducts';
 import ReviewSummary from "../features/reviews/ReviewSummary";
 import ReviewForm from "../features/reviews/ReviewForm";
 import ReviewsList from "../features/reviews/ReviewsList";
+import Reveal from "../components/Reveal";
 
 export default function ProductDetails() {
   const sizeChartRef = useRef(null);
@@ -21,17 +22,27 @@ export default function ProductDetails() {
       <div className="w-full py-10 flex flex-col gap-12">
         <ProductDetailsCard onSizeChartClick={scrollToSizeChart} />
 
-        <ReviewSummary />
+        <Reveal>
+          <ReviewSummary />
+        </Reveal>
 
-        <ReviewForm/>
+        <Reveal>
+          <ReviewForm />
+        </Reveal>
 
-        <ReviewsList />
+        <Reveal>
+          <ReviewsList />
+        </Reveal>
 
-        <RelatedProducts />
+        <Reveal>
+          <RelatedProducts />
+        </Reveal>
 
-        <div ref={sizeChartRef}>
-          <SizeCharts />
-        </div>
+        <Reveal>
+          <div ref={sizeChartRef}>
+            <SizeCharts />
+          </div>
+        </Reveal>
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import {
   clearCart,
   addToCart as addToCartApi,
 } from "../../utils/api/cartApi";
+import { useAuth } from "../../context/AuthContext";
 
 const CART_QUERY_KEY = ["cart"];
 
@@ -38,6 +39,7 @@ const getAvailableStock = (product) => {
 
 function useCart() {
   const queryClient = useQueryClient();
+  const { isLoggedIn } = useAuth();
 
   // Local UI-only state (not server state)
   const [isRemoving, setIsRemoving] = useState(null);
@@ -54,6 +56,8 @@ function useCart() {
       const response = await getCart();
       return response.data.cart;
     },
+    enabled: isLoggedIn,
+    retry: false,
     onError: (err) => {
       toast.error(err.message);
     },

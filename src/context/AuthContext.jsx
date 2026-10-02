@@ -1,72 +1,83 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Cookies from "js-cookie";
 import axiosInstance from "../utils/api/axiosInstance";
+import { getCurrentUser } from "../utils/api/userApi";
 
 const AuthContext = createContext();
 
+const persistLoggedIn = (value) => {
+  if (value) {
+    Cookies.set("isLoggedIn", "true", { expires: 7, sameSite: "lax" });
+  } else {
+    Cookies.remove("isLoggedIn");
+  }
+};
+
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(() => {
-    const storedToken = Cookies.get("token");
-    return storedToken || null; // No need to parse since it's stored as a string
-  });
-
-  const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    const storedLoggedIn = Cookies.get("isLoggedIn");
-    return storedLoggedIn ? JSON.parse(storedLoggedIn) : false;
-  });
-
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    () => Cookies.get("isLoggedIn") === "true"
+  );
   const [userId, setUserId] = useState(null);
   const [userProfile, setUserProfile] = useState(null);
 
-  useEffect(() => {
-    if (token) {
-      Cookies.set("token", token, {
-        expires: 7,
-        secure: true,
-        sameSite: "strict",
-      }); // Store token directly
-      Cookies.set("isLoggedIn", JSON.stringify(true), {
-        expires: 7,
-        secure: true,
-        sameSite: "strict",
-      });
-      const fetchUserData = async () => {
-        try {
-          const response = await axiosInstance.get("/users/me", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-
-          setUserId(response?.data?.data?.user?._id);
-          setUserProfile(response?.data?.data?.user);
-        } catch (error) {
-          console.error("Error fetching user data:", error);
-        }
-      };
-
-      fetchUserData();
-    } else {
-      Cookies.remove("token");
-      Cookies.remove("isLoggedIn");
-      setUserId(null);
-      setUserProfile(null);
-    }
-  }, [token]);
-
-  const login = (token) => {
-    setToken(token);
+  const applyUser = useCallback((user) => {
+    setUserId(user?._id ?? null);
+    setUserProfile(user ?? null);
     setIsLoggedIn(true);
-  };
+    persistLoggedIn(true);
+  }, []);
 
-  const logout = () => {
-    setToken(null);
+  const clearSession = useCallback(() => {
+    setUserId(null);
+    setUserProfile(null);
     setIsLoggedIn(false);
-  };
+    persistLoggedIn(false);
+  }, []);
+
+  const login = useCallback(
+    (user) => {
+      if (user) {
+        applyUser(user);
+        return;
+      }
+      setIsLoggedIn(true);
+      persistLoggedIn(true);
+    },
+    [applyUser]
+  );
+
+  const logout = useCallback(async () => {
+    try {
+      await axiosInstance.post("/users/logout");
+    } catch {
+      // Keep clearing local session even if the API has no logout route yet
+    }
+    clearSession();
+  }, [clearSession]);
+
+  useEffect(() => {
+    const restoreSession = async () => {
+      if (Cookies.get("isLoggedIn") !== "true") return;
+      try {
+        const user = await getCurrentUser();
+        applyUser(user);
+      } catch {
+        clearSession();
+      }
+    };
+
+    restoreSession();
+
+    const onUnauthorized = () => clearSession();
+    window.addEventListener("auth:unauthorized", onUnauthorized);
+    return () => window.removeEventListener("auth:unauthorized", onUnauthorized);
+  }, [applyUser, clearSession]);
 
   return (
-    <AuthContext.Provider value={{ token, isLoggedIn, userId, userProfile, login, logout }}>
+    <AuthContext.Provider
+      value={{ isLoggedIn, userId, userProfile, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );
@@ -75,5 +86,9 @@ export const AuthProvider = ({ children }) => {
 AuthProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
+
+export function useAuth() {
+  return useContext(AuthContext);
+}
 
 export default AuthContext;

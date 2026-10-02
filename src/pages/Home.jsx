@@ -1,43 +1,57 @@
-import "../styles/Landing.css"; // Import the CSS file
+import "../styles/Landing.css";
+
 import Hero from "../components/Landing/Hero";
-import CategorySection from "./../components/Landing/CategorySection";
+import CategorySection from "../components/Landing/CategorySection";
 import Sticker from "../components/Landing/Sticker";
 import Discount from "../components/Landing/Discount";
 import Review from "../components/Landing/Review";
 import Tutorial from "../components/Landing/Tutorial";
 import Carrousel from "../components/Landing/Carrousel";
 import PageTitle from "../components/PageTitle";
+import Reveal from "../components/Reveal";
+
 import useMediaQuery from "../hooks/useMediaQuery";
 
-function Landing() {
+function Home() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   return (
     <>
       <PageTitle title="Home" />
-      {/* Hero Section */}
+
       <Hero />
 
-      {/* CategorySection- section3 */}
-      <CategorySection />
+      <Reveal>
+        <CategorySection />
+      </Reveal>
 
       {isDesktop && (
-        <Tutorial />
+        <Reveal>
+          <Tutorial />
+        </Reveal>
       )}
 
-      {/* ProductItem- section4 */}
-      <Carrousel />
+      <Reveal>
+        <Carrousel />
+      </Reveal>
 
       {isDesktop && (
-        <Discount />
+        <Reveal>
+          <Discount />
+        </Reveal>
       )}
 
-      <Review />
+      <Reveal>
+        <Review />
+      </Reveal>
+
       {isDesktop && (
-        <Sticker />
+        <Reveal>
+          <Sticker />
+        </Reveal>
       )}
     </>
   );
 }
 
-export default Landing;
+export default Home;

@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import axios from "axios";
+import axiosInstance from "../utils/api/axiosInstance";
 
 import AuthContext from "../context/AuthContext";
 
@@ -36,11 +36,8 @@ export default function Login() {
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
-      const res = await axios.post(
-        "http://localhost:4001/api/v1/users/login",
-        data
-      );
-      login(res.data.data.token);
+      const res = await axiosInstance.post("/users/login", data);
+      login(res.data.data.user);
       if (redirect) {
         navigate(`/${redirect}`);
       } else {

@@ -2,16 +2,19 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { login as loginApi } from "../../utils/api/userApi";
+import { useAuth } from "../../context/AuthContext";
 
 export default function useLogin() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const redirect = searchParams.get("redirect");
+  const { login: setLoggedIn } = useAuth();
 
   const { mutate: login, isPending } = useMutation({
     mutationFn: loginApi,
     onSuccess: (user) => {
+      setLoggedIn(user);
       queryClient.setQueryData(["user"], user);
       navigate(redirect ? `/${redirect}` : "/", { replace: true });
     },

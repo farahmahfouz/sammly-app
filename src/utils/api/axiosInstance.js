@@ -1,38 +1,27 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+
 // const LIVE = "https://react-node-designer.glitch.me/api/v1";
 const LOCAL = "http://localhost:4001/api/v1/";
 
 const axiosInstance = axios.create({
   baseURL: LOCAL,
+  withCredentials: true,
 });
 
-// Request interceptor
-axiosInstance.interceptors.request.use(
-  (config) => {
-    let token = Cookies.get("token");
-
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
-// Response interceptor
 axiosInstance.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+  (response) => response,
   (error) => {
-    if (error.response && error.response.status === 401) {
-      // Cookies.remove("token");
-      // Cookies.remove("isLoggedIn");
-      // window.location.href = "/login";
+    const status = error.response?.status;
+    const url = error.config?.url || "";
+    const isAuthEndpoint =
+      url.includes("/users/login") || url.includes("/users/signup");
+
+    if (status === 401 && !isAuthEndpoint) {
+      Cookies.remove("isLoggedIn");
+      window.dispatchEvent(new Event("auth:unauthorized"));
     }
+
     return Promise.reject(error);
   }
 );

@@ -1,5 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
+import { AuthProvider } from "./context/AuthContext";
+import { UserProvider } from "./context/UserContext";
 // import Components
 import Navbar from "./layouts/Navbar";
 import Footer from "./layouts/Footer";
@@ -7,7 +10,6 @@ import Footer from "./layouts/Footer";
 //import pages
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
-import Landing from "./pages/Landing";
 import ProductsPage from "./pages/ProductsPage";
 import ProductDetails from "./pages/ProductDetails";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -17,15 +19,13 @@ import Error from "./components/Error";
 import CartPage from "./pages/CartPage";
 import ForgetPassword from "./pages/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword";
-import { AuthProvider } from "./context/AuthContext";
-import { UserProvider } from "./context/UserContext";
 import SuccessPayment from "./pages/SuccessPayment";
 import UserProfile from "./pages/UserProfile";
 import AboutUs from "./pages/AboutUs";
 import ScrollToTop from "./components/ScrollToTop";
 import HelpFAQs from "./pages/HelpFaqs";
 import ContactUs from "./pages/ContactUs";
-import { Toaster } from "react-hot-toast";
+import Home from "./pages/Home";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -59,7 +59,7 @@ function App() {
                     <>
                       <Navbar className="sticky top-0 z-50" />
                       <Routes>
-                        <Route path="/" element={<Landing />} />
+                        <Route path="/" element={<Home />} />
                         <Route
                           path="/products"
                           element={<ProductsPage />}
