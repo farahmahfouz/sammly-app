@@ -2,15 +2,15 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useLocation } from "react-router-dom";
 
-// Toast notifications
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-hot-toast";
 
-// Icons
 import ErrorIcon from "../icons/ErrorIcon";
 import { resetPassword } from "../utils/api/password";
 import Eye from "../icons/Eye";
 import EyeSlash from "../icons/EyeSlash";
+import PageTitle from "../components/PageTitle";
+import { IoIosLock } from "react-icons/io";
+import ArrowLeft from "../icons/ArrowLeft";
 
 export default function ResetPassword() {
   const {
@@ -43,25 +43,29 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto border m-9 rounded-xl p-5 shadow-[0px_0px_19px_16px_#f4eeee]">
+    <div className="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto border border-borderLight my-16 rounded-xl shadow-cardShadow">
+      <PageTitle title="Reset Password" />
+
       {/* Image Section */}
       <div className="md:order-1 flex justify-center items-center rounded-xl">
         <img
           src="/resetpass.png"
           alt="Reset Password"
-          className="w-4/5 object-cover rounded-xl"
+          className="w-full object-cover"
         />
       </div>
 
       {/* Form Section */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="md:order-2 p-5 rounded-xl flex flex-col justify-evenly"
+        className="md:order-2 p-5 rounded-xl flex flex-col justify-evenly gap-2.5"
       >
-        <div>
-          <h1 className="text-center sm:text-start text-3xl pb-6 text-textColor font-bold">
-            Reset Password
-          </h1>
+        <div className='flex flex-col items-start'>
+          <span className='block bg-surfacePurple/50 rounded-full text-primary p-4'>
+            <IoIosLock className='size-6' />
+          </span>
+          <h1 className="text-center sm:text-start text-3xl text-textPrimary/90 font-bold">Reset Password</h1>
+          <p className='text-textSecondary tracking-tighter text-sm max-w-80'>No worries! Enter your email address and we’ll send you a link to reset your password.</p>
         </div>
 
         <div className="">
@@ -69,7 +73,7 @@ export default function ResetPassword() {
           <div className="mb-4">
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-textColor"
+              className="block text-sm font-medium text-textPrimary"
             >
               New Password
             </label>
@@ -83,9 +87,8 @@ export default function ResetPassword() {
                 })}
                 type={showPassword ? "text" : "password"}
                 id="password"
-                className={`mt-1 block w-full px-3 py-2 border-b ${
-                  errors.password ? "border-b-red-500" : "border-b-gray-300"
-                } rounded-none shadow-sm focus:outline-none focus:ring-0 focus:border-b-indigo-500 sm:text-sm hover:border-b-SecondaryColor`}
+                className={`mt-1 block w-full px-3 py-2 border-b ${errors.password ? "border-b-red-500" : "border-b-gray-300"
+                  } rounded-none shadow-sm focus:outline-none focus:ring-0 focus:border-b-primary sm:text-sm hover:border-b-primaryDark`}
                 placeholder="Password"
               />
               {showPassword ? (
@@ -120,7 +123,7 @@ export default function ResetPassword() {
           <div className="mb-4">
             <label
               htmlFor="passwordConfirm"
-              className="block text-sm font-medium text-textColor"
+              className="block text-sm font-medium text-textPrimary"
             >
               Confirm Password
             </label>
@@ -132,11 +135,10 @@ export default function ResetPassword() {
                 })}
                 type={showConfirmPassword ? "text" : "password"}
                 id="passwordConfirm"
-                className={`mt-1 block w-full px-3 py-2 border-b ${
-                  errors.passwordConfirm
-                    ? "border-b-red-500"
-                    : "border-b-gray-300"
-                } rounded-none shadow-sm focus:outline-none focus:ring-0 focus:border-b-indigo-500 sm:text-sm hover:border-b-SecondaryColor`}
+                className={`mt-1 block w-full px-3 py-2 border-b ${errors.passwordConfirm
+                  ? "border-b-red-500"
+                  : "border-b-gray-300"
+                  } rounded-none shadow-sm focus:outline-none focus:ring-0 focus:border-b-primary sm:text-sm hover:border-b-primaryDark`}
                 placeholder="Confirm Password"
               />
               {showConfirmPassword ? (
@@ -160,7 +162,7 @@ export default function ResetPassword() {
 
           <button
             type="submit"
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-buttonColor hover:bg-hoverButton hover:transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-hoverButton"
+            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-cardShadow text-sm text-white bg-primary hover:bg-primaryDark hover:transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
             disabled={isLoading}
           >
             {isLoading ? (
@@ -169,6 +171,10 @@ export default function ResetPassword() {
               "Reset Password"
             )}
           </button>
+          <div className='flex gap-1 items-center pt-4 cursor-pointer' onClick={() => navigate('/login')}>
+            <ArrowLeft className='size-4 text-textSecondary' />
+            <p className='text-sm text-textMuted'>Back to login</p>
+          </div>
         </div>
       </form>
     </div>

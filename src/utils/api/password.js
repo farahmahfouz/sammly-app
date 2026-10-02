@@ -7,6 +7,10 @@ export const sendResetPasswordEmail = async (email) => {
     });
     return response.data;
   } catch (error) {
+    console.log("FORGOT PASSWORD ERROR:", error.response?.data);
+    console.log("STATUS:", error.response?.status);
+    console.log("FULL ERROR:", error);
+
     throw error.response?.data || error.message;
   }
 };
@@ -18,7 +22,7 @@ export const resetPassword = async (token, password, passwordConfirm) => {
       {
         password,
         passwordConfirm,
-      }
+      },
     );
     return response.data;
   } catch (error) {
