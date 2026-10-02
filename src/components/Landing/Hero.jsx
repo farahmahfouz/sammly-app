@@ -3,8 +3,8 @@ import PlayVideo from "../../icons/PlayVideo";
 import Fizz from "../../icons/Fizz";
 import CarIcon from "../../icons/CarIcon";
 import Checked from "../../icons/Checked";
-import Cloud from "../../icons/cloud";
 import ArrowRight from "../../icons/ArrowRight";
+import Cloud from './../../icons/Cloud';
 
 function Hero() {
   return (
