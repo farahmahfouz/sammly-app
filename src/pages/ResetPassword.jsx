@@ -43,11 +43,11 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto border border-borderLight my-16 rounded-xl shadow-cardShadow">
+    <div className="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto lg:border border-borderLight my-16 rounded-xl lg:shadow-cardShadow">
       <PageTitle title="Reset Password" />
 
       {/* Image Section */}
-      <div className="md:order-1 flex justify-center items-center rounded-xl">
+      <div className="md:order-1 hidden lg:flex justify-center items-center rounded-xl">
         <img
           src="/resetpass.png"
           alt="Reset Password"
@@ -60,7 +60,8 @@ export default function ResetPassword() {
         onSubmit={handleSubmit(onSubmit)}
         className="md:order-2 p-5 rounded-xl flex flex-col justify-evenly gap-2.5"
       >
-        <div className='flex flex-col items-start'>
+        <div className='flex flex-col items-center justify-center
+                 lg:items-start'>
           <span className='block bg-surfacePurple/50 rounded-full text-primary p-4'>
             <IoIosLock className='size-6' />
           </span>
@@ -70,7 +71,7 @@ export default function ResetPassword() {
 
         <div className="">
           {/* Password */}
-          <div className="mb-4">
+          <div className="my-4">
             <label
               htmlFor="password"
               className="block text-sm font-medium text-textPrimary"

@@ -32,13 +32,15 @@ function Review() {
                 <h2 className="text-xs font-semibold uppercase tracking-tighter">what our customer say</h2>
             </span>
             <div className="flex justify-between">
-                <p className="capitalize text-3xl font-extrabold text-textPrimary">real people. real stories.</p>
+                <p className="capitalize text-lg lg:text-3xl font-extrabold text-textPrimary">real people. real stories.</p>
                 <Link to="/products" className="flex gap-2 items-center capitalize text-sm font-medium tracking-tight text-primary hover:text-primaryDark">
-                    view all reviews <ArrowRight />
+                    <p>
+                        view all
+                        <span className="hidden md:inline"> reviews</span>
+                    </p>  <ArrowRight />
                 </Link>
             </div>
             <div className="grid  md:grid-cols-3 gap-4 pt-6">
-
                 {testimonials.map(test => (
                     <div key={test.name} className="border border-borderLight rounded-lg p-4 flex gap-4">
                         <img src={test.image} alt={test.name} className="h-12 w-12 object-cover rounded-full" />

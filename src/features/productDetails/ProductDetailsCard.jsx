@@ -21,7 +21,6 @@ import { LuLogIn } from "react-icons/lu";
 function ProductDetailsCard({ onSizeChartClick }) {
     const navigate = useNavigate();
     const { product, isLoading, isError } = useProduct();
-
     const { isLoggedIn } = useContext(AuthContext);
     const { addToCart } = useCart();
     const { favoriteProducts, toggleFavorite } = useFavoriteProducts();
@@ -60,7 +59,18 @@ function ProductDetailsCard({ onSizeChartClick }) {
         })
     );
 
+    const totalStock = product.totalStock ?? product.stock?.reduce((sum, s) => sum + (s.quantity || 0), 0) ?? 0;
+    const isOutOfStock = totalStock <= 0;
+
+    const hasValidSale =
+        product.isOnSale &&
+        !isOutOfStock &&
+        product.discount > 0 &&
+        product.finalPrice > 0 &&
+        product.finalPrice < product.price;
+
     const addToCartHandler = async (productId) => {
+        if (isOutOfStock) return;
         if (!selectedSize) {
             toast.warn("Please choose your size");
             return;
@@ -119,7 +129,8 @@ function ProductDetailsCard({ onSizeChartClick }) {
                     <img
                         src={allImages[activeIndex]}
                         alt={product.name}
-                        className="w-full h-full rounded-xl object-cover shadow-cardShadow"
+                        className={`w-full h-full rounded-xl object-cover shadow-cardShadow ${isOutOfStock ? "opacity-60 grayscale" : ""
+                            }`}
                     />
 
                     <div className="absolute bottom-3 end-3 bg-white/90 px-3 py-1 rounded-full text-sm text-primary">
@@ -129,9 +140,15 @@ function ProductDetailsCard({ onSizeChartClick }) {
             </div>
 
             <div className="w-full lg:w-1/2 py-5">
-                {product.isOnSale && (
+                {hasValidSale && (
                     <span className=" border border-primary shadow-cardShadow text-primaryDark text-xs font-bold text-center py-2 px-4 rounded-full">
-                       SALE
+                        SALE
+                    </span>
+                )}
+
+                {isOutOfStock && (
+                    <span className="bg-navy/90 text-white text-xs font-bold text-center py-2 px-4 rounded-full">
+                        OUT OF STOCK
                     </span>
                 )}
                 <div className="flex justify-between pt-4">
@@ -161,7 +178,7 @@ function ProductDetailsCard({ onSizeChartClick }) {
                     )}
                 </span>
                 <div className="flex gap-4 items-center pt-4">
-                    {product.isOnSale ? (
+                    {hasValidSale ? (
                         <>
                             <p className="text-xl font-bold text-primary line-through whitespace-nowrap">
                                 EG {product.price}
@@ -180,7 +197,7 @@ function ProductDetailsCard({ onSizeChartClick }) {
                 <ProductFeatures />
                 <div className="md:pt-5">
                     <RadioComponent setSize={setSelectedSize} stock={stockAvailable} onSizeChartClick={onSizeChartClick} />
-                    <div className="flex justify-center lg:justify-end md:pt-10">
+                    <div className="flex justify-center lg:justify-end pt-10">
                         {isLoggedIn ? (
                             <div className="grid grid-cols-[1.5fr_4fr] gap-10 w-full pt-4">
                                 <div className="flex items-center justify-between gap-4 border border-surfaceLavender shadow-cardShadow rounded-full px-5 py-2 ">
@@ -188,7 +205,7 @@ function ProductDetailsCard({ onSizeChartClick }) {
                                         onClick={() => setQuantity((prev) => prev - 1)}
                                         className={`text-primary text-lg font-medium transition ${isMinQuantity ? "opacity-50 cursor-not-allowed" : "hover:opacity-70"
                                             }`}
-                                        disabled={isMinQuantity}
+                                        disabled={isMinQuantity || isOutOfStock}
                                     >
                                         −
                                     </button>
@@ -197,7 +214,7 @@ function ProductDetailsCard({ onSizeChartClick }) {
                                         onClick={() => setQuantity((prev) => prev + 1)}
                                         className={`text-primary text-lg font-medium transition ${isMaxQuantity ? "opacity-50 cursor-not-allowed" : "hover:opacity-70"
                                             }`}
-                                        disabled={isMaxQuantity}
+                                        disabled={isMaxQuantity || isOutOfStock}
                                     >
                                         +
                                     </button>
@@ -205,10 +222,12 @@ function ProductDetailsCard({ onSizeChartClick }) {
                                 <button
                                     onClick={() => addToCartHandler(product._id)}
                                     className="bg-primary hover:bg-primaryDark text-sm transition duration-700 shadow-cardShadow rounded-full w-full text-white py-2 flex items-center justify-center gap-2"
-                                    disabled={isAdding}
+                                    disabled={isAdding || isOutOfStock}
                                 >
                                     {isAdding ? (
                                         <span className="loading loading-ring loading-md"></span>
+                                    ) : isOutOfStock ? (
+                                        <span>OUT OF STOCK</span>
                                     ) : (
                                         <>
                                             <TbShoppingBagExclamation className="text-lg" />

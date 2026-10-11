@@ -129,7 +129,6 @@ export default function MobileFilter({ isOpen, onClose }) {
                     type="radio"
                     name="price"
                     checked={isChecked}
-                    // onClick مش onChange، عشان نقدر نلغي الاختيار لو داس عليه تاني
                     onClick={() => handlePriceChange(p.min, p.max, isChecked)}
                     onChange={() => {}}
                     className="accent-primary"

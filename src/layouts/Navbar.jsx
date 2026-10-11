@@ -1,5 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 
 //contexts
 import AuthContext from "../context/AuthContext";
@@ -21,6 +21,12 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
 
   const closeDropdown = () => {
     if (document.activeElement instanceof HTMLElement) {
@@ -78,24 +84,45 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Navigation Links */}
-        <div className={`${isMenuOpen ? "block" : "hidden"} md:hidden`}>
-          <div className="absolute top-16 left-0 bg-white w-full shadow-lg p-3">
-            <CustomLink to="/" className="block px-4 py-2 text-primary hover:text-primaryDark">
-              Home
-            </CustomLink>
-            <CustomLink to="/products" className="block px-4 py-2 text-primary hover:text-primaryDark">
-              Products
-            </CustomLink>
-            <CustomLink
-              to="/customize"
-              className="block px-4 py-2 text-primary hover:text-primaryDark"
-            >
-              Customize
-            </CustomLink>
-            {/* <CustomLink to="/aboutus">About Us</CustomLink> */}
-            <CustomLink to="/contact">Contact Us</CustomLink>
-          </div>
+
+        <div
+          className={`absolute top-16 left-0 w-full bg-white shadow-lg p-3
+            flex flex-col gap-1 md:hidden z-50
+            transition-all duration-300 ease-in-out origin-top
+            ${isMenuOpen
+              ? "opacity-100 translate-y-0 scale-y-100 visible"
+              : "opacity-0 -translate-y-3 scale-y-95 invisible pointer-events-none"
+            }`}
+        >
+          <CustomLink
+            to="/"
+            className="block w-full px-4 py-3 rounded-lg text-primary hover:bg-purple-50 transition-colors duration-200"
+          >
+            Home
+          </CustomLink>
+
+          <CustomLink
+            to="/products"
+            className="block w-full px-4 py-3 rounded-lg text-primary hover:bg-purple-50 transition-colors duration-200"
+          >
+            Products
+          </CustomLink>
+
+          <CustomLink
+            to="/customize"
+            className="block w-full px-4 py-3 rounded-lg text-primary hover:bg-purple-50 transition-colors duration-200"
+          >
+            Customize
+          </CustomLink>
+
+          <CustomLink
+            to="/contact"
+            className="block w-full px-4 py-3 rounded-lg text-primary hover:bg-purple-50 transition-colors duration-200"
+          >
+            Contact Us
+          </CustomLink>
         </div>
+
 
         <div className="flex gap-2 items-center">
           {isLoggedIn ? (

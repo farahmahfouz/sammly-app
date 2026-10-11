@@ -12,15 +12,24 @@ import RatingStars from "../reviews/RatingStarts";
 
 function Product({ product }) {
     const { isLoggedIn } = useContext(AuthContext);
-
     const { favoriteProducts, toggleFavorite } = useFavoriteProducts();
+
+    const totalStock = product.totalStock ?? product.stock?.reduce((sum, s) => sum + (s.quantity || 0), 0) ?? 0;
+    const isOutOfStock = totalStock <= 0;
+
+    const hasValidSale =
+        product.isOnSale &&
+        !isOutOfStock &&
+        product.discount > 0 &&
+        product.finalPrice > 0 &&
+        product.finalPrice < product.price;
 
     return (
         <Link
             to={`/product-details/${product._id}`}
             className="flex flex-col h-full rounded-xl overflow-hidden relative w-full min-w-0 md:min-w-56 md:max-w-[351px] border border-borderLight shadow-cardShadow"
         >
-            {product.isOnSale && (
+            {hasValidSale && (
                 <span className="absolute top-4 -left-10 w-32 -rotate-45 z-10 bg-surfaceLavender text-primaryDark text-xs font-bold text-center py-1">
                     -{product.discount}%
                 </span>
@@ -52,6 +61,11 @@ function Product({ product }) {
                     alt={product.name}
                     className="rounded-lg p-2 w-full h-44 md:h-60 object-cover"
                 />
+                {isOutOfStock && (
+                    <span className="absolute bottom-3 left-3 bg-navy/80 text-white text-xs font-bold px-3 py-1 rounded-full z-10">
+                        Out of Stock
+                    </span>
+                )}
             </figure>
 
             {/* Product Info */}
@@ -65,7 +79,7 @@ function Product({ product }) {
 
                 <div className="flex flex-col md:flex-row md:justify-between gap-1 md:gap-3 pb-2">
                     <div className="flex flex-wrap gap-x-1 items-center">
-                        {product.isOnSale ? (
+                        {hasValidSale ? (
                             <>
                                 <p className="text-sm md:text-base font-bold text-primary line-through whitespace-nowrap">
                                     EG {product.price}
@@ -92,14 +106,24 @@ function Product({ product }) {
                 {/* Add To Cart Button */}
                 {isLoggedIn && (
                     <button
+                        disabled={isOutOfStock}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            if (isOutOfStock) return;
+                            // TODO: add to cart logic
+                        }}
+                        className={`py-1.5 md:py-2 mt-auto px-2 md:px-4 w-full rounded-full text-xs md:text-sm font-semibold flex items-center justify-between transition duration-700 ${isOutOfStock
+                                ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                                : "text-primary bg-surfaceLavender hover:bg-opacity-80"
+                            }`}
                         type="button"
-                        className="py-1.5 md:py-2 mt-auto px-2 md:px-4 w-full rounded-full text-primary bg-surfaceLavender transition duration-700 hover:bg-opacity-80 text-xs md:text-sm font-semibold flex items-center justify-between"
-                    >
+                    >   
                         <div className="flex items-center gap-1 md:gap-2">
                             <Cart />
                             <span className="border-l border-surfacePurple h-5"></span>
                         </div>
-                        <span className="mx-auto">Add To Cart</span>
+                        <span className="mx-auto">{isOutOfStock ? "Out of Stock" : "Add To Cart"}</span>
                     </button>
                 )}
             </div>

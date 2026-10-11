@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "motion/react";
 import ArrowRight from "../../icons/ArrowRight";
 import useProducts from "../../features/products/useProducts";
 
 const VISIBLE = 6;
-const ITEM_WIDTH = 240; 
+const ITEM_WIDTH = 240;
 const GAP = 16;
 const STEP = ITEM_WIDTH + GAP;
 
@@ -17,6 +18,31 @@ function Carrousel() {
   const handleNext = () => setStart((prev) => Math.min(prev + 1, maxStart));
   const handlePrev = () => setStart((prev) => Math.max(prev - 1, 0));
 
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.25,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: {
+      opacity: 0,
+      x: -40,
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.9,
+        ease: "easeOut",
+      },
+    },
+  };
+
+
   return (
     <section className="mx-auto py-6 md:py-16">
       {/* Section Header */}
@@ -28,11 +54,11 @@ function Carrousel() {
 
       <div className="flex justify-between container mx-auto">
         <span>
-          <p className="text-3xl font-extrabold capitalize text-textPrimary">
+          <p className="text-lg lg:text-3xl font-extrabold capitalize text-textPrimary">
             popular designs
           </p>
 
-          <p className="text-sm font-medium capitalize text-textSecondary">
+          <p className="text-sm font-medium capitalize text-textSecondary max-w-64 lg:max-w-fit">
             check out some of our best selling custom t-shirts and designs
           </p>
         </span>
@@ -41,7 +67,10 @@ function Carrousel() {
           to="/products"
           className="flex items-center gap-2 text-sm font-medium capitalize tracking-tight text-primary hover:text-primaryDark"
         >
-          view all products
+          <p>
+            view all
+            <span className="hidden md:inline"> designs</span>
+          </p>
           <ArrowRight />
         </Link>
       </div>
@@ -60,30 +89,40 @@ function Carrousel() {
           </span>
         </button>
 
-        <div
-          className="overflow-hidden"
-          style={{ width: VISIBLE * ITEM_WIDTH + (VISIBLE - 1) * GAP }}
-        >
-          <div
+        <div className="overflow-hidden" style={{ width: VISIBLE * ITEM_WIDTH + (VISIBLE - 1) * GAP }}>
+          <motion.div
             className="flex gap-4 transition-transform duration-300 ease-in-out"
             style={{ transform: `translateX(-${start * STEP}px)` }}
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{
+              once: true,
+              amount: 0.2,
+            }}
           >
             {products.map((product) => (
-              <div key={product._id} className="w-48 shrink-0 overflow-hidden">
+              <motion.div
+                key={product._id}
+                variants={cardVariants}
+                className="w-60 shrink-0 overflow-hidden"
+              >
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="h-48 w-48 rounded-lg object-cover shadow-cardShadow"
+                  className="h-60 w-60 rounded-lg object-cover shadow-cardShadow"
                 />
 
                 <p className="mt-3 text-xs font-semibold text-textPrimary line-clamp-1">
                   {product.name}
                 </p>
 
-                <p className="mt-2 font-bold text-primary">EG {product.price}</p>
-              </div>
+                <p className="mt-2 font-bold text-primary">
+                  EG {product.price}
+                </p>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* Next Button */}

@@ -1,8 +1,8 @@
-import Explore from './../../icons/Explore';
+import { motion } from "motion/react";
+import Explore from "./../../icons/Explore";
 import { Link } from "react-router-dom";
 import ArrowRight from "../../icons/ArrowRight";
-import CategoryCard from './CategoryCard';
-
+import CategoryCard from "./CategoryCard";
 
 const categories = [
   {
@@ -43,30 +43,77 @@ const categories = [
   },
 ];
 
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.25,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    x: -40,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.9,
+      ease: "easeOut",
+    },
+  },
+};
 
 function CategorySection() {
-
   return (
     <section className="py-6 md:py-16 container mx-auto">
       <div className="text-start mb-6">
         <span className="flex gap-1 text-primary items-center">
           <Explore />
-          <h2 className="text-xs font-semibold uppercase tracking-tighter">explore our collection</h2>
+          <h2 className="text-xs font-semibold uppercase tracking-tighter">
+            explore our collection
+          </h2>
         </span>
+
         <div className="flex justify-between">
-          <p className="capitalize text-3xl font-extrabold text-textPrimary">shop by style</p>
-          <Link to="/products" className="flex gap-2 items-center capitalize text-sm font-medium tracking-tight text-primary hover:text-primaryDark">
-            view all styles <ArrowRight />
+          <p className="capitalize text-lg lg:text-3xl font-extrabold text-textPrimary">
+            shop by style
+          </p>
+
+          <Link
+            to="/products"
+            className="flex gap-2 items-center capitalize text-sm font-medium tracking-tight text-primary hover:text-primaryDark"
+          >
+            <p>
+              view all <span className="hidden md:inline">categories</span>
+            </p> <ArrowRight />
           </Link>
         </div>
-        <p className="first-letter:capitalize text-textMuted text-sm">find the perfect fit for your vibe.</p>
+
+        <p className="first-letter:capitalize text-textMuted text-sm">
+          find the perfect fit for your vibe.
+        </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <motion.div
+        className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{
+          once: true,
+          amount: 0.2,
+        }}
+      >
         {categories.map((cat) => (
-          <CategoryCard cat={cat} key={cat.id} />
+          <motion.div key={cat.id} variants={cardVariants}>
+            <CategoryCard cat={cat} />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }

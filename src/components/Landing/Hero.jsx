@@ -28,19 +28,19 @@ function Hero() {
           fun to wear!
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 w-full sm:w-auto mt-4 md:mt-6">
+        <div className="flex flex-col 2xl:flex-row gap-3 lg:gap-6 w-full lg:w-auto mt-4 md:mt-6">
           <Link
             to="/customize"
             style={{
               background: "linear-gradient(to right, #81B3DC, #CE6ADA)",
             }}
-            className="rounded-full shadow-cardShadow flex gap-1 items-center justify-center text-white px-6 py-3 hover:opacity-90 transition"
+            className="rounded-full shadow-cardShadow flex gap-1 items-center justify-center text-white xl:px-6 py-3 px-1 hover:opacity-90 transition"
           >
             Create Your Own <ArrowRight />
           </Link>
-          <div className="flex gap-1 items-center justify-center rounded-full border border-primary bg-transparent text-primary px-6 py-3 transition">
+          <div className="flex gap-1 items-center justify-center rounded-full border border-primary bg-transparent text-primary xl:px-6 py-3 px-1 transition">
             <PlayVideo />
-            Watch How it works
+            How it works
           </div>
         </div>
 
