@@ -17,3 +17,8 @@ export const updateReview = async (reviewId, data) => {
   const res = await axiosInstance.patch(`/reviews/${reviewId}`, data);
   return res.data;
 };
+
+export const deleteReview = async (reviewId) => {
+  const res = await axiosInstance.delete(`/reviews/${reviewId}`);
+  return res;
+};

@@ -4,14 +4,41 @@ import RatingStars from "./RatingStarts";
 import useProductReview from "./useProductReview";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
+import ConfirmModal from "../../components/ConfirmModal";
+import useDeleteReview from "./useDeleteReview";
 
 const PAGE_SIZE = 1;
 
 function ReviewsList({ onEdit }) {
   const { reviews, isLoading } = useProductReview();
+  const { removeReview } = useDeleteReview();
+
   const [visible, setVisible] = useState(PAGE_SIZE);
 
   const { isLoggedIn, userId } = useContext(AuthContext);
+
+  const [showModal, setShowModal] = useState(false);
+  const [reviewToDelete, setReviewToDelete] = useState(null);
+
+
+  const handleDeleteConfirm = (id) => {
+    setReviewToDelete(id);
+    setShowModal(true);
+  };
+
+  const handleDeleteCancel = () => {
+    setReviewToDelete(null);
+    setShowModal(false);
+  };
+
+  const handleDeleteConfirmed = () => {
+    if (reviewToDelete) {
+      removeReview(reviewToDelete);
+    }
+
+    setReviewToDelete(null);
+    setShowModal(false);
+  };
 
 
   if (isLoading) return null;
@@ -67,9 +94,10 @@ function ReviewsList({ onEdit }) {
                     <li>
                       <button
                         type="button"
+                        aria-label="Review options"
                         onClick={() => {
-                          // handleDeleteConfirm(design._id);
-                          // document.activeElement?.blur();
+                          handleDeleteConfirm(review._id);
+                          document.activeElement?.blur();
                         }}
                         className="flex items-center gap-2 py-2.5 text-red-600"
                       >
@@ -100,6 +128,15 @@ function ReviewsList({ onEdit }) {
             </div>
           )
         })}
+        <ConfirmModal
+          isOpen={showModal}
+          title="Confirm Delete"
+          message="Are you sure you want to delete this review?"
+          confirmText="Delete"
+          variant="danger"
+          onConfirm={handleDeleteConfirmed}
+          onCancel={handleDeleteCancel}
+        />
       </div>
 
       {visible < reviews.length && (
