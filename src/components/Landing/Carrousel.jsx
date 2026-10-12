@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import ArrowRight from "../../icons/ArrowRight";
 import useProducts from "../../features/products/useProducts";
+import { ikUrl } from "../../utils/helpers/imageKit";
 
 const VISIBLE = 6;
 const ITEM_WIDTH = 240;
@@ -108,8 +109,14 @@ function Carrousel() {
                 className="w-60 shrink-0 overflow-hidden"
               >
                 <img
-                  src={product.image}
+                  src={ikUrl(product.image, 600)}
+                  srcSet={`${ikUrl(product.image, 300)} 300w, ${ikUrl(product.image, 600)} 600w`}
+                  sizes="300px"
                   alt={product.name}
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                  decoding="async"
                   className="h-60 w-60 rounded-lg object-cover shadow-cardShadow"
                 />
 

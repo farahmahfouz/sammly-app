@@ -43,6 +43,7 @@ function Tutorial() {
         <video
           className="w-full h-full object-fill rounded-xl"
           controls
+          preload="none"
           poster="/tutorial-cover.webp"
         >
           <source src="tutorial.mp4" type="video/mp4" />
