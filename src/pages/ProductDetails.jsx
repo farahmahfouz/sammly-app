@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import SizeCharts from "../features/productDetails/SizeCharts";
 import ProductDetailsCard from "../features/productDetails/ProductDetailsCard";
 import RelatedProducts from './../features/productDetails/RelatedProducts';
@@ -9,12 +9,19 @@ import Reveal from "../components/Reveal";
 
 export default function ProductDetails() {
   const sizeChartRef = useRef(null);
+  const reviewFormRef = useRef(null);
+  const [editingReview, setEditingReview] = useState(null);
 
   const scrollToSizeChart = () => {
     sizeChartRef.current?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
+  };
+
+  const handleEditReview = (review) => {
+    setEditingReview(review);
+    reviewFormRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
   return (
@@ -27,11 +34,15 @@ export default function ProductDetails() {
         </Reveal>
 
         <Reveal>
-          <ReviewForm />
+          <div ref={reviewFormRef}>
+            <ReviewForm
+              editingReview={editingReview}
+              onCancelEdit={() => setEditingReview(null)} />
+          </div>
         </Reveal>
 
         <Reveal>
-          <ReviewsList />
+          <ReviewsList onEdit={handleEditReview}/>
         </Reveal>
 
         <Reveal>

@@ -1,26 +1,57 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Rating from "../../components/Rating";
 import useCreateReview from "./useCreateReview";
+import useUpdateReview from './useUpdateReview';
 
-function ReviewForm() {
+function ReviewForm({ editingReview, onCancelEdit }) {
     const [rating, setRating] = useState(0);
     const [review, setReview] = useState("");
-    const { addReview, isPending } = useCreateReview();
+    const textareaRef = useRef(null);
+
+    const { addReview, isPending: isCreating } = useCreateReview();
+    const { editReview, isPending: isUpdating } = useUpdateReview();
+
+    const isEditing = Boolean(editingReview);
+    const isPending = isCreating || isUpdating;
+
+    useEffect(() => {
+        if (!editingReview) return;
+        setRating(editingReview.rating);
+        setReview(editingReview.review);
+
+        const t = setTimeout(() => textareaRef.current?.focus({ preventScroll: true }), 400);
+        return () => clearTimeout(t);
+    }, [editingReview]);
+
+    const resetForm = () => {
+        setRating(0);
+        setReview("");
+    };
+
+    const handleCancel = () => {
+        resetForm();
+        onCancelEdit?.();
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         if (rating === 0) return;
 
-        addReview(
-            { rating, review },
-            {
-                onSuccess: () => {
-                    setRating(0);
-                    setReview("");
-                },
-            }
-        );
+        if (isEditing) {
+            editReview(
+                { reviewId: editingReview._id, data: { rating, review } },
+                {
+                    onSuccess: () => {
+                        resetForm();
+                        onCancelEdit?.();
+                    },
+                }
+            );
+            return;
+        }
+
+        addReview({ rating, review }, { onSuccess: resetForm });
     };
 
     return (
@@ -42,6 +73,7 @@ function ReviewForm() {
             </div>
 
             <textarea
+                ref={textareaRef}
                 id="message"
                 name="message"
                 rows={5}
@@ -52,13 +84,20 @@ function ReviewForm() {
                 className="mt-4 w-full resize-none rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-textPrimary placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
             />
 
-            <div className="mt-2 flex justify-end">
+            <div className="mt-2 flex justify-end gap-2">
+                {isEditing && (
+                    <button type="button"
+                        onClick={handleCancel}
+                        className="rounded-full border border-borderLight px-8 py-3 text-sm font-semibold text-textPrimary hover:bg-gray-50">
+                        Cancel
+                    </button>
+                )}
                 <button
                     type="submit"
                     disabled={isPending}
                     className="rounded-full bg-primary px-8 py-3 text-sm font-semibold tracking-tight text-white shadow-cardShadow transition-all hover:bg-primaryDark disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                    {isPending ? "Submitting..." : "Submit Review"}
+                     {isPending ? "Saving..." : isEditing ? "Update Review" : "Submit Review"}
                 </button>
             </div>
         </form>
