@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import { Link } from "react-router-dom";
 import PlayVideo from "../../icons/PlayVideo";
 import Fizz from "../../icons/Fizz";
@@ -20,7 +21,8 @@ function Hero() {
           Your imagination <br />
           on a{" "}
         </h1>
-        <img src="t-shirt-word.png" alt="" className="h-20 w-28 md:h-40 md:w-44 absolute top-10 left-36 md:left-28 rotate-6" />
+        <img src="t-shirt-word.webp" width="400"
+          height="251" alt="T-shirt word" className="h-20 w-28 md:h-40 md:w-44 absolute top-10 left-36 md:left-28 rotate-6 aspect-auto" />
 
         <p className="max-w-80 text-textPrimary tracking-wide leading-5 mt-4 text-center md:text-start">
           Turn your photos, designs, or ideas into
@@ -28,7 +30,7 @@ function Hero() {
           fun to wear!
         </p>
 
-        <div className="flex flex-col 2xl:flex-row gap-3 lg:gap-6 w-full lg:w-auto mt-4 md:mt-6">
+        <div className="flex flex-col 2xl:flex-row gap-3 lg:gap-6 w-full xl:w-auto mt-4 md:mt-6">
           <Link
             to="/customize"
             style={{
@@ -61,7 +63,7 @@ function Hero() {
             </p>
           </div>
           <div className="text-primaryDark flex gap-2 items-center">
-            <Cloud/>
+            <Cloud />
             <p className="text-textPrimary text-xs font-semibold tracking-wide leading-5">
               Soft & Comfortable<br />
               Fabric
@@ -72,8 +74,13 @@ function Hero() {
 
       {/* Image Section */}
       <img
-        src="hero-home.png"
+        src="hero-home-optimized.webp"
         alt="New Collection"
+        width="1000"
+        height="834"
+        fetchpriority="high"
+        loading="eager"
+        decoding="async"
         className="w-full h-auto max-w-md md:max-w-2xl object-cover mt-6 md:mt-0"
       />
     </div>

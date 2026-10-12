@@ -5,8 +5,11 @@ import PageTitle from "../components/PageTitle";
 export default function Signup() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-[1.6fr_1fr] container mx-auto py-6">
-      <PageTitle title="Sign Up" />
-
+      <PageTitle
+        title="Sign Up | Sammly"
+        description="Create your free Sammly account to save designs, track orders, and checkout faster."
+        noIndex
+      />
       {/* Image Section */}
       <div className="hidden md:flex flex-col">
         <div className="flex flex-col gap-2 items-start">

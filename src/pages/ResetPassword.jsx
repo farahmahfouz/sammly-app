@@ -44,7 +44,11 @@ export default function ResetPassword() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto lg:border border-borderLight my-16 rounded-xl lg:shadow-cardShadow">
-      <PageTitle title="Reset Password" />
+      <PageTitle
+        title="Reset Password | Sammly"
+        description="Choose a new password for your Sammly account and get back to designing and ordering."
+        noIndex
+      />
 
       {/* Image Section */}
       <div className="md:order-1 hidden lg:flex justify-center items-center rounded-xl">

@@ -26,6 +26,8 @@ export default function ProductDetails() {
 
   return (
     <div className="container mx-auto">
+
+
       <div className="w-full py-10 flex flex-col gap-12">
         <ProductDetailsCard onSizeChartClick={scrollToSizeChart} />
 
@@ -42,7 +44,7 @@ export default function ProductDetails() {
         </Reveal>
 
         <Reveal>
-          <ReviewsList onEdit={handleEditReview}/>
+          <ReviewsList onEdit={handleEditReview} />
         </Reveal>
 
         <Reveal>

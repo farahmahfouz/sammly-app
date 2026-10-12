@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import PageTitle from '../components/PageTitle';
 
 export default function SuccessPayment() {
   const location = useLocation();
@@ -11,6 +12,11 @@ export default function SuccessPayment() {
 
   return (
     <div className="flex flex-col items-center justify-center p-10">
+      <PageTitle
+        title="Payment Successful | Sammly"
+        description="Thank you for your order! Your payment was successful and your custom apparel is being prepared."
+        noIndex
+      />
       <div className="flex flex-col justify-center items-center border ">
         <img src="/success.png" alt="success payment" className="w-3/6" />
         <div className="">

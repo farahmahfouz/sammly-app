@@ -46,7 +46,10 @@ const Badge = ({ children }) => (
 export default function AboutUs() {
   return (
     <div className="container mx-auto">
-      <PageTitle title="About Us" />
+      <PageTitle
+        title="About Us | Sammly"
+        description="Meet the team behind Sammly. Learn our story, our mission, and how we help people turn their creative ideas into custom apparel they love."
+      />
 
       {/* ================= HERO ================= */}
       <section className="px-6 py-14 grid md:grid-cols-2 gap-10 items-center">

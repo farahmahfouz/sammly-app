@@ -129,7 +129,10 @@ function HelpFAQs() {
 
     return (
         <section className="max-w-4xl mx-auto py-8 md:py-12">
-            <PageTitle title="Help" />
+            <PageTitle
+                title="Help & FAQs | Sammly"
+                description="Find answers to common questions about ordering, customizing designs, shipping, and payments. Get quick help with Sammly's FAQ page."
+            />
 
             {/* Header + search */}
             <div className="text-center mb-8">

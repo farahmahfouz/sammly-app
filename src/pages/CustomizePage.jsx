@@ -8,7 +8,10 @@ import VideoTutorial from '../features/designs/VideoTutorial';
 export default function CustomizePage() {
   return (
     <div className="py-10">
-      <PageTitle title="Customize" />
+      <PageTitle
+        title="Customize Your Design | Sammly"
+        description="Learn how custom design works at Sammly. Watch tutorials, explore the steps, and choose a product to start creating your own unique apparel."
+      />
 
       <HeroSection />
 

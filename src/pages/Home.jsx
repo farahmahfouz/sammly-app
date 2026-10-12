@@ -1,5 +1,3 @@
-import "../styles/Landing.css";
-
 import Hero from "../components/Landing/Hero";
 import CategorySection from "../components/Landing/CategorySection";
 import Sticker from "../components/Landing/Sticker";
@@ -17,7 +15,9 @@ function Home() {
 
   return (
     <>
-      <PageTitle title="Home" />
+      <PageTitle title="Sammly | Custom Apparel Designed by You"
+        description="Create and order your own custom apparel with Sammly. Design with our easy online editor, pick your style, and get it delivered to your door."
+      />
 
       <Hero />
 

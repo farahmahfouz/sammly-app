@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 
+import { FaFacebook, FaTiktok, FaInstagram } from "react-icons/fa";
+import { RiTwitterXFill } from "react-icons/ri";
+
 function Footer() {
 
   return (
@@ -8,24 +11,25 @@ function Footer() {
         <div className="flex flex-col items-center md:items-start">
           <div className="flex justify-center sm:justify-start flex-col gap-4">
             <Link to="/" className="mx-auto md:mx-0">
-              <img src="/sammlyLogo.png" width={90} alt="logo" />
+              <img src="/sammlyLogo.png" width="160" height="40" alt="logo" />
             </Link>
             <p className="text-textMuted text-sm max-w-[200px] first-letter:capitalize tracking-tighter">custom T-shirts for every story, every style, every occasion.</p>
           </div>
 
           <div className="flex space-x-4 mt-4">
-            <a href="#" className="bg-surfacePurple/90 text-textSecondary hover:text-gray-900 p-3 rounded-full flex items-center justify-center">
-              <i className="fab fa-facebook"></i>
-            </a>
-            <a href="#" className="bg-surfacePurple/90 text-textSecondary hover:text-gray-900 p-3 rounded-full flex items-center justify-center">
-              <i className="fab fa-instagram"></i>
-            </a>
-            <a href="#" className="bg-surfacePurple/90 text-textSecondary hover:text-gray-900 p-3 rounded-full flex items-center justify-center">
-              <i className="fab fa-x-twitter"></i>
-            </a>
-            <a href="#" className="bg-surfacePurple/90 text-textSecondary hover:text-gray-900 p-3 rounded-full flex items-center justify-center">
-              <i className="fab fa-tiktok"></i>
-            </a>
+            <span  aria-label="Sammly on Facebook" className="bg-surfacePurple/90 text-textSecondary hover:text-gray-900 p-3 rounded-full flex items-center justify-center">
+              <FaFacebook />
+            </span>
+            <span  aria-label="Sammly on Instagram" className="bg-surfacePurple/90 text-textSecondary hover:text-gray-900 p-3 rounded-full flex items-center justify-center">
+              <FaInstagram />
+
+            </span>
+            <span  aria-label="Sammly on X" className="bg-surfacePurple/90 text-textSecondary hover:text-gray-900 p-3 rounded-full flex items-center justify-center">
+              <RiTwitterXFill />
+            </span>
+            <span  aria-label="Sammly on Tiktok" className="bg-surfacePurple/90 text-textSecondary hover:text-gray-900 p-3 rounded-full flex items-center justify-center">
+              <FaTiktok />
+            </span>
           </div>
         </div>
 
@@ -114,7 +118,7 @@ function Footer() {
         <p className="text-sm tracking-tighter text-textMuted">
           &copy; 2024 Sammly. All rights reserved.
         </p>
-       
+
       </div>
     </footer>
   );

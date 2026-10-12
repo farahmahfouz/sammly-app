@@ -50,7 +50,7 @@ export default function Navbar() {
       <div className="navbar container mx-auto border-0 flex justify-between">
         <div >
           <Link to="/" className="hidden md:block">
-            <img src="/sammlyLogo.png" width={90} alt="logo" />
+            <img src="/sammlyLogo.png" width="160" height="40" alt="logo" />
           </Link>
         </div>
 

@@ -109,7 +109,10 @@ function ContactUs() {
 
     return (
         <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-0 py-6 md:py-12">
-            <PageTitle title="Contact Us" />
+            <PageTitle
+                title="Contact Us | Sammly"
+                description="Have a question or need help with your order? Get in touch with the Sammly team and we will get back to you as soon as possible."
+            />
 
             <div className="text-center mb-10 relative">
                 <img

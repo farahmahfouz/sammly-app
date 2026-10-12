@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import UserContext from "../../context/UserContext";
 import Skelton from "../../layouts/Skelton";
 import { FiCodesandbox } from "react-icons/fi";
@@ -23,9 +23,11 @@ const formatOrderDate = (value) => {
     }),
   };
 };
-
+const PAGE_SIZE = 2;
 export default function ProfileOrders() {
   const { userOrders } = useContext(UserContext);
+  const [visible, setVisible] = useState(PAGE_SIZE);
+
 
   if (!userOrders) {
     return <Skelton />;
@@ -39,7 +41,7 @@ export default function ProfileOrders() {
     <>
       {visibleOrders.length > 0 ? (
         <div className="grid grid-cols-1 gap-4">
-          {visibleOrders.map((order) => {
+          {visibleOrders.slice(0, visible).map((order) => {
             const { day, time } = formatOrderDate(order.createdAt);
 
             return (
@@ -47,9 +49,7 @@ export default function ProfileOrders() {
                 key={order._id}
                 className="text-textPrimary shadow-cardShadow border border-borderLight rounded-lg p-3 sm:p-4"
               >
-                {/* الهيدر */}
                 <div className="flex flex-col sm:flex-row sm:justify-between gap-3 sm:gap-4">
-                  {/* الأيقونة + رقم الأوردر + التاريخ */}
                   <div className="flex items-center gap-3 sm:gap-4 min-w-0">
                     <div className="bg-surfaceLavender/50 shadow-cardShadow p-3 sm:p-4 rounded-md shrink-0">
                       <FiCodesandbox className="size-5 sm:size-6 text-primary" />
@@ -70,7 +70,6 @@ export default function ProfileOrders() {
                     </div>
                   </div>
 
-                  {/* الحالة + السعر: جنب بعض في الموبايل، فوق بعض في الشاشات الكبيرة */}
                   <div className="flex flex-row flex-wrap sm:flex-col items-center sm:items-end justify-between sm:justify-start gap-2 sm:gap-4">
                     <div className="inline-flex w-fit items-center gap-2 px-3 py-1 rounded-full bg-emerald-100/40 text-emerald-500 text-xs sm:text-sm font-medium">
                       <FaCircle className="size-2" />
@@ -86,7 +85,6 @@ export default function ProfileOrders() {
                   </div>
                 </div>
 
-                {/* المنتجات */}
                 <div className="mt-3 sm:mt-4 border border-borderLight bg-surfaceLavender/50 rounded-md p-3 sm:py-3 sm:px-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                     {order.items.map((item) => (
@@ -118,6 +116,15 @@ export default function ProfileOrders() {
               </div>
             );
           })}
+
+          {visible < visibleOrders.length && (
+            <button
+              onClick={() => setVisible((v) => v + PAGE_SIZE)}
+              className="mt-4 w-full rounded-full border border-borderLight py-2 text-sm font-semibold text-textPrimary hover:bg-gray-50"
+            >
+              Show more ({visibleOrders.length - visible} left)
+            </button>
+          )}
         </div>
       ) : (
         <div className="w-full flex justify-center items-center py-10">

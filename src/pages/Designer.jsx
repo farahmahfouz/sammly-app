@@ -474,7 +474,10 @@ export default function Designer() {
 
   return (
     <div className="container mx-auto py-6 md:py-14">
-      <PageTitle title="Design" />
+      <PageTitle
+        title="Design Studio | Sammly"
+        description="Use the Sammly design studio to add text, images, and artwork to your product. Preview your design live and save it before you order."
+      />
 
       <div className="hidden md:flex justify-between pb-10">
         <div className="max-w-[420px]">

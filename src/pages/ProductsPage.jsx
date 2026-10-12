@@ -16,12 +16,15 @@ export default function ProductsPage() {
   return (
     <div
       className={`w-full min-w-0 grid transition-all duration-300 grid-cols-1 ${isFilterOpen
-          ? "md:grid-cols-[20rem_minmax(0,1fr)]"
-          : "md:grid-cols-[0_minmax(0,1fr)]"
+        ? "md:grid-cols-[20rem_minmax(0,1fr)]"
+        : "md:grid-cols-[0_minmax(0,1fr)]"
         }`}
     >
-      <PageTitle title="Products" />
-
+      <PageTitle
+        title="Shop Products | Sammly"
+        description="Browse our collection of custom-ready apparel. Filter by category, size, and price to find the perfect piece to personalize with your own design."
+      />
+      
       {isDesktop && <Filter isOpen={isFilterOpen} />}
 
       <Products isFilterOpen={isFilterOpen} onToggleFilter={handleToggleFilter} />

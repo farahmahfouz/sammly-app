@@ -1,29 +1,8 @@
-/* auther : wak wak team,
- "fatma elzahraa abdelaleem", 
- "rwan adel omar , 
- "shady mohamed radwan ,
- "farah mahmoud mahfouz ", 
- "yasser ahmed salem"""   */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@keyframes slide {
-  0% {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.transition-opacity {
-  animation: slide 0.7s ease-in-out;
-}
 
 * {
   body {

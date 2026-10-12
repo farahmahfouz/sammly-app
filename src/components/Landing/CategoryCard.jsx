@@ -11,6 +11,10 @@ function CategoryCard({ cat }) {
             <img
                 src={cat.image}
                 alt={cat.name}
+                loading="lazy"
+                decoding="async"
+                width="300"
+                height="240"
                 className="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-300"
             />
             <div className="bg-surfaceGray/80 border border-borderLight p-4">

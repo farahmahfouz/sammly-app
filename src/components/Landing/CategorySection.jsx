@@ -9,37 +9,37 @@ const categories = [
     id: 1,
     name: "Men",
     description: "Classic & Trendy",
-    image: "/categories/man-style.png",
+    image: "/categories/man-style.webp",
   },
   {
     id: 2,
     name: "Women",
     description: "Stylish & Comfy",
-    image: "/categories/women-style.png",
+    image: "/categories/women-style.webp",
   },
   {
     id: 3,
     name: "Kids",
     description: "Fun & Colorful",
-    image: "/categories/kids-style.png",
+    image: "/categories/kids-style.webp",
   },
   {
     id: 4,
     name: "Hoodies",
     description: "Warm & Cozy",
-    image: "/categories/hoodies-style.png",
+    image: "/categories/hoodies-style.webp",
   },
   {
     id: 5,
     name: "Shoes",
     description: "Everyday Comfort",
-    image: "/categories/print-shoes.jpg",
+    image: "/categories/print-shoes.webp",
   },
   {
     id: 6,
     name: "Accessories",
     description: "Mugs, Bags & More",
-    image: "/categories/accessories.jpg",
+    image: "/categories/accessories.webp",
   },
 ];
 

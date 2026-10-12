@@ -16,7 +16,11 @@ const UserProfile = () => {
 
   return (
     <div className="container mx-auto py-6 md:py-14">
-      <PageTitle title="Profile" />
+      <PageTitle
+        title="My Profile | Sammly"
+        description="Manage your Sammly profile, view your saved designs, track your orders, and see your favorite products."
+        noIndex
+      />
 
       <div className="grid grid-cols-1 md:grid-cols-3 md:gap-4 bg-surfacePurple/30 rounded-lg shadow-cardShadow p-2 md:p-6">
         {/* Profile Card */}

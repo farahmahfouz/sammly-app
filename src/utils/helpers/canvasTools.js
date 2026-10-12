@@ -8,24 +8,6 @@ export const resizeCanvas = (fabricCanvas, canvasWidth, canvasHeight) => {
   fabricCanvas.current.setHeight(canvasHeight);
   fabricCanvas.current.renderAll(); // Re-render the canvas to apply changes
 };
-//////////////////////////////////////////////////original code/////////////////////////////
-//screenshot capture
-// export const captureScreenShot = async (fabricCanvas) => {
-//   fabricCanvas.discardActiveObject();
-//   fabricCanvas.renderAll();
-//   const imageOfDesign = await takeScreenShotFunc(
-//     "divToTakeScreenshot",
-//     "MyImage",
-//     "image/jpeg",
-//     "#f5f5f5"
-//   );
-//   console.log(imageOfDesign);
-//   if (imageOfDesign) {
-//     return imageOfDesign;
-//   } else {
-//     throw new Error("Screenshot capture failed");
-//   }
-// };
 
 export const captureScreenShot = async (
   fabricCanvas,
@@ -88,16 +70,6 @@ export const saveAsJSON = (fabricCanvas) => {
   return json;
 };
 
-///////////////////////////////////////////
-//load from json
-// export const loadFromJSON = (fabricCanvas, savedCanvas) => {
-//   // Load the canvas from the JSON string
-//   fabricCanvas.loadFromJSON(savedCanvas, () => {
-//     fabricCanvas.renderAll(); // Render the canvas after loading
-//     console.log("Canvas loaded from JSON");
-//   });
-// };
-
 export const loadFromJSON = (canvas, json) => {
   canvas.loadFromJSON(json, () => {
     canvas.renderAll();
@@ -150,21 +122,6 @@ export const removeSelectedObject = (fabricCanvas) => {
   }
 };
 
-// export const calculateTotalPrice = (basePrice, canvas) => {
-//   let totalPrice = basePrice;
-//   const IMAGE_PRICE = 100; // Price per image
-//   const TEXT_PRICE = 50; // Price per text element
-
-//   canvas.getObjects().forEach((obj) => {
-//     if (obj.type === "image" || obj.type === "img") {
-//       totalPrice += IMAGE_PRICE;
-//     } else if (obj.type === "textbox") {
-//       totalPrice += TEXT_PRICE;
-//     }
-//   });
-
-//   return totalPrice;
-// };
 
 export const calculateTotalPrice = (basePrice, ...canvases) => {
   let totalPrice = basePrice;

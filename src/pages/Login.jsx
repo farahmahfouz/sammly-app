@@ -67,7 +67,11 @@ export default function Login() {
 
   return (
     <>
-      <PageTitle title="Login" />
+      <PageTitle
+        title="Log In | Sammly"
+        description="Log in to your Sammly account to manage your designs, orders, and favorites."
+        noIndex
+      />
       <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] container mx-auto py-12">
         {/* Image Section */}
         <div className="hidden md:flex items-center">

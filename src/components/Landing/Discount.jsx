@@ -15,12 +15,14 @@ function Discount() {
             </div>
 
             <div className="flex gap-4 items-center">
-                <img src="discount.png" alt="" className="max-w-96 h-56 object-cover" />
-                <div className="w-64 rounded-[20px] bg-[#f3eaff] px-6 py-4 text-center">
+                <img src="discount.webp" alt="Disount" loading="lazy" decoding="async"
+                    width="300"
+                    height="224" className="max-w-96 h-56 object-cover" />
+                <div className=" rounded-[20px] bg-[#f3eaff] px-6 py-4 text-center">
 
-                    <h4 className="mb-3 text-sm font-semibold text-gray-900">
+                    <h3 className="mb-3 text-sm font-semibold text-gray-900">
                         Offer ends in
-                    </h4>
+                    </h3>
 
                     <div className="flex items-center justify-center gap-2">
 

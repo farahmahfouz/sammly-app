@@ -37,7 +37,11 @@ export default function ForgetPassword() {
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto lg:border border-borderLight my-16 rounded-xl lg:shadow-cardShadow">
-            <PageTitle title="Forgot Password" />
+            <PageTitle
+                title="Forgot Password | Sammly"
+                description="Forgot your password? Enter your email and we will send you a link to reset it and get back into your Sammly account."
+                noIndex
+            />
 
             {/* Image Section */}
             <div className="md:order-1 hidden lg:flex justify-center items-center rounded-xl">

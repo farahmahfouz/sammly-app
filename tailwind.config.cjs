@@ -25,7 +25,7 @@ module.exports = {
 
         textPrimary: "#10213F",
         textSecondary: "#667085",
-        textMuted: "#98A2B3",
+        textMuted: "#6c747f",
 
         border: "#E6E8EF",
         borderLight: "#F0F1F5",

@@ -17,6 +17,7 @@ import RadioComponent from "../../components/RadioComponent";
 import Spinner from "../../components/Spinner";
 import RatingStars from "../reviews/RatingStarts";
 import { LuLogIn } from "react-icons/lu";
+import PageTitle from "../../components/PageTitle";
 
 function ProductDetailsCard({ onSizeChartClick }) {
     const navigate = useNavigate();
@@ -98,6 +99,10 @@ function ProductDetailsCard({ onSizeChartClick }) {
 
     return (
         <div className=" flex flex-col lg:flex-row md:gap-11">
+            <PageTitle
+                title={`${product.name} | Sammly`}
+                description={product.description?.slice(0, 155)}
+            />
             <div className="flex gap-4 w-full lg:w-1/2">
                 <div className="hidden md:flex flex-col gap-3 w-20">
                     {allImages.map((img, index) => (

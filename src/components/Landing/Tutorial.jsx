@@ -38,17 +38,17 @@ function Tutorial() {
         </button>
       </div>
       <div className="flex items-center gap-2 relative">
-        <img src="lines.png" alt="" className="w-6 md:w-44 shrink-0 absolute -top-9 -left-36" />
+        <img src="lines.webp" alt="" className="w-6 md:w-44 shrink-0 absolute -top-9 -left-36" />
 
         <video
           className="w-full h-full object-fill rounded-xl"
           controls
-          poster="/tutorial-cover.png"
+          poster="/tutorial-cover.webp"
         >
           <source src="tutorial.mp4" type="video/mp4" />
         </video>
 
-        <img src="lines.png" alt="" className="w-6 md:w-24 shrink-0 absolute -bottom-8 -right-20 rotate-[190deg]" />
+        <img src="lines.webp" alt="Lines" width="160" height="40" className="w-6 md:w-24 shrink-0 absolute -bottom-8 -right-20 rotate-[190deg]" />
       </div>
     </div>
   )
